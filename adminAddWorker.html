@@ -15,6 +15,43 @@
     <link rel="stylesheet" href="./contrStyleCss/style.css">
     <link rel="stylesheet" href="./contrStyleCss/addadmin.css">
     <title>Admin one Rest</title>
+    <style>
+        #container {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        #drag1 {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            margin: 5px;
+        }
+
+        #drag2 {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            margin: 5px;
+        }
+    </style>
+    <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text/plain", event.target.id);
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            event.target.appendChild(document.getElementById(data));
+        }
+    </script>
 </head>
 
 <body>
@@ -32,7 +69,7 @@
                         <a class="nav-link active" aria-current="page" href="./adminOneRes.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./adminAddWorker.html">Add Worker</a>
+                        <a class="nav-link" href="./adminAddWorker.html">Worker</a>
                     </li>
 
                 </ul>
@@ -75,8 +112,7 @@
                     </div>
                     <div class="input_pox">
                         <span class="datails">Worker img</span>
-                        <input type="file"  placeholder="Confirm admin Password" id="workerImg"
-                            id="workingImg">
+                        <input type="file" placeholder="Confirm admin Password" id="workerImg" id="workingImg">
                     </div>
                     <div class="input_pox">
                         <span class="datails">Worker Time</span>
@@ -98,7 +134,67 @@
             </form>
         </div>
     </div>
-
+    <!-- <div class="body2">
+        <div class="container2 ">
+            <div class="title">Update worker</div>
+            <form id="updateadmin">
+                <div class="user_details">
+                    <div class="input_pox">
+                        <span class="datails">Full Name</span>
+                        <input type="text" placeholder="enter admin name" value="Botirov Abduhamid"
+                            id="updateworkername">
+                    </div>
+                    <div class="input_pox">
+                        <span class="datails">Password</span>
+                        <input type="text" placeholder="enter admin Username" value="Abduhamid" id="updatePassword2">
+                    </div>
+                    <div class="input_pox">
+                        <span class="datails">Email</span>
+                        <input type="text" placeholder="enter admin Email" value="abduhamid1@gmail.com"
+                            id="updateworkeremail">
+                    </div>
+                    <div class="input_pox">
+                        <span class="datails">Phone Number</span>
+                        <input type="text" placeholder="enter admin Phone" value="998997867075" id="updateworkerPhone">
+                    </div>
+                    <div class="input_pox">
+                        <span class="datails">Worker Info</span>
+                        <input type="text" placeholder="enter admin Password" value="bu admin" id="updateworkerinfo">
+                    </div>
+                    <div class="input_pox">
+                        <span class="datails">Worker salary</span>
+                        <input type="text" placeholder="Confirm admin Password" value="1000" id="updateworkersalary">
+                    </div>
+                    <div class="input_pox">
+                        <span class="datails">Worker img</span>
+                        <input type="file" placeholder="Confirm admin Password" id="workerImg" id="updateworkingImg">
+                    </div>
+                    <div class="input_pox">
+                        <span class="datails">Worker Time</span>
+                        <input type="text" placeholder="Confirm admin Password" value="free time" id="updateworkerTime">
+                    </div>
+                    <div class="input_pox">
+                        <span class="datails">Worker rol</span>
+                        <input type="text" placeholder="Confirm admin Password" value="admin" id="updateworkerRol">
+                    </div>
+                    <div class="input_pox">
+                        <span class="datails">Which restaurant owner is this?</span>
+                        <input type="text" placeholder="Rest Id" value="644bf6d576130db63bdf9685" disabled
+                            id="updateworkersres">
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="submit" value="Register">
+                </div>
+            </form>
+        </div>
+    </div> -->
+    <div class="card" draggable="true">
+        <h3>Workers</h3>
+        <div class="allWorkerWrapper" id="allWorkerWrapper2">
+            
+        </div>
+    </div>
     <!-- script -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
         integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
