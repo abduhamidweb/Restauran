@@ -193,6 +193,97 @@ form .button input :hover {
   text-transform: capitalize;
   font-weight: 700;
 }
+
+.body2 .card2 {
+  width: 200px !important;
+  margin: 40px;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  -webkit-transition: 0.1s ease-in-out;
+  transition: 0.1s ease-in-out;
+}
+.body2 .card2:first-of-type {
+  margin-right: 25px;
+}
+
+.body2 .card2:hover {
+  /* margin-top: -10px; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.body2 .banner {
+  height: 100px;
+  width: 100%;
+  padding-top: 30px;
+  background-color: #fafafa;
+  background-size: cover;
+  background-position: center;
+}
+.body2 .card2 .banner {
+  background-image: url('https://tinypic.host/images/2023/03/30/300150.jpg');
+}
+.swiper-button-prev {
+  width: 300px;
+  background: #2ab1ce;
+}
+.body2 .avatar {
+  height: 100px;
+  width: 100px;
+  margin: auto;
+  background-size: cover;
+  background-position: center;
+  background-color: #f1f1f1;
+  border-radius: 100%;
+}
+.allCards {
+  display: flex;
+  overflow-x: scroll;
+}
+.body2 .card2 .avatar {
+  background-image: url('https://tinypic.host/images/2023/02/21/pikrepo.com-2.jpg');
+}
+.body3 .container2 {
+  overflow: hidden;
+}
+.body2 h3,
+a,
+i {
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
+  -webkit-transition: 0.1s ease-in-out;
+  transition: 0.1s ease-in-out;
+}
+.body2 h3 {
+  margin-top: 45px;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #212121;
+}
+.body2 a {
+  display: block;
+  padding: 5px 0px;
+  font-size: 14px;
+  color: #9e9e9e;
+  text-decoration: none;
+}
+.body2 a:hover {
+  background-color: #fafafa;
+  color: inherit;
+}
+.body2 ul {
+  margin-top: 10px;
+  padding: 15px 0px;
+  background-color: #fafafa;
+}
+.body2 ul a {
+  display: inline;
+  margin-right: 10px;
+}
+.body2 ul a i:hover {
+  transform: scale(1.5);
+  color: #2ab1ce;
+}
 ::-webkit-scrollbar {
   width: 0px;
   display: none;
