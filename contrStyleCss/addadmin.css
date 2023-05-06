@@ -193,9 +193,9 @@ form .button input :hover {
   text-transform: capitalize;
   font-weight: 700;
 }
-
 .body2 .card2 {
   width: 200px !important;
+  cursor: pointer;
   margin: 40px;
   overflow: hidden;
   border-radius: 15px;
@@ -235,6 +235,11 @@ form .button input :hover {
   background-position: center;
   background-color: #f1f1f1;
   border-radius: 100%;
+  overflow: hidden;
+}
+.body2 .avatar img{
+  width: 100%;
+  height: 100%;
 }
 .allCards {
   display: flex;

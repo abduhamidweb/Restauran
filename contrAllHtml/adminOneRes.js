@@ -15,7 +15,6 @@ async function section1() {
     staticOurFood.setAttribute("id", "staticOurFood")
     let response = await fetch(BASE_URL +resId );
     let data = await response.json();
-    console.log('data :', data);
     // let allArray = data.resource;
     // allArray.map(item => {
     //     // submit

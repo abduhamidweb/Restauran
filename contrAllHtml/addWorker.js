@@ -68,7 +68,7 @@ async function AllWorker() {
         cardUser.setAttribute("class", "user");
         cardUser.innerHTML = `
                 <div class="userImg">
-                    <img src= ${ worker.userPhoto ? "/imgs/"+worker.userPhoto : ""} alt="workers imgs">
+                    <img src= ${ worker.userPhoto ? "http://localhost:5000/imgs/"+worker.userPhoto : ""} alt="workers imgs">
                 </div>
                 <div class="userInfo">
                     <h4><strong>name:</strong> ${worker.username ?worker.username : "bu muxim odam" }</h4>
@@ -139,11 +139,13 @@ async function AllWorker() {
         cardUser.innerHTML = `
       <div class="card2">
    <div class="banner">
-      <div class="avatar"></div>
+      <div class="avatar">
+      <img src=${"http://localhost:5000/imgs/"+worker.userPhoto}>
+      </div>
    </div>
 	<h3>${worker.username}</h3>
-   <a href="mailto:contact@webdevtrick.com">📧 contact@mail.com</a>
-   <a href="">📱 +00 000-000-0000</a>
+   <a href="mailto:${worker.email}">📧 ${worker.email}</a>
+   <a href="">📱 ${worker.userPhone}</a>
 	<ul>
       <a href="#" target="_blank"><i class="fa fa-twitter" style="font-size:16px"></i></a>
 	   <a href="#" target="_blank"><i class="fa fa-linkedin" style="font-size:16px"></i></a>
@@ -203,10 +205,10 @@ async function AllWorker() {
         item.addEventListener('click', (e) => {
             let id = e.target.getAttribute("id");
             if (id) {
-                
+
                 deleteItem(id)
                 window.location.reload()
-            }  else alert("Something is strange")
+            } else alert("Something is strange")
         })
     })
 }
