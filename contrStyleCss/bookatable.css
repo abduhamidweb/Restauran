@@ -461,13 +461,25 @@ nav.close ~ .dashboard .top {
   font-size: 5px !important;
   font-weight: 700;
 }
-.data{
-   width: 160px;
+.data {
+  width: 160px;
 }
-.data-list{
-    overflow-y: scroll;
+.data-list {
+  overflow-y: scroll;
   font-size: 5px !important;
 }
-.data-list button{
-    font-size: 5px !important;
+.data-list button {
+  font-size: 5px !important;
+}
+.modal {
+  width: 100%;
+  height: 100vh;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.575);
+}
+.modal-content {
+  margin: auto;
+  width: 60%;
+  padding: 50px;
+  border-radius: 20px;
 }

@@ -38,6 +38,19 @@ sidebarToggle.addEventListener("click", () => {
 })
 
 let BASE_URL = "http://localhost:5000/api/";
+
+// Modal yopish tugmasi
+var closeButton = document.getElementsByClassName("close")[0];
+
+// Modal ochish tugmasiga "click" hodisasini qo'shish
+
+// Modal yopish tugmasiga "click" hodisasini qo'shish
+closeButton.onclick = function () {
+    modal.style.display = "none";
+}
+
+// Modalni xaridor tomonidan jo'natilgan ma'lumotlari qabul qilish
+
 async function AllWorker() {
 
     let response = await fetch(BASE_URL + "restaurants/" + localStorage.getItem("adminres_id"));
@@ -95,6 +108,7 @@ async function AllWorker() {
                 const response = await fetch(`${BASE_URL}zakazlar/${id}`, {
                     method: 'DELETE'
                 });
+                location.reload();
                 if (!response.ok) {
                     throw new Error('Server error');
                 }
@@ -114,6 +128,56 @@ async function AllWorker() {
             if (e.target.classList.contains("btn-info")) {
                 let updateId = e.target.getAttribute("id")
                 console.log('updateId :', updateId);
+                modal.style.display = "block";
+                let response = await fetch(BASE_URL + "zakazlar/" + updateId);
+                let {
+                    zakaz: {
+                        username,
+                        email,
+                        phone,
+                        time,
+                        date,
+                        num_people,
+                        message,
+                        _id
+                    }
+
+                } = await response.json();
+
+                updateusername.value = username ? username : "";
+                updateemail.value = email ? email : "";
+                updatephone.value = phone ? phone : "";
+                updatedate.value = date ? date : "";
+                updatetime.value = time ? time : "";
+                updatenum_people.value = num_people ? num_people : "";
+                updatemessage.value = message ? message : "";
+                updatezakazId.value = _id ? _id : "";
+
+                let formdate = document.querySelector('.formdataupdate');
+                formdate.addEventListener('submit', async (e) => {
+                    e.preventDefault()
+                    let a = updateusername.value
+                    console.log('a :', a);
+                    let response = await fetch(BASE_URL + 'zakazlar/' + updatezakazId.value, {
+                        method: 'PUT',
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            username: a ? a : "",
+                            email: updateemail.value ? updateemail.value : "",
+                            phone: updatephone.value ? updatephone.value : "",
+                            time: updatedate.value ? updatedate.value : "",
+                            date: updatetime.value ? updatetime.value : "",
+                            num_people: updatenum_people.value ? updatenum_people.value : "",
+                            message: updatemessage.value ? updatemessage.value : "",
+                        })
+
+                    });
+                
+                    let {success} = await response.json();
+                   success ? location.reload() : alert("error")
+                });
             }
             // const parentCard = e.target.closest('.user');
             // const id = parentCard.getAttribute('id');

@@ -59,6 +59,8 @@
 </head>
 
 <body>
+
+
     <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
             <a class="navbar-brand" href="./adminOneRes.html">Admin CRUD</a>
@@ -171,12 +173,36 @@
                     <i class="uil uil-clock-three"></i>
                     <span class="text">Recent Activity</span>
                 </div>
-            
+
             </div>
         </div>
     </section>
-
-
+    <!-- Modal Oynasi -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close fs-1">&times;</span>
+            <form id="modal-form" class="formdataupdate">
+                <label for="username">Username:</label>
+                <input class="form-control" type="text" id="updateusername" name="username"><br><br>
+                <label for="email">Email:</label>
+                <input class="form-control" type="email" id="updateemail" name="email"><br><br>
+                <label for="phone">Phone:</label>
+                <input class="form-control" type="text" id="updatephone" name="phone"><br><br>
+                <label for="date">Date:</label>
+                <input class="form-control" type="text" id="updatedate" name="date"><br><br>
+                <label for="time">Time:</label>
+                <input class="form-control" type="text" id="updatetime" name="time"><br><br>
+                <label for="num_people">Number of people:</label>
+                <input class="form-control" type="number" id="updatenum_people" name="num_people"><br><br>
+               
+                <label for="message">Message:</label>
+                <textarea class="form-control" id="updatemessage" name="message"></textarea><br><br>
+                <label for="zakazId">zakazId</label>
+                <input class="form-control" type="text" id="updatezakazId" name="num_people" disabled><br><br>
+                <button class="form-control bg-info text-light p-4" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
     <!-- script -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
         integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
