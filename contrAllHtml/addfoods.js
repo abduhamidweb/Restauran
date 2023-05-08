@@ -62,11 +62,18 @@ async function AllWorker() {
         foods
     } = await response.json();
     console.log(foods);
+    //     name
+    //     calories
+    //     type
+    //     price
+    //     isAvailable
+    //     file
+    // description
     foods ? foods.forEach(food => {
-                let cardUser = document.createElement("div");
-                cardUser.setAttribute('id', food._id);
-                cardUser.setAttribute("class", "user");
-                cardUser.innerHTML = `
+        let cardUser = document.createElement("div");
+        cardUser.setAttribute('id', food._id);
+        cardUser.setAttribute("class", "user");
+        cardUser.innerHTML = `
                 <div class="userImg">
                     <img src= ${ food.imgLink ? "http://localhost:5000/imgs/"+food.imgLink : ""} alt="workers imgs">
                 </div>
@@ -77,139 +84,100 @@ async function AllWorker() {
                 </div>
                 `
         allWorkerWrapper2.append(cardUser);
-        // cardUser.addEventListener('click', async (e) => {
-        //     const parentCard = e.target.closest('.user');
-        //     const id = parentCard.getAttribute('id');
-        //     let response = await fetch(BASE_URL + "worker/" + id);
-        //     let {
-        //         email,
-        //         password,
-        //         res_id,
-        //         salary,
-        //         userInfo,
-        //         username,
-        //         workingTime,
-        //         userPhone,
-        //         rol,
-        //         _id
-        //     } = await response.json();
-        //     updateworkername.value = username ? username : ""
-        //     updatePassword2.value = password ? password : ""
-        //     updateworkeremail.value = email ? email : ""
-        //     updateworkerPhone.value = userPhone ? userPhone : ""
-        //     updateworkerinfo.value = userInfo ? userInfo : ""
-        //     updateworkersalary.value = salary ? salary : ""
-        //     updateworkerTime.value = workingTime ? workingTime : ""
-        //     updateworkerRol.value = rol ? rol : ""
-        //     updateworkersres.value = res_id ? res_id : ""
-        //     workerIdUpdate.value = _id ? _id : ""
-        // })
-
-
+        cardUser.addEventListener('click', async (e) => {
+            const parentCard = e.target.closest('.user');
+            const id = parentCard.getAttribute('id');
+            let response = await fetch(BASE_URL + "foods/" + id);
+            let {
+                name,
+                calories,
+                type,
+                price,
+                isAvailable,
+                description,
+                _id
+            } = await response.json();
+            updateworkername.value = name ? name : ""
+            updatePassword2.value = type ? type : ""
+            updateworkeremail.value = calories ? calories : ""
+            updateworkerPhone.value = price ? price : ""
+            updateworkerinfo.value = isAvailable ? isAvailable : ""
+            updateworkerTime.value = description ? description : ""
+            workerIdUpdate.value = _id ? _id : ""
+        })
     }) : ""
-//     updateadmin.addEventListener("submit", async (e) => {
-//         e.preventDefault();
-//         try {
-//             const formData = new FormData();
-//             formData.append('username', updateworkername.value ? updateworkername.value : "")
-//             formData.append('email', updateworkeremail.value ? updateworkeremail.value : "")
-//             formData.append('password', updatePassword2.value ? updatePassword2.value : "")
-//             formData.append('userPhone', updateworkerPhone.value ? updateworkerPhone.value : "")
-//             formData.append('userInfo', updateworkerinfo.value ? updateworkerinfo.value : "")
-//             formData.append('workingTime', updateworkerTime.value ? updateworkerTime.value : "")
-//             formData.append('file', updateworkingImg.files[0] ? updateworkingImg.files[0] : "")
-//             formData.append('salary', updateworkersalary.value ? updateworkersalary.value : "")
-//             formData.append('rol', updateworkerRol.value ? updateworkerRol.value : "")
-//             formData.append('res_id', localStorage.getItem("adminres_id"))
-//             await fetch('http://localhost:5000/api/worker/' + workerIdUpdate.value, {
-//                 method: 'PUT',
-//                 headers: {
-//                     'enctype': 'multipart/form-data'
-//                 },
-//                 body: formData
-//             });
-//         } catch (error) {
-//             console.error(error);
-//         }
-//     });
-//     workers ? workers.forEach(worker => {
-//         let cardUser = document.createElement("div");
-//         cardUser.setAttribute('id', worker._id);
-//         cardUser.setAttribute("class", "user");
-//         cardUser.innerHTML = `
-//       <div class="card2">
-//    <div class="banner">
-//       <div class="avatar">
-//       <img src=${"http://localhost:5000/imgs/"+worker.userPhoto}>
-//       </div>
-//    </div>
-// 	<h3>${worker.username}</h3>
-//    <a href="mailto:${worker.email}">📧 ${worker.email}</a>
-//    <a href="">📱 ${worker.userPhone}</a>
-// 	<ul>
-//       <a href="#" target="_blank"><i class="fa fa-twitter" style="font-size:16px"></i></a>
-// 	   <a href="#" target="_blank"><i class="fa fa-linkedin" style="font-size:16px"></i></a>
-//       <a href="#" target="_blank"><i class="fa fa-instagram" style="font-size:16px"></i></a>
-//       <a href="#" target="_blank"><i class="fa fa-facebook" style="font-size:16px"></i></a>
-// 	</ul>
-//     <button class="btn btn-danger mb-3" id=${worker._id}>Delete</button>
-// </div>
-//                 `
-//         allCards.append(cardUser);
-//         // cardUser.addEventListener('click', async (e) => {
-//         //     const parentCard = e.target.closest('.user');
-//         //     const id = parentCard.getAttribute('id');
-//         //     let response = await fetch(BASE_URL + "worker/" + id);
-//         //     let {
-//         //         email,
-//         //         password,
-//         //         res_id,
-//         //         salary,
-//         //         userInfo,
-//         //         username,
-//         //         workingTime,
-//         //         userPhone,
-//         //         rol,
-//         //         _id
-//         //     } = await response.json();
-//         //     updateworkername.value = username ? username : ""
-//         //     updatePassword2.value = password ? password : ""
-//         //     updateworkeremail.value = email ? email : ""
-//         //     updateworkerPhone.value = userPhone ? userPhone : ""
-//         //     updateworkerinfo.value = userInfo ? userInfo : ""
-//         //     updateworkersalary.value = salary ? salary : ""
-//         //     updateworkerTime.value = workingTime ? workingTime : ""
-//         //     updateworkerRol.value = rol ? rol : ""
-//         //     updateworkersres.value = res_id ? res_id : ""
-//         //     workerIdUpdate.value = _id ? _id : ""
-//         // })
-
-
-//     }) : ""
-//     const deleteItem = async (id) => {
-//         try {
-//             const response = await fetch(`${BASE_URL}worker/${id}`, {
-//                 method: 'DELETE'
-//             });
-//             if (!response.ok) {
-//                 throw new Error('Server error');
-//             }
-//             // Element o'chirildi
-//         } catch (error) {
-//             console.log('error :', error);
-//             // Xatolikni ishlash
-//         }
-//     }
-//     let allWrapper = document.querySelectorAll('.btn-danger');
-//     allWrapper.forEach(item => {
-//         item.addEventListener('click', (e) => {
-//             let id = e.target.getAttribute("id");
-//             if (id) {
-
-//                 deleteItem(id)
-//                 window.location.reload()
-//             } else alert("Something is strange")
-//         })
-//     })
+    updateadmin.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        try {
+            const formData = new FormData();
+            formData.append('name', updateworkername.value ? updateworkername.value : "")
+            formData.append('calories', updateworkeremail.value ? updateworkeremail.value : "")
+            formData.append('type', updatePassword2.value ? updatePassword2.value : "")
+            formData.append('price', updateworkerPhone.value ? updateworkerPhone.value : "")
+            formData.append('isAvailable', updateworkerinfo.value ? updateworkerinfo.value : "")
+            formData.append('description', updateworkerTime.value ? updateworkerTime.value : "")
+            formData.append('file', updateworkingImg.files[0] ? updateworkingImg.files[0] : "")
+            formData.append('res_id', localStorage.getItem("adminres_id"))
+            await fetch(BASE_URL + 'foods/' + workerIdUpdate.value, {
+                method: 'PUT',
+                headers: {
+                    'enctype': 'multipart/form-data'
+                },
+                body: formData
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    });
+    foods ? foods.forEach(food => {
+        let cardUser = document.createElement("div");
+        cardUser.setAttribute('id', food._id);
+        cardUser.setAttribute("class", "user");
+        cardUser.innerHTML = `
+          <div class="card2">
+       <div class="banner">
+          <div class="avatar">
+          <img src=${"http://localhost:5000/imgs/" + food.imgLink}>
+          </div>
+       </div>
+    	<h3>${food.name}</h3>
+       <p>price: ${food.price}</p>
+       <p>desc:  ${food.description}</p>
+    	<ul>
+          <a href="#" target="_blank"><i class="fa fa-twitter" style="font-size:16px"></i></a>
+    	   <a href="#" target="_blank"><i class="fa fa-linkedin" style="font-size:16px"></i></a>
+          <a href="#" target="_blank"><i class="fa fa-instagram" style="font-size:16px"></i></a>
+          <a href="#" target="_blank"><i class="fa fa-facebook" style="font-size:16px"></i></a>
+    	</ul>
+        <button class="btn btn-danger mb-3" id=${food._id}>Delete</button>
+    </div>
+                    `
+        allCards.append(cardUser);
+    }) : "";
+    
+    const deleteItem = async (id) => {
+        try {
+            const response = await fetch(`${BASE_URL}foods/${id}`, {
+                method: 'DELETE'
+            });
+            if (!response.ok) {
+                throw new Error('Server error');
+            }
+            // Element o'chirildi
+        } catch (error) {
+            console.log('error :', error);
+            // Xatolikni ishlash
+        }
+    }
+    let allWrapper = document.querySelectorAll('.btn-danger');
+    allWrapper.forEach(item => {
+        item.addEventListener('click', (e) => {
+            let id = e.target.getAttribute("id");
+            if (id) {
+                deleteItem(id)
+                window.location.reload()
+            } else alert("Something is strange")
+        })
+    })
 }
 AllWorker()
