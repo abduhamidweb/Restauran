@@ -18,16 +18,42 @@ let BASE_URL = 'http://localhost:5000/api/';
         startTime.setMinutes(0);
 
         const endTime = new Date();
+
         endTime.setDate(endTime.getDate() + (8 + (7 - endTime.getDay())) % 7);
         endTime.setHours(23);
         endTime.setMinutes(0);
         sabdhjbhds.innerHTML = ` ${dayOfWeek}-${daysOfWeek[(daysOfWeek.indexOf(dayOfWeek) + 5) % 7]}: ${startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })} - ${endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`
-
     } else {
-         sabdhjbhds.innerHTML = 'Closed'
+        sabdhjbhds.innerHTML = 'Closed'
     }
 
 
 
 
-})()
+})();
+
+
+let bookatable = document.querySelector('.bookatablefood')
+bookatable.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    let bookatable = await fetch(BASE_URL + "zakazlar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            username: usernamebook.value,
+            email: useremailbook.value,
+            phone: userphonebook.value,
+            date: userdatebook.value,
+            time: usertimebook.value,
+            num_people: userpeoplebook.value,
+            message: usermessagebook.value
+        })
+    })
+    let {
+        success,
+        message
+    } = await bookatable.json();
+ success ? alert(message) : alert("Error")
+})
