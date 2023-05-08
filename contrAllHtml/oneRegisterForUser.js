@@ -48,7 +48,8 @@ bookatable.addEventListener("submit", async (e) => {
             date: userdatebook.value,
             time: usertimebook.value,
             num_people: userpeoplebook.value,
-            message: usermessagebook.value
+            message: usermessagebook.value,
+            res_id: localStorage.getItem("adminres_id")
         })
     })
     let {
