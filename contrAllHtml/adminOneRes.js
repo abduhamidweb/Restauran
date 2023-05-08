@@ -13,7 +13,7 @@ async function section1() {
     staticOurFood.append(staticOurTitle)
 
     staticOurFood.setAttribute("id", "staticOurFood")
-    let response = await fetch(BASE_URL +resId );
+    let response = await fetch(BASE_URL + resId);
     let data = await response.json();
     // let allArray = data.resource;
     // allArray.map(item => {

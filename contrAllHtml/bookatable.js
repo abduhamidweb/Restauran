@@ -1,8 +1,10 @@
 let tokenbos = localStorage.getItem("tokenadmin");
+let workerToken = localStorage.getItem("workerToken");
+let workerRes_id = localStorage.getItem("workerRes_id");
 let resId = localStorage.getItem("adminres_id");
 (() => {
-    if (!tokenbos) return location = "adminLogin.html";
-    if (!resId) return location = "adminLogin.html";
+    if (!tokenbos || !workerToken) return location = "workerCheckBookATable.html";
+    if (!resId || !workerRes_id) return location = "workerCheckBookATable.html";
 })();
 const body = document.querySelector("body"),
     modeToggle = body.querySelector(".mode-toggle");
@@ -174,9 +176,11 @@ async function AllWorker() {
                         })
 
                     });
-                
-                    let {success} = await response.json();
-                   success ? location.reload() : alert("error")
+
+                    let {
+                        success
+                    } = await response.json();
+                    success ? location.reload() : alert("error")
                 });
             }
             // const parentCard = e.target.closest('.user');
