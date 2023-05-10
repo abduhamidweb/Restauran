@@ -6,7 +6,7 @@ addadmin.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     try {
-        await fetch('http://localhost:5000/api/worker', {
+     let data =   await fetch('http://localhost:5000/api/worker/admin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -18,7 +18,8 @@ addadmin.addEventListener("submit", async (e) => {
                 res_id: bossaddWhichResta.value,
             })
         });
-
+let result = await data.json()
+console.log('result :', result);
     } catch (error) {
         console.error(error);
     }

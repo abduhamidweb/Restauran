@@ -32,6 +32,7 @@ let BASE_URL = 'http://localhost:5000/api/';
 
 })();
 
+let ResId = localStorage.getItem("adminres_id") || localStorage.getItem("rest-id")
 
 let bookatable = document.querySelector('.bookatablefood')
 bookatable.addEventListener("submit", async (e) => {
@@ -49,12 +50,34 @@ bookatable.addEventListener("submit", async (e) => {
             time: usertimebook.value,
             num_people: userpeoplebook.value,
             message: usermessagebook.value,
-            res_id: localStorage.getItem("adminres_id")
+            res_id: ResId
         })
     })
     let {
         success,
         message
     } = await bookatable.json();
- success ? alert(message) : alert("Error")
+    success ? alert(message) : alert("Error")
+})
+let contactUs = document.querySelector('.contactUs')
+contactUs.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    let contactdata = await fetch(BASE_URL + "contact", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            username: contactname.value,
+            email: contactemail.value,
+            subject: contactsubject.value,
+            message: contactmessage.value,
+            res_id: ResId
+        })
+    })
+    let {
+        success,
+        message
+    } = await contactdata.json();
+    success ? alert(message) : alert("Error")
 })

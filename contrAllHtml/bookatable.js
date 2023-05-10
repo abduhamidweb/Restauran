@@ -1,10 +1,13 @@
-let tokenbos = localStorage.getItem("tokenadmin");
+let tokenadmin = localStorage.getItem("tokenadmin");
+let resId = localStorage.getItem("adminres_id");
 let workerToken = localStorage.getItem("workerToken");
 let workerRes_id = localStorage.getItem("workerRes_id");
-let resId = localStorage.getItem("adminres_id");
 (() => {
-    if (!tokenbos || !workerToken) return location = "workerCheckBookATable.html";
-    if (!resId || !workerRes_id) return location = "workerCheckBookATable.html";
+    if ((tokenadmin && resId) || (workerToken && workerRes_id)) {
+        // Qo'shimcha amallar
+    } else {
+        location = "workerCheckBookATable.html";
+    }
 })();
 const body = document.querySelector("body"),
     modeToggle = body.querySelector(".mode-toggle");
@@ -54,8 +57,8 @@ closeButton.onclick = function () {
 // Modalni xaridor tomonidan jo'natilgan ma'lumotlari qabul qilish
 
 async function AllWorker() {
-
-    let response = await fetch(BASE_URL + "restaurants/" + localStorage.getItem("adminres_id"));
+    let id = localStorage.getItem("adminres_id") || localStorage.getItem('workerRes_id')
+    let response = await fetch(BASE_URL + "restaurants/" + id);
     let {
         zakaz
     } = await response.json();
