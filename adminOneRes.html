@@ -11,6 +11,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css" rel="stylesheet" />
     <!-- style -->
     <link rel="stylesheet" href="./contrStyleCss/style.css">
     <title>Admin one Rest</title>
@@ -47,7 +53,57 @@
             </div>
         </div>
     </nav>
-    <h2 class="text-center my-4">Admin One Restaurant</h2>
+    <h2 class="text-center my-4">Admin of Restaurant</h2>
+    <div class="container border border-2 p-5">
+        <h2 class="text-center">Hero section</h2>
+        <!-- Tabs navs -->
+        <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1" role="tab"
+                    aria-controls="ex1-tabs-1" aria-selected="true">add hero</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#ex1-tabs-2" role="tab"
+                    aria-controls="ex1-tabs-2" aria-selected="false">Update hero</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#ex1-tabs-3" role="tab"
+                    aria-controls="ex1-tabs-3" aria-selected="false">delete hero</a>
+            </li>
+        </ul>
+        <!-- Tabs navs -->
+
+        <!-- Tabs content -->
+        <div class="tab-content" id="ex1-content">
+            <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                <!-- Tabs content -->
+                <form class="form form-control border border-0" id="formupdatehero">
+                    <input type="text" class="form-control mt-4 p-3 fs-3" placeholder="Hero title" id="herotitle">
+                    <textarea name="" class="form-control mt-4 p-3 fs-3" id="herodescription"
+                        placeholder="Hero description">
+                    </textarea>
+                    <input type="file" class="form-control mt-4 p-3 fs-3" id="heroImg">
+                    <button type="submit" id="heroBtn"
+                        class="form-control mt-4 p-3 fs-3 bg-info text-light">submit</button>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                <form class="form form-control border border-0" id="formhero">
+                    <input type="text" class="form-control mt-4 p-3 fs-3" placeholder="Hero title" id="updateherotitle">
+                    <textarea name="" class="form-control mt-4 p-3 fs-3" id="updateherodescription"
+                        value="updateherodescription" placeholder="">
+                                    </textarea>
+                    <input type="file" class="form-control mt-4 p-3 fs-3" id="updateheroImg">
+                    <button type="submit" id="updateheroBtn"
+                        class="form-control mt-4 p-3 fs-3 bg-info text-light">submit</button>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+                Tab 3 content
+            </div>
+        </div>
+
+    </div>
     <!-- script -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
         integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
@@ -55,6 +111,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
         integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
         crossorigin="anonymous"></script>
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
     <img src="" alt="">
     <!-- my script -->
     <script src="./contrAllHtml/adminOneRes.js"></script>
