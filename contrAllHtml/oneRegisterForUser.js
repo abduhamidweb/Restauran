@@ -216,3 +216,4 @@ contactUs.addEventListener("submit", async (e) => {
     } = await contactdata.json();
     success ? alert(message) : alert("Error")
 })
+

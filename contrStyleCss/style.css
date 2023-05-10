@@ -1,0 +1,8 @@
+.userImg {
+  width: 200px !important;
+  height: 200px !important;
+}
+.userImg img {
+  width: 100%;
+  height: 100%;
+}

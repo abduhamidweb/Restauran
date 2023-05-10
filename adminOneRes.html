@@ -77,7 +77,7 @@
         <div class="tab-content" id="ex1-content">
             <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
                 <!-- Tabs content -->
-                <form class="form form-control border border-0" id="formupdatehero">
+                <form class="form form-control border border-0" id="formaddhero">
                     <input type="text" class="form-control mt-4 p-3 fs-3" placeholder="Hero title" id="herotitle">
                     <textarea name="" class="form-control mt-4 p-3 fs-3" id="herodescription"
                         placeholder="Hero description">
@@ -87,19 +87,23 @@
                         class="form-control mt-4 p-3 fs-3 bg-info text-light">submit</button>
                 </form>
             </div>
-            <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-                <form class="form form-control border border-0" id="formhero">
+            <div class="tab-pane fade " id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                <div class="tabUpdatePanelUpdate"></div>
+                <form class="form form-control border border-0" id="formupdatehero">
                     <input type="text" class="form-control mt-4 p-3 fs-3" placeholder="Hero title" id="updateherotitle">
                     <textarea name="" class="form-control mt-4 p-3 fs-3" id="updateherodescription"
                         value="updateherodescription" placeholder="">
                                     </textarea>
                     <input type="file" class="form-control mt-4 p-3 fs-3" id="updateheroImg">
+                    <input type="text" class="form-control mt-4 p-3 fs-3" id="updateheroImgId" disabled>
                     <button type="submit" id="updateheroBtn"
                         class="form-control mt-4 p-3 fs-3 bg-info text-light">submit</button>
                 </form>
             </div>
             <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-                Tab 3 content
+            <div class="deletHeroWrapper" id="deletHeroWrapper">
+                
+            </div>
             </div>
         </div>
 

@@ -15,6 +15,127 @@ async function section1() {
     staticOurFood.setAttribute("id", "staticOurFood")
     let response = await fetch(BASE_URL + resId);
     let data = await response.json();
+    let hero = data.hero;
+    let updatePanelHero = document.querySelector('.tabUpdatePanelUpdate')
+    hero ? hero.forEach(item => {
+        let cardUser = document.createElement("div");
+        cardUser.setAttribute('id', item._id);
+        cardUser.setAttribute("class", "user border border-2 m-4 p-4 d-flex");
+        cardUser.innerHTML = `
+                <div class="userImg">
+                    <img src= ${ item.imgLink ? "http://localhost:5000/imgs/"+item.imgLink : ""} alt="workers imgs">
+                </div>
+                <div class="userInfo ms-5 mt-5">
+                    <h4><strong>name:</strong> ${item.title ?item.title : "bu muxim odam" }</h4>
+                </div>
+                `
+        updatePanelHero.append(cardUser);
+        cardUser.addEventListener('click', async (e) => {
+            const parentCard = e.target.closest('.user');
+            const id = parentCard.getAttribute('id');
+            let response = await fetch(BASE_URL2 + "hero/" + id);
+            let {
+                title,
+                description,
+                _id
+            } = await response.json();
+            updateherotitle.value = title ? title : ""
+            updateherodescription.value = description ? description : ""
+            updateheroImgId.value = _id ? _id : ""
+        })
+        formupdatehero.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            try {
+                const formData = new FormData();
+                formData.append('title', updateherotitle.value ? updateherotitle.value : "")
+                formData.append('description', updateherodescription.value ? updateherodescription.value : "")
+                formData.append('file', updateheroImg.files[0] ? updateheroImg.files[0] : "")
+                formData.append('res_id', localStorage.getItem("adminres_id"))
+                let data = await fetch(BASE_URL2 + 'hero/' + updateheroImgId.value, {
+                    method: 'PUT',
+                    headers: {
+                        'enctype': 'multipart/form-data'
+                    },
+                    body: formData
+                });
+                console.log(await data.json());
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    }) : ""
+    hero ? hero.forEach(item => {
+        let cardUser = document.createElement("div");
+        cardUser.setAttribute('id', item._id);
+        cardUser.setAttribute("class", "user border border-2 m-4 p-4 d-flex");
+        cardUser.innerHTML = `
+                <div class="userInfo ms-5 mt-5">
+                    <h4><strong>name:</strong> ${item.title ?item.title : "bu muxim odam" } <button class="btn btn-danger btnHeroDelete" id=${item._id}>delete</button></h4>
+                </div>
+                `
+        deletHeroWrapper.append(cardUser);
+        cardUser.addEventListener('click', async (e) => {
+            const parentCard = e.target.closest('.user');
+            const id = parentCard.getAttribute('id');
+            let response = await fetch(BASE_URL2 + "hero/" + id);
+            let {
+                title,
+                description,
+                _id
+            } = await response.json();
+            updateherotitle.value = title ? title : ""
+            updateherodescription.value = description ? description : ""
+            updateheroImgId.value = _id ? _id : ""
+        })
+        formupdatehero.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            try {
+                const formData = new FormData();
+                formData.append('title', updateherotitle.value ? updateherotitle.value : "")
+                formData.append('description', updateherodescription.value ? updateherodescription.value : "")
+                formData.append('file', updateheroImg.files[0] ? updateheroImg.files[0] : "")
+                formData.append('res_id', localStorage.getItem("adminres_id"))
+                let data = await fetch(BASE_URL2 + 'hero/' + updateheroImgId.value, {
+                    method: 'PUT',
+                    headers: {
+                        'enctype': 'multipart/form-data'
+                    },
+                    body: formData
+                });
+                console.log(await data.json());
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    }) : ""
+    const deleteItem = async (id) => {
+        try {
+            const response = await fetch(`${BASE_URL2}hero/${id}`, {
+                method: 'DELETE'
+            });
+            if (!response.ok) {
+                throw new Error('Server error');
+            }
+            // Element o'chirildi
+        } catch (error) {
+            console.log('error :', error);
+            // Xatolikni ishlash
+        }
+    }
+    let allWrapper = document.querySelectorAll('.btnHeroDelete');
+    allWrapper.forEach(item => {
+        item.addEventListener('click', (e) => {
+            let id = e.target.getAttribute("id");
+            if (id) {
+                deleteItem(id)
+                window.location.reload()
+            } else alert("Something is strange")
+        })
+    });
+
+
+
+
     // let allArray = data.resource;
     // allArray.map(item => {
     //     // submit
@@ -81,4 +202,48 @@ async function section1() {
     //     data ? alert("success") : "error";
     // })
 }
-section1()
+section1();
+formaddhero.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    try {
+        const formData = new FormData();
+        formData.append('title', herotitle.value)
+        formData.append('description', herodescription.value)
+        formData.append('file', heroImg.files[0])
+        formData.append('res_id', localStorage.getItem("adminres_id"));
+        await fetch(BASE_URL2 + 'hero', {
+            method: 'POST',
+            headers: {
+                'enctype': 'multipart/form-data'
+            },
+            body: formData
+        });
+
+    } catch (error) {
+        console.error(error);
+    }
+
+
+
+
+
+    // let contactdata = await fetch(BASE_URL + "contact", {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //         username: contactname.value,
+    //         email: contactemail.value,
+    //         subject: contactsubject.value,
+    //         message: contactmessage.value,
+    //         res_id: ResId
+    //     })
+    // })
+    // let {
+    //     success,
+    //     message
+    // } = await contactdata.json();
+    // success ? alert(message) : alert("Error")
+});
