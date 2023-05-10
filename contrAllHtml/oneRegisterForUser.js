@@ -2,12 +2,16 @@
     let tokenbos = localStorage.getItem("rest-id");
     if (!tokenbos) return location = "AllRestForUser.html";
 })();
+let ResId = localStorage.getItem("adminres_id") || localStorage.getItem("rest-id")
 
 let BASE_URL = 'http://localhost:5000/api/';
 (async () => {
     let response = await fetch(BASE_URL + "restaurants/" + localStorage.getItem("rest-id"));
-    let GET = await response.json();
-    bcgvhdjdwvg2.innerHTML = GET.contact
+    let {
+        foods,
+        contact
+    } = await response.json();
+    bcgvhdjdwvg2.innerHTML = contact
     const today = new Date();
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const dayOfWeek = daysOfWeek[today.getDay()];
@@ -26,13 +30,140 @@ let BASE_URL = 'http://localhost:5000/api/';
     } else {
         sabdhjbhds.innerHTML = 'Closed'
     }
+    // <!-- ======= Menu Section ======= -->
+    foods ? foods.forEach(food => {
+        console.log('food :', food);
+        let cardUser = document.createElement("div");
+        cardUser.setAttribute('id', food._id);
+        cardUser.setAttribute("class", "col-lg-6 menu-item filter-starters");
+        cardUser.innerHTML = `
+            <div class="menu-content">
+              <a href="#">${food.name ? food.name : "bu muxim odam"}</a><span>$${food.price ? food.price : "bu muxim odam"}</span>
+            </div>
+            <div class="menu-ingredients">
+             ${food.description ? food.description : "bu muxim odam"} 
+            </div>
+          </div>
+                `
+        AllFoodsWrap.append(cardUser);
+        // console.log(menu-flters);
+        // cardUser.addEventListener('click', async (e) => {
+        //     const parentCard = e.target.closest('.user');
+        //     const id = parentCard.getAttribute('id');
+        //     let response = await fetch(BASE_URL + "foods/" + id);
+        //     let {
+        //         name,
+        //         calories,
+        //         type,
+        //         price,
+        //         isAvailable,
+        //         description,
+        //         _id
+        //     } = await response.json();
+        //     updateworkername.value = name ? name : ""
+        //     updatePassword2.value = type ? type : ""
+        //     updateworkeremail.value = calories ? calories : ""
+        //     updateworkerPhone.value = price ? price : ""
+        //     updateworkerinfo.value = isAvailable ? isAvailable : ""
+        //     updateworkerTime.value = description ? description : ""
+        //     workerIdUpdate.value = _id ? _id : ""
+        // })
+    }) : "";
+    let menuFilters = document.querySelectorAll('.menuFilters li')
+    menuFilters.forEach(item => {
+        item.addEventListener('click', (e) => {
+            let type = e.target.getAttribute("id");
+            if (type) {
+                AllFoodsWrap.innerHTML = ""
+                foods ? foods.forEach(food => {
+                    if (food.type == type && food.res_id == ResId) {
+                        let cardUser = document.createElement("div");
+                        cardUser.setAttribute('id', food._id);
+                        cardUser.setAttribute("class", "col-lg-6 menu-item filter-starters");
+                        cardUser.innerHTML = `
+                  <div class="menu-content">
+                    <a href="#">${food.name ? food.name : "bu muxim odam"}</a><span>$${food.price ? food.price : "bu muxim odam"}</span>
+                  </div>
+                  <div class="menu-ingredients">
+                   ${food.description ? food.description : "bu muxim odam"} 
+                  </div>
+                </div>
+                      `
+                        AllFoodsWrap.append(cardUser);
+                    }
+                    // console.log(menu-flters);
+                    // cardUser.addEventListener('click', async (e) => {
+                    //     const parentCard = e.target.closest('.user');
+                    //     const id = parentCard.getAttribute('id');
+                    //     let response = await fetch(BASE_URL + "foods/" + id);
+                    //     let {
+                    //         name,
+                    //         calories,
+                    //         type,
+                    //         price,
+                    //         isAvailable,
+                    //         description,
+                    //         _id
+                    //     } = await response.json();
+                    //     updateworkername.value = name ? name : ""
+                    //     updatePassword2.value = type ? type : ""
+                    //     updateworkeremail.value = calories ? calories : ""
+                    //     updateworkerPhone.value = price ? price : ""
+                    //     updateworkerinfo.value = isAvailable ? isAvailable : ""
+                    //     updateworkerTime.value = description ? description : ""
+                    //     workerIdUpdate.value = _id ? _id : ""
+                    // })
+                }) : "";
+            } else {
+                AllFoodsWrap.innerHTML = ""
+                foods ? foods.forEach(food => {
+                    let cardUser = document.createElement("div");
+                    cardUser.setAttribute('id', food._id);
+                    cardUser.setAttribute("class", "col-lg-6 menu-item filter-starters");
+                    cardUser.innerHTML = `
+            <div class="menu-content">
+              <a href="#">${food.name ? food.name : "bu muxim odam"}</a><span>$${food.price ? food.price : "bu muxim odam"}</span>
+            </div>
+            <div class="menu-ingredients">
+             ${food.description ? food.description : "bu muxim odam"} 
+            </div>
+          </div>
+                `
+                    AllFoodsWrap.append(cardUser);
+                    // console.log(menu-flters);
+                    // cardUser.addEventListener('click', async (e) => {
+                    //     const parentCard = e.target.closest('.user');
+                    //     const id = parentCard.getAttribute('id');
+                    //     let response = await fetch(BASE_URL + "foods/" + id);
+                    //     let {
+                    //         name,
+                    //         calories,
+                    //         type,
+                    //         price,
+                    //         isAvailable,
+                    //         description,
+                    //         _id
+                    //     } = await response.json();
+                    //     updateworkername.value = name ? name : ""
+                    //     updatePassword2.value = type ? type : ""
+                    //     updateworkeremail.value = calories ? calories : ""
+                    //     updateworkerPhone.value = price ? price : ""
+                    //     updateworkerinfo.value = isAvailable ? isAvailable : ""
+                    //     updateworkerTime.value = description ? description : ""
+                    //     workerIdUpdate.value = _id ? _id : ""
+                    // })
+                }) : "";
+            }
+        })
+    })
+
+
 
 
 
 
 })();
 
-let ResId = localStorage.getItem("adminres_id") || localStorage.getItem("rest-id")
 
 let bookatable = document.querySelector('.bookatablefood')
 bookatable.addEventListener("submit", async (e) => {

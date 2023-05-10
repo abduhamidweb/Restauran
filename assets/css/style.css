@@ -927,12 +927,12 @@ section {
   font-family: "Comic Neue", sans-serif;
   color: #948c81;
 }
-
 /*--------------------------------------------------------------
 # Specials
 --------------------------------------------------------------*/
 .specials {
   overflow: hidden;
+  margin-top: 150px;
 }
 
 .specials .nav-tabs {
