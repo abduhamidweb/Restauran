@@ -32,7 +32,7 @@ let BASE_URL = 'http://localhost:5000/api/';
     }
     // <!-- ======= Menu Section ======= -->
     foods ? foods.forEach(food => {
-        console.log('food :', food);
+        if (food.res_id == ResId) {
         let cardUser = document.createElement("div");
         cardUser.setAttribute('id', food._id);
         cardUser.setAttribute("class", "col-lg-6 menu-item filter-starters");
@@ -45,7 +45,8 @@ let BASE_URL = 'http://localhost:5000/api/';
             </div>
           </div>
                 `
-        AllFoodsWrap.append(cardUser);
+            AllFoodsWrap.append(cardUser);
+        }
         // console.log(menu-flters);
         // cardUser.addEventListener('click', async (e) => {
         //     const parentCard = e.target.closest('.user');
@@ -117,6 +118,8 @@ let BASE_URL = 'http://localhost:5000/api/';
             } else {
                 AllFoodsWrap.innerHTML = ""
                 foods ? foods.forEach(food => {
+                    if (food.res_id == ResId) {
+                         
                     let cardUser = document.createElement("div");
                     cardUser.setAttribute('id', food._id);
                     cardUser.setAttribute("class", "col-lg-6 menu-item filter-starters");
@@ -129,7 +132,8 @@ let BASE_URL = 'http://localhost:5000/api/';
             </div>
           </div>
                 `
-                    AllFoodsWrap.append(cardUser);
+                        AllFoodsWrap.append(cardUser);
+                     }
                     // console.log(menu-flters);
                     // cardUser.addEventListener('click', async (e) => {
                     //     const parentCard = e.target.closest('.user');
