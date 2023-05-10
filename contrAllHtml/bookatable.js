@@ -60,8 +60,10 @@ async function AllWorker() {
     let id = localStorage.getItem("adminres_id") || localStorage.getItem('workerRes_id')
     let response = await fetch(BASE_URL + "restaurants/" + id);
     let {
-        zakaz
+        zakaz,
+        contactUs
     } = await response.json();
+    console.log('contactUs :', contactUs);
     zakaz ? zakaz.forEach(z => {
         let cardUser = document.createElement("div");
         cardUser.setAttribute("class", "activity-data")
@@ -178,6 +180,130 @@ async function AllWorker() {
                             message: updatemessage.value ? updatemessage.value : "",
                         })
 
+                    });
+
+                    let {
+                        success
+                    } = await response.json();
+                    success ? location.reload() : alert("error")
+                });
+            }
+            // const parentCard = e.target.closest('.user');
+            // const id = parentCard.getAttribute('id');
+            // let response = await fetch(BASE_URL + "foods/" + id);
+            // let {
+            //     name,
+            //     calories,
+            //     type,
+            //     price,
+            //     isAvailable,
+            //     description,
+            //     _id
+            // } = await response.json();
+            // updateworkername.value = name ? name : ""
+            // updatePassword2.value = type ? type : ""
+            // updateworkeremail.value = calories ? calories : ""
+            // updateworkerPhone.value = price ? price : ""
+            // updateworkerinfo.value = isAvailable ? isAvailable : ""
+            // updateworkerTime.value = description ? description : ""
+            // workerIdUpdate.value = _id ? _id : ""
+        })
+    }) : ""
+    contactUs ? contactUs.forEach(z => {
+        console.log('z :', z);
+        let cardUser = document.createElement("div");
+        cardUser.setAttribute("class", "activity-data")
+        cardUser.innerHTML = `
+                              <div class="data names">
+                        <span class="data-title">username</span>
+                        <span class="data-list">${z.username}</span>
+                    </div>
+                    <div class="data email">
+                        <span class="data-title">Email</span>
+                        <span class="data-list">${z.email}</span>
+                    </div>
+                    <div class="data joined">
+                        <span class="data-title">Subject</span>
+                        <span class="data-list">${z.subject}</span>
+                    </div>
+                
+                    <div class="data status">
+                        <span class="data-title">message</span>
+                        <span class="data-list">${z.message}</span>
+                    </div>
+                    <div class="data status">
+                        <span class="data-title">update</span>
+                        <span class="data-list">
+                            <button class="btn btn-info text-light" id=${z._id}>Update</button>
+                        </span>
+                    </div>
+                    <div class="data status">
+                        <span class="data-title">delete</span>
+                        <span class="data-list">
+                            <button class="btn btn-danger" id=${z._id}>Delete</button>
+                        </span>
+                    </div>
+                `
+        clientSay.append(cardUser);
+        const deleteItem = async (id) => {
+            try {
+                const response = await fetch(`${BASE_URL}contact/${id}`, {
+                    method: 'DELETE'
+                });
+                location.reload();
+                if (!response.ok) {
+                    throw new Error('Server error');
+                }
+                // Element o'chirildi
+            } catch (error) {
+                console.log('error :', error);
+                // Xatolikni ishlash
+            }
+        }
+        cardUser.addEventListener('click', async (e) => {
+            if (e.target.classList.contains("btn-danger")) {
+                let deleteId = e.target.getAttribute("id")
+                if (deleteId) {
+                    deleteItem(deleteId)
+                }
+            }
+            if (e.target.classList.contains("btn-info")) {
+                let updateId = e.target.getAttribute("id")
+                console.log('updateId :', updateId);
+                modal.style.display = "block";
+                let response = await fetch(BASE_URL + "contact/" + updateId);
+                let {
+                    zakaz: {
+                        username,
+                        email,
+                        subject,
+                        message,
+                        _id
+                    }
+
+                } = await response.json();
+
+                updateusername.value = username ? username : "";
+                updateemail.value = email ? email : "";
+                updatedate.value = subject ? subject : "";
+                updatemessage.value = message ? message : "";
+                updatezakazId.value = _id ? _id : "";
+
+                let formdate = document.querySelector('.formdataupdate');
+                formdate.addEventListener('submit', async (e) => {
+                    e.preventDefault()
+                    let a = updateusername.value
+                    let response = await fetch(BASE_URL + 'contact/' + updatezakazId.value, {
+                        method: 'PUT',
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            username: a ? a : "",
+                            email: updateemail.value ? updateemail.value : "",
+                            subject: updatedate.value ? updatedate.value : "",
+                            message: updatemessage.value ? updatemessage.value : "",
+                        })
                     });
 
                     let {
