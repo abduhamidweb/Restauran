@@ -9,7 +9,8 @@ let BASE_URL = 'http://localhost:5000/api/';
     let response = await fetch(BASE_URL + "restaurants/" + localStorage.getItem("rest-id"));
     let {
         foods,
-        contact
+        contact,
+        hero
     } = await response.json();
     bcgvhdjdwvg2.innerHTML = contact
     const today = new Date();
@@ -70,6 +71,59 @@ let BASE_URL = 'http://localhost:5000/api/';
         //     workerIdUpdate.value = _id ? _id : ""
         // })
     }) : "";
+    const carouselInner = document.querySelector('.carousel-inner');
+    // for (let i = 0; i < hero.length; i++) {
+    // console.log('i :', i);
+    //     const item = document.createElement('div');
+    //     item.classList.add('carousel-item');
+    //     if (i === 0) {
+    //         item.classList.add('active');
+    //     }
+    //     const img = document.createElement('img');
+    //     img.classList.add('d-block');
+    //     img.classList.add('w-100');
+    //     img.setAttribute('src', hero[i]);
+    //     item.appendChild(img);
+    //     carouselInner.appendChild(item);
+    // }
+
+
+    hero ? hero.forEach((item, i) => {
+        const item3 = document.createElement('div');
+        item3.classList.add('carousel-item');
+        if (i === 0) {
+            item3.classList.add('active');
+        }
+        const img = document.createElement('img');
+        img.classList.add('d-block');
+        img.classList.add('w-100');
+        img.setAttribute('src', 'http://localhost:5000/imgs/' + item.imgLink);
+        item3.appendChild(img);
+        carouselInner.appendChild(item3);
+    }) : ""
+    hero ? hero.forEach((item, i) => {
+        // console.log('item :', i);
+
+        // let herowrapperItems = document.createElement("div");
+        // // herowrapperItems.setAttribute('id', item._id);
+        // herowrapperItems.setAttribute("class", "carousel-item ");
+        // herowrapperItems.setAttribute("style", "background-image: url(assets/img/slide/slide-2.jpg);");
+        // herowrapperItems.innerHTML = `
+        //           <div class="carousel-container">
+        //             <div class="carousel-content">
+        //               <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
+        //               <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi
+        //                 ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea
+        //                 voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+        //               <div>
+        //                 <a href="#menu" class="btn-menu animate__animated animate__fadeInUp scrollto">Our Menu</a>
+        //                 <a href="#book-a-table" class="btn-book animate__animated animate__fadeInUp scrollto">Book a Table</a>
+        //               </div>
+        //             </div>
+        //           </div>
+        // `
+        // heroWrapperAll.append(herowrapperItems);
+    }) : ""
     let menuFilters = document.querySelectorAll('.menuFilters li')
     menuFilters.forEach(item => {
         item.addEventListener('click', (e) => {
@@ -216,4 +270,3 @@ contactUs.addEventListener("submit", async (e) => {
     } = await contactdata.json();
     success ? alert(message) : alert("Error")
 })
-

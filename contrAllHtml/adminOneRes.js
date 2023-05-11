@@ -16,7 +16,9 @@ async function section1() {
     let response = await fetch(BASE_URL + resId);
     let data = await response.json();
     let hero = data.hero;
-    let updatePanelHero = document.querySelector('.tabUpdatePanelUpdate')
+    let updatePanelHero = document.querySelector('.tabUpdatePanelUpdate');
+
+    // hero CRUD================================
     hero ? hero.forEach(item => {
         let cardUser = document.createElement("div");
         cardUser.setAttribute('id', item._id);
@@ -133,6 +135,7 @@ async function section1() {
         })
     });
 
+    // hero end ===============================================
 
 
 
