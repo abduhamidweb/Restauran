@@ -139,7 +139,8 @@ async function section1() {
 
 
 
-    // let allArray = data.resource;
+    let allArray = data.resource;
+    console.log('allArray :', allArray);
     // allArray.map(item => {
     //     // submit
     //     let buttonUpdate = document.createElement("button");

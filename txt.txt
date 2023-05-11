@@ -32,52 +32,6 @@ let BASE_URL = 'http://localhost:5000/api/';
         sabdhjbhds.innerHTML = 'Closed'
     }
     // <!-- ======= Menu Section ======= -->
-    hero ? hero.forEach((item, index) => {
-        let cardUser = document.createElement("div");
-        cardUser.setAttribute('id', item._id);
-        cardUser.setAttribute("class", "carousel-item");
-        cardUser.setAttribute("style", `background-image: url(${'http://localhost:5000/imgs/'+item.imgLink}`)
-        if (index === 0) {
-            cardUser.classList.add('active');
-        }
-        cardUser.innerHTML = `
-            <div class="carousel-container">
-              <div class="carousel-content">
-                <h2 class="animate__animated animate__fadeInDown"><span>Delicious</span> ${item.title}</h2>
-                <p class="animate__animated animate__fadeInUp">${item.description}</p>
-                <div>
-                  <a href="#menu" class="btn-menu animate__animated animate__fadeInUp scrollto">Our Menu</a>
-                  <a href="#book-a-table" class="btn-book animate__animated animate__fadeInUp scrollto">Book a Table</a>
-                </div>
-              </div>
-            </div>
-        `
-        heroWrapperAllItems.append(cardUser);
-        console.log('cardUser :', cardUser);
-    }) : ""
-    const prevButton = document.querySelector(".carousel-control-prev");
-    const nextButton = document.querySelector(".carousel-control-next");
-    let activeIndex = 0;
-    prevButton.addEventListener("click", () => {
-        activeIndex--;
-        if (activeIndex < 0) activeIndex = hero.length - 1;
-        renderSlides();
-    });
-
-    nextButton.addEventListener("click", () => {
-        activeIndex++;
-        if (activeIndex >= hero.length) activeIndex = 0;
-        renderSlides();
-    });
-
-    // slide-larni yangilash
-    function renderSlides() {
-        const carouselItems = document.querySelectorAll(".carousel-item");
-        carouselItems.forEach((item, index) => {
-            if (index === activeIndex) item.classList.add("active");
-            else item.classList.remove("active");
-        });
-    }
     foods ? foods.forEach(food => {
         if (food.res_id == ResId) {
             let cardUser = document.createElement("div");
@@ -94,7 +48,156 @@ let BASE_URL = 'http://localhost:5000/api/';
                 `
             AllFoodsWrap.append(cardUser);
         }
+        // console.log(menu-flters);
+        // cardUser.addEventListener('click', async (e) => {
+        //     const parentCard = e.target.closest('.user');
+        //     const id = parentCard.getAttribute('id');
+        //     let response = await fetch(BASE_URL + "foods/" + id);
+        //     let {
+        //         name,
+        //         calories,
+        //         type,
+        //         price,
+        //         isAvailable,
+        //         description,
+        //         _id
+        //     } = await response.json();
+        //     updateworkername.value = name ? name : ""
+        //     updatePassword2.value = type ? type : ""
+        //     updateworkeremail.value = calories ? calories : ""
+        //     updateworkerPhone.value = price ? price : ""
+        //     updateworkerinfo.value = isAvailable ? isAvailable : ""
+        //     updateworkerTime.value = description ? description : ""
+        //     workerIdUpdate.value = _id ? _id : ""
+        // })
     }) : "";
+    const carouselInner = document.querySelector('.carousel-inner');
+    // for (let i = 0; i < hero.length; i++) {
+    // console.log('i :', i);
+    //     const item = document.createElement('div');
+    //     item.classList.add('carousel-item');
+    //     if (i === 0) {
+    //         item.classList.add('active');
+    //     }
+    //     const img = document.createElement('img');
+    //     img.classList.add('d-block');
+    //     img.classList.add('w-100');
+    //     img.setAttribute('src', hero[i]);
+    //     item.appendChild(img);
+    //     carouselInner.appendChild(item);
+    // }
+
+
+    // hero ? hero.forEach((item, i) => {
+    //     const item3 = document.createElement('div');
+    //     item3.classList.add('carousel-item');
+    //     if (i === 0) {
+    //         item3.classList.add('active');
+    //     }
+    //     // const img = document.createElement('img');
+    //     // img.classList.add('d-block');
+    //     // img.classList.add('w-100');
+    //     // img.setAttribute('src', 'http://localhost:5000/imgs/' + item.imgLink);
+    //     // item3.appendChild(img);
+
+
+    //     item3.innerHTML = `
+    //                     <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg);">
+    //         <div class="carousel-container">
+    //           <div class="carousel-content">
+    //             <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
+    //             <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi
+    //               ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea
+    //               voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+    //             <div>
+    //               <a href="#menu" class="btn-menu animate__animated animate__fadeInUp scrollto">Our Menu</a>
+    //               <a href="#book-a-table" class="btn-book animate__animated animate__fadeInUp scrollto">Book a Table</a>
+    //             </div>
+    //           </div>
+    //         </div>
+    //       </div> 
+    //     `
+    //     carouselInner.appendChild(item3);
+    // }) : ""
+    // const carouselInner = document.querySelector(".carousel-inner");
+    const prevButton = document.querySelector(".carousel-control-prev");
+    const nextButton = document.querySelector(".carousel-control-next");
+
+    let activeIndex = 0;
+
+    // slide-larni carousel-innerga qo'shish
+    hero.forEach((slide, index) => {
+        const div = document.createElement("div");
+        div.classList.add("carousel-item");
+        if (index === activeIndex) div.classList.add("active");
+
+        div.style.backgroundImage = `url(${'http://localhost:5000/imgs/' + slide.imgLink})`;
+        div.innerHTML = `
+      <div class="carousel-container">
+        <div class="carousel-content">
+          <h2 class="animate__animated animate__fadeInDown">${slide.title}</h2>
+          <div>
+            <a href="}" class="btn-menu animate__animated animate__fadeInUp scrollto">Our Menu</a>
+            <a href="$" class="btn-book animate__animated animate__fadeInUp scrollto">Book a Table</a>
+          </div>
+        </div>
+      </div>
+  `;
+
+        carouselInner.appendChild(div);
+    });
+    
+
+    
+    prevButton.addEventListener("click", () => {
+        activeIndex--;
+        if (activeIndex < 0) activeIndex = slides.length - 1;
+        renderSlides();
+    });
+
+    nextButton.addEventListener("click", () => {
+        activeIndex++;
+        if (activeIndex >= slides.length) activeIndex = 0;
+        renderSlides();
+    });
+
+    // slide-larni yangilash
+    function renderSlides() {
+        const carouselItems = document.querySelectorAll(".carousel-item");
+        carouselItems.forEach((item, index) => {
+            if (index === activeIndex) item.classList.add("active");
+            else item.classList.remove("active");
+        });
+    }
+
+
+
+
+
+    
+    hero ? hero.forEach((item, i) => {
+        // console.log('item :', i);
+
+        // let herowrapperItems = document.createElement("div");
+        // // herowrapperItems.setAttribute('id', item._id);
+        // herowrapperItems.setAttribute("class", "carousel-item ");
+        // herowrapperItems.setAttribute("style", "background-image: url(assets/img/slide/slide-2.jpg);");
+        // herowrapperItems.innerHTML = `
+        //           <div class="carousel-container">
+        //             <div class="carousel-content">
+        //               <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
+        //               <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi
+        //                 ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea
+        //                 voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+        //               <div>
+        //                 <a href="#menu" class="btn-menu animate__animated animate__fadeInUp scrollto">Our Menu</a>
+        //                 <a href="#book-a-table" class="btn-book animate__animated animate__fadeInUp scrollto">Book a Table</a>
+        //               </div>
+        //             </div>
+        //           </div>
+        // `
+        // heroWrapperAll.append(herowrapperItems);
+    }) : ""
     let menuFilters = document.querySelectorAll('.menuFilters li')
     menuFilters.forEach(item => {
         item.addEventListener('click', (e) => {
@@ -185,6 +288,9 @@ let BASE_URL = 'http://localhost:5000/api/';
             }
         })
     })
+
+
+
 
 
 
