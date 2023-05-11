@@ -134,13 +134,28 @@ async function section1() {
             } else alert("Something is strange")
         })
     });
-
     // hero end ===============================================
-
-
-
     let allArray = data.resource;
-    console.log('allArray :', allArray);
+    allArray.forEach(item => {
+        EumIpsamUpdate.value = item.title,
+            videoEumIpsam.value = item.videoLink
+        videoEumIpsamId.value = item._id
+    });
+    EumIpsam.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let bookatable = await fetch(BASE_URL2 + "resources/" + videoEumIpsamId.value, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title: EumIpsamUpdate.value,
+                videoLink: videoEumIpsam.value,
+            })
+        });
+        const data = await bookatable.json();
+        data ? alert("oke") : ""
+    });
     // allArray.map(item => {
     //     // submit
     //     let buttonUpdate = document.createElement("button");

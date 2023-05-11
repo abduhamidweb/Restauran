@@ -3,7 +3,6 @@ async function resuorc() {
     let response = await fetch(BASE_URL);
     let data = await response.json();
     data ? data.map((item) => {
-        console.log('item :', item);
         let rest_wrapper = document.createElement("div");
         rest_wrapper.setAttribute("class", "col-lg-3")
         rest_wrapper.innerHTML = `
