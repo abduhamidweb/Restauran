@@ -268,3 +268,44 @@ formaddhero.addEventListener("submit", async (e) => {
     // } = await contactdata.json();
     // success ? alert(message) : alert("Error")
 });
+chooseForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    try {
+        await fetch(BASE_URL2 + 'choose', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title: chooseFormUpdate.value,
+                message: videochooseForm.value,
+                res_id: localStorage.getItem("adminres_id")
+            })
+        });
+    } catch (error) {
+        console.error(error);
+    }
+
+
+
+
+
+    // let contactdata = await fetch(BASE_URL + "contact", {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //         username: contactname.value,
+    //         email: contactemail.value,
+    //         subject: contactsubject.value,
+    //         message: contactmessage.value,
+    //         res_id: ResId
+    //     })
+    // })
+    // let {
+    //     success,
+    //     message
+    // } = await contactdata.json();
+    // success ? alert(message) : alert("Error")
+});
