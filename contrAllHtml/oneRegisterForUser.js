@@ -12,9 +12,9 @@ let BASE_URL = 'http://localhost:5000/api/';
         contact,
         hero,
         resource,
-        choose
+        choose,
+        photos
     } = await response.json();
-    console.log(resource);
     bcgvhdjdwvg2.innerHTML = contact
     const today = new Date();
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -34,6 +34,22 @@ let BASE_URL = 'http://localhost:5000/api/';
     } else {
         sabdhjbhds.innerHTML = 'Closed'
     }
+    // img==============================
+    
+    photos ? photos.forEach(photo => {
+
+        let cardUser = document.createElement("div");
+        cardUser.setAttribute('id', photo._id);
+        cardUser.setAttribute("class", "col-lg-3 col-md-4");
+        cardUser.innerHTML = `
+            <div class="gallery-item">
+              <a href=${'http://localhost:5000/imgs/'+photo.imgLink} class="gallery-lightbox">
+                <img src=${'http://localhost:5000/imgs/'+photo.imgLink} alt="" class="img-fluid">
+              </a>
+            </div>
+        `
+        restImgsWrapper.append(cardUser);
+    }) : ""
     // <!-- ======= Menu Section ======= -->
     hero ? hero.forEach((item, index) => {
         let cardUser = document.createElement("div");

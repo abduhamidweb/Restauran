@@ -212,13 +212,11 @@ async function section1() {
         deletChooseWrapper.append(cardUser);
         // ================================================
 
-        let photos = data.photos;
 
 
 
 
 
-        
         // formupdatehero.addEventListener("submit", async (e) => {
         //     e.preventDefault();
         //     try {
@@ -240,17 +238,87 @@ async function section1() {
         //     }
         // });
     }) : ""
+
     let allWrapperchoose = document.querySelectorAll('.btnchooseDelete');
     allWrapperchoose.forEach(item => {
         item.addEventListener('click', (e) => {
             let id = e.target.getAttribute("id");
-            console.log('id :', id);
             if (id) {
                 deleteItem("choose", id)
                 window.location.reload()
             } else alert("Something is strange")
         })
     });
+
+    let photos = data.photos
+    photos ? photos.forEach(item => {
+        let cardUser = document.createElement("div");
+        cardUser.setAttribute('id', item._id);
+        cardUser.setAttribute("class", "user border border-2 m-4 p-4 d-flex");
+        cardUser.innerHTML = `
+                <div class="userInfo ms-5 mt-5">
+                                    <img src=${'http://localhost:5000/imgs/'+item.imgLink} width="300" alt="" class="img-fluid">
+                </div>
+                `
+        photoUpdate.append(cardUser);
+        cardUser.addEventListener('click', async (e) => {
+            const parentCard = e.target.closest('.user');
+            const id = parentCard.getAttribute('id');
+            updateimg.value = id ? id : ""
+        })
+    }) : ""
+    // DElete ================================
+    photos ? photos.forEach(item => {
+        let cardUser = document.createElement("div");
+        cardUser.setAttribute('id', item._id);
+        cardUser.setAttribute("class", "user border border-2 m-4 p-4 d-flex");
+        cardUser.innerHTML = `
+                <div class="userInfo ms-5 mt-5">
+                    <h4><strong>name:</strong> ${item._id ?item._id : "bu muxim odam" } <button class="btn btn-danger btnphotosDelete" id=${item._id}>delete</button></h4>
+                </div>
+                     <div class="userInfo ms-5 mt-5">
+                                    <img src=${'http://localhost:5000/imgs/'+item.imgLink} width="200" alt="" class="img-fluid">
+                </div>
+                `
+        imgUploadDeleted.append(cardUser);
+        // ================================================
+
+
+
+
+
+
+        // formupdatehero.addEventListener("submit", async (e) => {
+        //     e.preventDefault();
+        //     try {
+        //         const formData = new FormData();
+        //         formData.append('title', updateherotitle.value ? updateherotitle.value : "")
+        //         formData.append('description', updateherodescription.value ? updateherodescription.value : "")
+        //         formData.append('file', updateheroImg.files[0] ? updateheroImg.files[0] : "")
+        //         formData.append('res_id', localStorage.getItem("adminres_id"))
+        //         let data = await fetch(BASE_URL2 + 'hero/' + updateheroImgId.value, {
+        //             method: 'PUT',
+        //             headers: {
+        //                 'enctype': 'multipart/form-data'
+        //             },
+        //             body: formData
+        //         });
+        //         console.log(await data.json());
+        //     } catch (error) {
+        //         console.error(error);
+        //     }
+        // });
+    }) : ""
+        let allWrapperImgId = document.querySelectorAll('.btnphotosDelete');
+        allWrapperImgId.forEach(item => {
+            item.addEventListener('click', (e) => {
+                let id = e.target.getAttribute("id");
+                if (id) {
+                    deleteItem("photo", id)
+                    window.location.reload()
+                } else alert("Something is strange")
+            })
+        });
     // console.log('chooseArray :', chooseArray);
     // allArray.map(item => {
     //     // submit
@@ -365,7 +433,7 @@ formaddhero.addEventListener("submit", async (e) => {
 chooseForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     try {
-        await fetch(BASE_URL2 + 'choose', {
+        let data = await fetch(BASE_URL2 + 'choose', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -376,6 +444,7 @@ chooseForm.addEventListener("submit", async (e) => {
                 res_id: localStorage.getItem("adminres_id")
             })
         });
+        data ? window.location.reload() : alert("Error")
     } catch (error) {
         console.error(error);
     }
@@ -409,13 +478,33 @@ imgupload.addEventListener("submit", async (e) => {
         const formData = new FormData();
         formData.append('file', photoUpload.files[0])
         formData.append('res_id', localStorage.getItem("adminres_id"))
-        await fetch('http://localhost:5000/api/photo', {
+        let data = await fetch(BASE_URL2 + 'photo', {
             method: 'POST',
             headers: {
                 'enctype': 'multipart/form-data'
             },
             body: formData
         });
+        data ? window.location.reload() : alert("Error")
+
+    } catch (error) {
+        console.error(error);
+    }
+});
+imguploadUpdate.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    try {
+        const formData = new FormData();
+        formData.append('file', photoUploadUpdate.files[0])
+        formData.append('res_id', localStorage.getItem("adminres_id"))
+        let data = await fetch(BASE_URL2 + 'photo/' + updateimg.value, {
+            method: 'PUT',
+            headers: {
+                'enctype': 'multipart/form-data'
+            },
+            body: formData
+        });
+        data ? window.location.reload() : alert("Error")
 
     } catch (error) {
         console.error(error);
