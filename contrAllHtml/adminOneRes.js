@@ -210,6 +210,15 @@ async function section1() {
                 </div>
                 `
         deletChooseWrapper.append(cardUser);
+        // ================================================
+
+        let photos = data.photos;
+
+
+
+
+
+        
         // formupdatehero.addEventListener("submit", async (e) => {
         //     e.preventDefault();
         //     try {
@@ -393,4 +402,22 @@ chooseForm.addEventListener("submit", async (e) => {
     //     message
     // } = await contactdata.json();
     // success ? alert(message) : alert("Error")
+});
+imgupload.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    try {
+        const formData = new FormData();
+        formData.append('file', photoUpload.files[0])
+        formData.append('res_id', localStorage.getItem("adminres_id"))
+        await fetch('http://localhost:5000/api/photo', {
+            method: 'POST',
+            headers: {
+                'enctype': 'multipart/form-data'
+            },
+            body: formData
+        });
+
+    } catch (error) {
+        console.error(error);
+    }
 });
