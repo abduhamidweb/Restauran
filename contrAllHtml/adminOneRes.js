@@ -110,9 +110,9 @@ async function section1() {
             }
         });
     }) : ""
-    const deleteItem = async (id) => {
+    const deleteItem = async (path, id) => {
         try {
-            const response = await fetch(`${BASE_URL2}hero/${id}`, {
+            const response = await fetch(`${BASE_URL2}${path}/${id}`, {
                 method: 'DELETE'
             });
             if (!response.ok) {
@@ -129,11 +129,12 @@ async function section1() {
         item.addEventListener('click', (e) => {
             let id = e.target.getAttribute("id");
             if (id) {
-                deleteItem(id)
+                deleteItem("hero", id)
                 window.location.reload()
             } else alert("Something is strange")
         })
     });
+
     // hero end ===============================================
     let allArray = data.resource;
     allArray.forEach(item => {
@@ -157,6 +158,90 @@ async function section1() {
         data ? alert("oke") : ""
     });
     let chooseArray = data.choose;
+    chooseArray.forEach(item => {
+        let cardUser = document.createElement("div");
+        cardUser.setAttribute('id', item._id);
+        cardUser.setAttribute("class", "user border border-2 m-4 p-4 d-flex");
+        cardUser.innerHTML = `
+                <div class="userInfo ms-5 mt-5">
+                    <h4><strong>name:</strong> ${item.title ?item.title : "bu muxim odam" } </h4>
+                </div>
+                `
+        updatechooseForms.append(cardUser);
+        cardUser.addEventListener('click', async (e) => {
+            const parentCard = e.target.closest('.user');
+            const id = parentCard.getAttribute('id');
+            let response = await fetch(BASE_URL2 + "choose/" + id);
+            let {
+                data: {
+                    title,
+                    message,
+                    _id
+                }
+            } = await response.json()
+            updatechooseFormUpdate.value = title ? title : ""
+            videoupdatechooseForm.value = message ? message : ""
+            videoupdatechooseFormId.value = _id ? _id : ""
+        })
+    });
+    updatechooseForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let bookatable = await fetch(BASE_URL2 + "choose/" + videoupdatechooseFormId.value, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title: updatechooseFormUpdate.value,
+                message: videoupdatechooseForm.value,
+            })
+        });
+        const data = await bookatable.json();
+        console.log('data :', data);
+        data ? alert("oke") : ""
+    });
+    chooseArray ? chooseArray.forEach(item => {
+        let cardUser = document.createElement("div");
+        cardUser.setAttribute('id', item._id);
+        cardUser.setAttribute("class", "user border border-2 m-4 p-4 d-flex");
+        cardUser.innerHTML = `
+                <div class="userInfo ms-5 mt-5">
+                    <h4><strong>name:</strong> ${item.title ?item.title : "bu muxim odam" } <button class="btn btn-danger btnchooseDelete" id=${item._id}>delete</button></h4>
+                </div>
+                `
+        deletChooseWrapper.append(cardUser);
+        // formupdatehero.addEventListener("submit", async (e) => {
+        //     e.preventDefault();
+        //     try {
+        //         const formData = new FormData();
+        //         formData.append('title', updateherotitle.value ? updateherotitle.value : "")
+        //         formData.append('description', updateherodescription.value ? updateherodescription.value : "")
+        //         formData.append('file', updateheroImg.files[0] ? updateheroImg.files[0] : "")
+        //         formData.append('res_id', localStorage.getItem("adminres_id"))
+        //         let data = await fetch(BASE_URL2 + 'hero/' + updateheroImgId.value, {
+        //             method: 'PUT',
+        //             headers: {
+        //                 'enctype': 'multipart/form-data'
+        //             },
+        //             body: formData
+        //         });
+        //         console.log(await data.json());
+        //     } catch (error) {
+        //         console.error(error);
+        //     }
+        // });
+    }) : ""
+        let allWrapperchoose = document.querySelectorAll('.btnchooseDelete');
+        allWrapperchoose.forEach(item => {
+            item.addEventListener('click', (e) => {
+                let id = e.target.getAttribute("id");
+                console.log('id :', id);
+                if (id) {
+                    deleteItem("choose", id)
+                    window.location.reload()
+                } else alert("Something is strange")
+            })
+        });
     // console.log('chooseArray :', chooseArray);
     // allArray.map(item => {
     //     // submit
