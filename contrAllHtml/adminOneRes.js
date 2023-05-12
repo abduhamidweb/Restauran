@@ -156,6 +156,8 @@ async function section1() {
         const data = await bookatable.json();
         data ? alert("oke") : ""
     });
+    let chooseArray = data.choose;
+    // console.log('chooseArray :', chooseArray);
     // allArray.map(item => {
     //     // submit
     //     let buttonUpdate = document.createElement("button");

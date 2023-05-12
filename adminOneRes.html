@@ -57,14 +57,55 @@
     <h2 class="text-center my-4">Admin of Restaurant</h2>
     <div class="container border border-2 p-5 my-3">
         <h2 class="text-center">Choose card section</h2>
-        <form id="chooseForm">
-            <h2>Title</h2>
-            <input type="text" class="form-control mt-3 p-3" placeholder="title" id="chooseFormUpdate">
-            <h2 class="mt-3">Message </h2>
-            <input type="text" class="form-control mt-3 p-3" placeholder="title" id="videochooseForm"><input type="text"
-                class="form-control mt-3 p-3" placeholder="title" id="videochooseFormId" disabled>
-            <button type="submit" class="form-control mt-4 p-3 fs-3 bg-info text-light">submit</button>
-        </form>
+            <!-- Tabs navs -->
+            <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1choose" role="tab"
+                        aria-controls="ex1-tabs-1choose" aria-selected="true">add hero</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#ex1-tabs-2choose" role="tab"
+                        aria-controls="ex1-tabs-2choose" aria-selected="false">Update hero</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#ex1-tabs-3" role="tab"
+                        aria-controls="ex1-tabs-3" aria-selected="false">delete hero</a>
+                </li>
+            </ul>
+            <!-- Tabs navs -->
+            
+            <!-- Tabs content -->
+            <div class="tab-content" id="ex1-content">
+                <div class="tab-pane fade show active" id="ex1-tabs-1choose" role="tabpanel" aria-labelledby="ex1-tab-1">
+                    <!-- Tabs content -->
+                        <form id="chooseForm">
+                            <h2>Title</h2>
+                            <input type="text" class="form-control mt-3 p-3" placeholder="title" id="chooseFormUpdate">
+                            <h2 class="mt-3">Message </h2>
+                            <input type="text" class="form-control mt-3 p-3" placeholder="title" id="videochooseForm"><input type="text"
+                                class="form-control mt-3 p-3" placeholder="title" id="videochooseFormId" disabled>
+                            <button type="submit" class="form-control mt-4 p-3 fs-3 bg-info text-light">submit</button>
+                        </form>
+                </div>
+                <div class="tab-pane fade " id="ex1-tabs-2choose" role="tabpanel" aria-labelledby="ex1-tab-2">
+                    <!-- <form class="form form-control border border-0" id="formupdatehero">
+                        <input type="text" class="form-control mt-4 p-3 fs-3" placeholder="Hero title" id="updateherotitle">
+                        <textarea name="" class="form-control mt-4 p-3 fs-3" id="updateherodescription"
+                            value="updateherodescription" placeholder="">
+                                                </textarea>
+                        <input type="file" class="form-control mt-4 p-3 fs-3" id="updateheroImg">
+                        <input type="text" class="form-control mt-4 p-3 fs-3" id="updateheroImgId" disabled>
+                        <button type="submit" id="updateheroBtn"
+                            class="form-control mt-4 p-3 fs-3 bg-info text-light">submit</button>
+                    </form> -->
+                </div>
+                <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+                    <div class="deletHeroWrapper" id="deletChooseWrapper">
+            
+                    </div>
+                </div>
+            </div>
+  
         <!-- Tabs navs -->
     </div>
     <div class="container border border-2 p-5">
