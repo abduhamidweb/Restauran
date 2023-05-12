@@ -112,23 +112,23 @@
         <!-- Tabs navs -->
         <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1" role="tab"
-                    aria-controls="ex1-tabs-1" aria-selected="true">add hero</a>
+                <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1hero" role="tab"
+                    aria-controls="ex1-tabs-1hero" aria-selected="true">add hero</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#ex1-tabs-2" role="tab"
-                    aria-controls="ex1-tabs-2" aria-selected="false">Update hero</a>
+                <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#ex1-tabs-2hero" role="tab"
+                    aria-controls="ex1-tabs-2hero" aria-selected="false">Update hero</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#ex1-tabs-3" role="tab"
-                    aria-controls="ex1-tabs-3" aria-selected="false">delete hero</a>
+                <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#ex1-tabs-3hero" role="tab"
+                    aria-controls="ex1-tabs-3hero" aria-selected="false">delete hero</a>
             </li>
         </ul>
         <!-- Tabs navs -->
 
         <!-- Tabs content -->
         <div class="tab-content" id="ex1-content">
-            <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+            <div class="tab-pane fade show active" id="ex1-tabs-1hero" role="tabpanel" aria-labelledby="ex1-tab-1">
                 <!-- Tabs content -->
                 <form class="form form-control border border-0" id="formaddhero">
                     <input type="text" class="form-control mt-4 p-3 fs-3" placeholder="Hero title" id="herotitle">
@@ -140,7 +140,7 @@
                         class="form-control mt-4 p-3 fs-3 bg-info text-light">submit</button>
                 </form>
             </div>
-            <div class="tab-pane fade " id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+            <div class="tab-pane fade " id="ex1-tabs-2hero" role="tabpanel" aria-labelledby="ex1-tab-2">
                 <div class="tabUpdatePanelUpdate"></div>
                 <form class="form form-control border border-0" id="formupdatehero">
                     <input type="text" class="form-control mt-4 p-3 fs-3" placeholder="Hero title" id="updateherotitle">
@@ -153,7 +153,7 @@
                         class="form-control mt-4 p-3 fs-3 bg-info text-light">submit</button>
                 </form>
             </div>
-            <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+            <div class="tab-pane fade" id="ex1-tabs-3hero" role="tabpanel" aria-labelledby="ex1-tab-3">
                 <div class="deletHeroWrapper" id="deletHeroWrapper">
 
                 </div>
@@ -171,6 +171,43 @@
                 class="form-control mt-3 p-3" placeholder="title" id="videoEumIpsamId" disabled>
             <button type="submit" class="form-control mt-4 p-3 fs-3 bg-info text-light">submit</button>
         </form>
+    </div>
+    <div class="container border border-2 p-5 mt-3">
+        <h2 class="text-center">Upload Photos</h2>
+        <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1phots" role="tab"
+                    aria-controls="ex1-tabs-1phots" aria-selected="true">add hero</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#ex1-tabs-2photos" role="tab"
+                    aria-controls="ex1-tabs-2photos" aria-selected="false">Update hero</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#ex1-tabs-3photos" role="tab"
+                    aria-controls="ex1-tabs-3photos" aria-selected="false">delete hero</a>
+            </li>
+        </ul>
+        <!-- Tabs navs -->
+
+        <!-- Tabs content -->
+        <div class="tab-content" id="ex1-content">
+            <div class="tab-pane fade show active" id="ex1-tabs-1phots" role="tabpanel" aria-labelledby="ex1-tab-1">
+                <!-- Tabs content -->
+                <form id="imgupload">
+                    <h2>Photos upload.</h2>
+                    <input type="file" class="form-control mt-3 p-3" placeholder="title" id="photoUpload" required>
+                    <button type="submit" class="form-control mt-4 p-3 fs-3 bg-info text-light">submit</button>
+                </form>
+            </div>
+            <div class="tab-pane fade " id="ex1-tabs-2photos" role="tabpanel" aria-labelledby="ex1-tab-2">
+
+            </div>
+            <div class="tab-pane fade" id="ex1-tabs-3photos" role="tabpanel" aria-labelledby="ex1-tab-3">
+
+            </div>
+        </div>
+
     </div>
     <!-- script -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"

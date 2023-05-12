@@ -231,17 +231,17 @@ async function section1() {
         //     }
         // });
     }) : ""
-        let allWrapperchoose = document.querySelectorAll('.btnchooseDelete');
-        allWrapperchoose.forEach(item => {
-            item.addEventListener('click', (e) => {
-                let id = e.target.getAttribute("id");
-                console.log('id :', id);
-                if (id) {
-                    deleteItem("choose", id)
-                    window.location.reload()
-                } else alert("Something is strange")
-            })
-        });
+    let allWrapperchoose = document.querySelectorAll('.btnchooseDelete');
+    allWrapperchoose.forEach(item => {
+        item.addEventListener('click', (e) => {
+            let id = e.target.getAttribute("id");
+            console.log('id :', id);
+            if (id) {
+                deleteItem("choose", id)
+                window.location.reload()
+            } else alert("Something is strange")
+        })
+    });
     // console.log('chooseArray :', chooseArray);
     // allArray.map(item => {
     //     // submit
