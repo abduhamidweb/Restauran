@@ -309,16 +309,16 @@ async function section1() {
         //     }
         // });
     }) : ""
-        let allWrapperImgId = document.querySelectorAll('.btnphotosDelete');
-        allWrapperImgId.forEach(item => {
-            item.addEventListener('click', (e) => {
-                let id = e.target.getAttribute("id");
-                if (id) {
-                    deleteItem("photo", id)
-                    window.location.reload()
-                } else alert("Something is strange")
-            })
-        });
+    let allWrapperImgId = document.querySelectorAll('.btnphotosDelete');
+    allWrapperImgId.forEach(item => {
+        item.addEventListener('click', (e) => {
+            let id = e.target.getAttribute("id");
+            if (id) {
+                deleteItem("photo", id)
+                window.location.reload()
+            } else alert("Something is strange")
+        })
+    });
     // console.log('chooseArray :', chooseArray);
     // allArray.map(item => {
     //     // submit
