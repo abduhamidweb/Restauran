@@ -13,7 +13,8 @@ let BASE_URL = 'http://localhost:5000/api/';
         hero,
         resource,
         choose,
-        photos
+        photos,
+        workers
     } = await response.json();
     bcgvhdjdwvg2.innerHTML = contact
     const today = new Date();
@@ -35,7 +36,32 @@ let BASE_URL = 'http://localhost:5000/api/';
         sabdhjbhds.innerHTML = 'Closed'
     }
     // img==============================
-    
+    workers ? workers.forEach(item => {
+            console.log('item :', item);
+            if (item.rol == "admin") {
+                return null
+            }
+            let card = document.createElement('div');
+            card.setAttribute('class', 'col-lg-4 col-md-6');
+            card.innerHTML = `
+            <div class="member">
+              <div class="pic">
+              <img src=${'http://localhost:5000/imgs/' + item.userPhoto} class="img-fluid" alt=""></div>
+              <div class="member-info">
+                <h4>${item.username}</h4>
+                <span>${item.rol ? item.rol : "Master Chef"}</span>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+        `
+            chefWrapper.append(card)
+        }) :
+        ""
     photos ? photos.forEach(photo => {
 
         let cardUser = document.createElement("div");
