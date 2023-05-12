@@ -11,7 +11,8 @@ let BASE_URL = 'http://localhost:5000/api/';
         foods,
         contact,
         hero,
-        resource
+        resource,
+        choose
     } = await response.json();
     console.log(resource);
     bcgvhdjdwvg2.innerHTML = contact
@@ -188,6 +189,9 @@ let BASE_URL = 'http://localhost:5000/api/';
         })
     })
 
+
+
+
     resource ? resource.forEach(item => {
         let cardUser = document.createElement("div");
         cardUser.setAttribute('id', item._id);
@@ -232,7 +236,19 @@ let BASE_URL = 'http://localhost:5000/api/';
         `
         AbouteOneTop.append(cardUser)
     }) : "";
-
+    choose ? choose.forEach((item, i) => {
+        let cardUser = document.createElement("div");
+        cardUser.setAttribute('id', item._id);
+        cardUser.setAttribute("class", `${i>1 ?"col-lg-4" : "col-lg-4 mt-lg-0" }`)
+        cardUser.innerHTML = `
+            <div class="box">
+              <span>0${i+1}</span>
+              <h4>${item.title}</h4>
+              <p>${item.message}</p>
+            </div>
+        `
+        chooseCard.append(cardUser)
+    }) : "";
 })();
 
 
