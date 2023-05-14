@@ -21,7 +21,7 @@
          if (token) {
              localStorage.setItem("workerToken", token);
              localStorage.setItem("workerRes_id", res_id ? res_id : null);
-              location = "BookATable.html";
+             location = "BookATable.html";
          } else {
              alert("please enter your email address");
          }

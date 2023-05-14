@@ -63,7 +63,6 @@ async function AllWorker() {
         zakaz,
         contactUs
     } = await response.json();
-    console.log('contactUs :', contactUs);
     zakaz ? zakaz.forEach(z => {
         let cardUser = document.createElement("div");
         cardUser.setAttribute("class", "activity-data")
@@ -134,7 +133,6 @@ async function AllWorker() {
             }
             if (e.target.classList.contains("btn-info")) {
                 let updateId = e.target.getAttribute("id")
-                console.log('updateId :', updateId);
                 modal.style.display = "block";
                 let response = await fetch(BASE_URL + "zakazlar/" + updateId);
                 let {
@@ -210,7 +208,7 @@ async function AllWorker() {
         })
     }) : ""
     contactUs ? contactUs.forEach(z => {
-        console.log('z :', z);
+       
         let cardUser = document.createElement("div");
         cardUser.setAttribute("class", "activity-data")
         cardUser.innerHTML = `
@@ -269,7 +267,7 @@ async function AllWorker() {
             }
             if (e.target.classList.contains("btn-info")) {
                 let updateId = e.target.getAttribute("id")
-                console.log('updateId :', updateId);
+                
                 modal.style.display = "block";
                 let response = await fetch(BASE_URL + "contact/" + updateId);
                 let {

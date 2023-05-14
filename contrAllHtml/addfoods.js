@@ -17,14 +17,14 @@ addadmin.addEventListener("submit", async (e) => {
         formData.append('file', workerImg.files[0])
         formData.append('description', workersalary.value)
         formData.append('res_id', localStorage.getItem("adminres_id"));
-        await fetch('http://localhost:5000/api/foods', {
+        let data = await fetch('http://localhost:5000/api/foods', {
             method: 'POST',
             headers: {
                 'enctype': 'multipart/form-data'
             },
             body: formData
         });
-
+        data ? location.reload() : null;
     } catch (error) {
         console.error(error);
     }
@@ -61,7 +61,6 @@ async function AllWorker() {
     let {
         foods
     } = await response.json();
-    console.log(foods);
     //     name
     //     calories
     //     type
@@ -118,13 +117,14 @@ async function AllWorker() {
             formData.append('description', updateworkerTime.value ? updateworkerTime.value : "")
             formData.append('file', updateworkingImg.files[0] ? updateworkingImg.files[0] : "")
             formData.append('res_id', localStorage.getItem("adminres_id"))
-            await fetch(BASE_URL + 'foods/' + workerIdUpdate.value, {
+            let data = await fetch(BASE_URL + 'foods/' + workerIdUpdate.value, {
                 method: 'PUT',
                 headers: {
                     'enctype': 'multipart/form-data'
                 },
                 body: formData
             });
+            data ? location.reload() : null
         } catch (error) {
             console.error(error);
         }
@@ -154,7 +154,7 @@ async function AllWorker() {
                     `
         allCards.append(cardUser);
     }) : "";
-    
+
     const deleteItem = async (id) => {
         try {
             const response = await fetch(`${BASE_URL}foods/${id}`, {

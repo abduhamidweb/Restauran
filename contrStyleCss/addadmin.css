@@ -237,7 +237,7 @@ form .button input :hover {
   border-radius: 100%;
   overflow: hidden;
 }
-.body2 .avatar img{
+.body2 .avatar img {
   width: 100%;
   height: 100%;
 }
@@ -290,8 +290,8 @@ i {
   color: #2ab1ce;
 }
 ::-webkit-scrollbar {
-  width: 0px;
-  display: none;
+  width: 20px;
+  /* display: none; */
   background: none;
 }
 /* directional buttons */

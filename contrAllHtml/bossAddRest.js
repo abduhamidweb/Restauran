@@ -5,7 +5,7 @@
 addrest.addEventListener("submit", async (e) => {
     e.preventDefault();
     try {
-        await fetch('http://localhost:5000/api/restaurants', {
+  let data=      await fetch('http://localhost:5000/api/restaurants', {
             method: 'POST',
             headers: {
                 token: localStorage.getItem("tokenbos"),
@@ -19,6 +19,7 @@ addrest.addEventListener("submit", async (e) => {
                 rest_img: "/nskdcjnsldm/diwoke.jpg"
             })
         });
+            data ? location.reload() : null
 
     } catch (error) {
         console.error(error);

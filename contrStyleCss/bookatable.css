@@ -458,7 +458,7 @@ nav.close ~ .dashboard .top {
 }
 .data-title {
   text-transform: capitalize;
-  font-size: 5px !important;
+  font-size: 13px !important;
   font-weight: 700;
 }
 .data {
@@ -466,10 +466,10 @@ nav.close ~ .dashboard .top {
 }
 .data-list {
   overflow-y: scroll;
-  font-size: 5px !important;
+  font-size: 15px !important;
 }
 .data-list button {
-  font-size: 5px !important;
+  font-size: 15px !important;
 }
 .modal {
   width: 100%;

@@ -1,49 +1,50 @@
 (() => {
-    let tokenbos = localStorage.getItem("rest-id");
-    if (!tokenbos) return location = "AllRestForUser.html";
+  let tokenbos = localStorage.getItem("rest-id");
+  if (!tokenbos) return location = "AllRestForUser.html";
 })();
 let ResId = localStorage.getItem("adminres_id") || localStorage.getItem("rest-id")
 
 let BASE_URL = 'http://localhost:5000/api/';
 (async () => {
-    let response = await fetch(BASE_URL + "restaurants/" + localStorage.getItem("rest-id"));
-    let {
-        foods,
-        contact,
-        hero,
-        resource,
-        choose,
-        photos,
-        workers
-    } = await response.json();
-    bcgvhdjdwvg2.innerHTML = contact
-    const today = new Date();
-    const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const dayOfWeek = daysOfWeek[today.getDay()];
-    if (dayOfWeek !== "Sun" && dayOfWeek !== "Mon") {
-        const startTime = new Date();
-        startTime.setDate(startTime.getDate() + (8 + (7 - startTime.getDay())) % 7);
-        startTime.setHours(11);
-        startTime.setMinutes(0);
+  let response = await fetch(BASE_URL + "restaurants/" + localStorage.getItem("rest-id"));
+  let {
+    foods,
+    contact,
+    hero,
+    resource,
+    choose,
+    photos,
+    workers
+  } = await response.json();
+  console.log(choose);
+  bcgvhdjdwvg2.innerHTML = contact
+  const today = new Date();
+  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const dayOfWeek = daysOfWeek[today.getDay()];
+  if (dayOfWeek !== "Sun" && dayOfWeek !== "Mon") {
+    const startTime = new Date();
+    startTime.setDate(startTime.getDate() + (8 + (7 - startTime.getDay())) % 7);
+    startTime.setHours(11);
+    startTime.setMinutes(0);
 
-        const endTime = new Date();
+    const endTime = new Date();
 
-        endTime.setDate(endTime.getDate() + (8 + (7 - endTime.getDay())) % 7);
-        endTime.setHours(23);
-        endTime.setMinutes(0);
-        sabdhjbhds.innerHTML = ` ${dayOfWeek}-${daysOfWeek[(daysOfWeek.indexOf(dayOfWeek) + 5) % 7]}: ${startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })} - ${endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`
-    } else {
-        sabdhjbhds.innerHTML = 'Closed'
-    }
-    // img==============================
-    workers ? workers.forEach(item => {
-            console.log('item :', item);
-            if (item.rol == "admin") {
-                return null
-            }
-            let card = document.createElement('div');
-            card.setAttribute('class', 'col-lg-4 col-md-6');
-            card.innerHTML = `
+    endTime.setDate(endTime.getDate() + (8 + (7 - endTime.getDay())) % 7);
+    endTime.setHours(23);
+    endTime.setMinutes(0);
+    sabdhjbhds.innerHTML = ` ${dayOfWeek}-${daysOfWeek[(daysOfWeek.indexOf(dayOfWeek) + 5) % 7]}: ${startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })} - ${endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`
+  } else {
+    sabdhjbhds.innerHTML = 'Closed'
+  }
+  // img==============================
+  workers ? workers.forEach(item => {
+      console.log('item :', item);
+      if (item.rol == "admin") {
+        return null
+      }
+      let card = document.createElement('div');
+      card.setAttribute('class', 'col-lg-4 col-md-6');
+      card.innerHTML = `
             <div class="member">
               <div class="pic">
               <img src=${'http://localhost:5000/imgs/' + item.userPhoto} class="img-fluid" alt=""></div>
@@ -59,37 +60,38 @@ let BASE_URL = 'http://localhost:5000/api/';
               </div>
             </div>
         `
-            chefWrapper.append(card)
-        }) :
-        ""
-    photos ? photos.forEach(photo => {
+      chefWrapper.append(card)
+    }) :
+    ""
+  photos ? photos.forEach(photo => {
 
-        let cardUser = document.createElement("div");
-        cardUser.setAttribute('id', photo._id);
-        cardUser.setAttribute("class", "col-lg-3 col-md-4");
-        cardUser.innerHTML = `
+    let cardUser = document.createElement("div");
+    cardUser.setAttribute('id', photo._id);
+    cardUser.setAttribute("class", "col-lg-3 col-md-4");
+    cardUser.innerHTML = `
             <div class="gallery-item">
               <a href=${'http://localhost:5000/imgs/'+photo.imgLink} class="gallery-lightbox">
                 <img src=${'http://localhost:5000/imgs/'+photo.imgLink} alt="" class="img-fluid">
               </a>
             </div>
         `
-        restImgsWrapper.append(cardUser);
-    }) : ""
-    // <!-- ======= Menu Section ======= -->
-    hero ? hero.forEach((item, index) => {
-        let cardUser = document.createElement("div");
-        cardUser.setAttribute('id', item._id);
-        cardUser.setAttribute("class", "carousel-item");
-        cardUser.setAttribute("style", `background-image: url(${'http://localhost:5000/imgs/' + item.imgLink}`)
-        if (index === 0) {
-            cardUser.classList.add('active');
-        }
-        cardUser.innerHTML = `
+    restImgsWrapper.append(cardUser);
+  }) : ""
+  // <!-- ======= Menu Section ======= -->
+  hero ? hero.forEach((item, index) => {
+    let cardUser = document.createElement("div");
+    cardUser.setAttribute('id', item._id);
+    cardUser.setAttribute("class", "carousel-item");
+    cardUser.setAttribute("style", `background-image: url(${ item.imgLink ? "http://localhost:5000/imgs/"+item.imgLink : ""}`)
+    if (index === 0) {
+      cardUser.classList.add('active');
+    }
+    cardUser.innerHTML = `
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2 class="animate__animated animate__fadeInDown"><span>Delicious</span> ${item.title}</h2>
-                <p class="animate__animated animate__fadeInUp">${item.description}</p>
+                <p class="animate__animated animate__fadeInUp">${item.description}
+                </p>
                 <div>
                   <a href="#menu" class="btn-menu animate__animated animate__fadeInUp scrollto">Our Menu</a>
                   <a href="#book-a-table" class="btn-book animate__animated animate__fadeInUp scrollto">Book a Table</a>
@@ -97,34 +99,98 @@ let BASE_URL = 'http://localhost:5000/api/';
               </div>
             </div>
         `
-        heroWrapperAllItems.append(cardUser);
-        console.log('cardUser :', cardUser);
-    }) : "";
-    const prevButton = document.querySelector(".carousel-control-prev");
-    const nextButton = document.querySelector(".carousel-control-next");
-    let activeIndex = 0;
-    prevButton.addEventListener("click", () => {
-        activeIndex--;
-        if (activeIndex < 0) activeIndex = hero.length - 1;
-        renderSlides();
-    });
+    heroWrapperAllItems.append(cardUser);
+  }) : "";
+  const prevButton = document.querySelector(".carousel-control-prev");
+  const nextButton = document.querySelector(".carousel-control-next");
+  let activeIndex = 0;
+  prevButton.addEventListener("click", () => {
+    activeIndex--;
+    if (activeIndex < 0) activeIndex = hero.length - 1;
+    renderSlides();
+  });
 
-    nextButton.addEventListener("click", () => {
-        activeIndex++;
-        if (activeIndex >= hero.length) activeIndex = 0;
-        renderSlides();
-    });
+  nextButton.addEventListener("click", () => {
+    activeIndex++;
+    if (activeIndex >= hero.length) activeIndex = 0;
+    renderSlides();
+  });
 
-    // slide-larni yangilash
-    function renderSlides() {
-        const carouselItems = document.querySelectorAll(".carousel-item");
-        carouselItems.forEach((item, index) => {
-            if (index === activeIndex) item.classList.add("active");
-            else item.classList.remove("active");
-        });
+  // slide-larni yangilash
+  function renderSlides() {
+    const carouselItems = document.querySelectorAll(".carousel-item");
+    carouselItems.forEach((item, index) => {
+      if (index === activeIndex) item.classList.add("active");
+      else item.classList.remove("active");
+    });
+  }
+  foods ? foods.forEach(food => {
+    if (food.res_id == ResId) {
+      let cardUser = document.createElement("div");
+      cardUser.setAttribute('id', food._id);
+      cardUser.setAttribute("class", "col-lg-6 menu-item filter-starters");
+      cardUser.innerHTML = `
+            <div class="menu-content">
+              <a href="#">${food.name ? food.name : "bu muxim odam"}</a><span>$${food.price ? food.price : "bu muxim odam"}</span>
+            </div>
+            <div class="menu-ingredients">
+             ${food.description ? food.description : "bu muxim odam"} 
+            </div>
+          </div>
+                `
+      AllFoodsWrap.append(cardUser);
     }
-    foods ? foods.forEach(food => {
-        if (food.res_id == ResId) {
+  }) : "";
+  let menuFilters = document.querySelectorAll('.menuFilters li')
+  menuFilters.forEach(item => {
+    item.addEventListener('click', (e) => {
+      let type = e.target.getAttribute("id");
+      if (type) {
+        AllFoodsWrap.innerHTML = ""
+        foods ? foods.forEach(food => {
+          if (food.type == type && food.res_id == ResId) {
+            let cardUser = document.createElement("div");
+            cardUser.setAttribute('id', food._id);
+            cardUser.setAttribute("class", "col-lg-6 menu-item filter-starters");
+            cardUser.innerHTML = `
+                  <div class="menu-content">
+                    <a href="#">${food.name ? food.name : "bu muxim odam"}</a><span>$${food.price ? food.price : "bu muxim odam"}</span>
+                  </div>
+                  <div class="menu-ingredients">
+                   ${food.description ? food.description : "bu muxim odam"} 
+                  </div>
+                </div>
+                      `
+            AllFoodsWrap.append(cardUser);
+          }
+          // console.log(menu-flters);
+          // cardUser.addEventListener('click', async (e) => {
+          //     const parentCard = e.target.closest('.user');
+          //     const id = parentCard.getAttribute('id');
+          //     let response = await fetch(BASE_URL + "foods/" + id);
+          //     let {
+          //         name,
+          //         calories,
+          //         type,
+          //         price,
+          //         isAvailable,
+          //         description,
+          //         _id
+          //     } = await response.json();
+          //     updateworkername.value = name ? name : ""
+          //     updatePassword2.value = type ? type : ""
+          //     updateworkeremail.value = calories ? calories : ""
+          //     updateworkerPhone.value = price ? price : ""
+          //     updateworkerinfo.value = isAvailable ? isAvailable : ""
+          //     updateworkerTime.value = description ? description : ""
+          //     workerIdUpdate.value = _id ? _id : ""
+          // })
+        }) : "";
+      } else {
+        AllFoodsWrap.innerHTML = ""
+        foods ? foods.forEach(food => {
+          if (food.res_id == ResId) {
+
             let cardUser = document.createElement("div");
             cardUser.setAttribute('id', food._id);
             cardUser.setAttribute("class", "col-lg-6 menu-item filter-starters");
@@ -138,107 +204,42 @@ let BASE_URL = 'http://localhost:5000/api/';
           </div>
                 `
             AllFoodsWrap.append(cardUser);
-        }
-    }) : "";
-    let menuFilters = document.querySelectorAll('.menuFilters li')
-    menuFilters.forEach(item => {
-        item.addEventListener('click', (e) => {
-            let type = e.target.getAttribute("id");
-            if (type) {
-                AllFoodsWrap.innerHTML = ""
-                foods ? foods.forEach(food => {
-                    if (food.type == type && food.res_id == ResId) {
-                        let cardUser = document.createElement("div");
-                        cardUser.setAttribute('id', food._id);
-                        cardUser.setAttribute("class", "col-lg-6 menu-item filter-starters");
-                        cardUser.innerHTML = `
-                  <div class="menu-content">
-                    <a href="#">${food.name ? food.name : "bu muxim odam"}</a><span>$${food.price ? food.price : "bu muxim odam"}</span>
-                  </div>
-                  <div class="menu-ingredients">
-                   ${food.description ? food.description : "bu muxim odam"} 
-                  </div>
-                </div>
-                      `
-                        AllFoodsWrap.append(cardUser);
-                    }
-                    // console.log(menu-flters);
-                    // cardUser.addEventListener('click', async (e) => {
-                    //     const parentCard = e.target.closest('.user');
-                    //     const id = parentCard.getAttribute('id');
-                    //     let response = await fetch(BASE_URL + "foods/" + id);
-                    //     let {
-                    //         name,
-                    //         calories,
-                    //         type,
-                    //         price,
-                    //         isAvailable,
-                    //         description,
-                    //         _id
-                    //     } = await response.json();
-                    //     updateworkername.value = name ? name : ""
-                    //     updatePassword2.value = type ? type : ""
-                    //     updateworkeremail.value = calories ? calories : ""
-                    //     updateworkerPhone.value = price ? price : ""
-                    //     updateworkerinfo.value = isAvailable ? isAvailable : ""
-                    //     updateworkerTime.value = description ? description : ""
-                    //     workerIdUpdate.value = _id ? _id : ""
-                    // })
-                }) : "";
-            } else {
-                AllFoodsWrap.innerHTML = ""
-                foods ? foods.forEach(food => {
-                    if (food.res_id == ResId) {
-
-                        let cardUser = document.createElement("div");
-                        cardUser.setAttribute('id', food._id);
-                        cardUser.setAttribute("class", "col-lg-6 menu-item filter-starters");
-                        cardUser.innerHTML = `
-            <div class="menu-content">
-              <a href="#">${food.name ? food.name : "bu muxim odam"}</a><span>$${food.price ? food.price : "bu muxim odam"}</span>
-            </div>
-            <div class="menu-ingredients">
-             ${food.description ? food.description : "bu muxim odam"} 
-            </div>
-          </div>
-                `
-                        AllFoodsWrap.append(cardUser);
-                    }
-                    // console.log(menu-flters);
-                    // cardUser.addEventListener('click', async (e) => {
-                    //     const parentCard = e.target.closest('.user');
-                    //     const id = parentCard.getAttribute('id');
-                    //     let response = await fetch(BASE_URL + "foods/" + id);
-                    //     let {
-                    //         name,
-                    //         calories,
-                    //         type,
-                    //         price,
-                    //         isAvailable,
-                    //         description,
-                    //         _id
-                    //     } = await response.json();
-                    //     updateworkername.value = name ? name : ""
-                    //     updatePassword2.value = type ? type : ""
-                    //     updateworkeremail.value = calories ? calories : ""
-                    //     updateworkerPhone.value = price ? price : ""
-                    //     updateworkerinfo.value = isAvailable ? isAvailable : ""
-                    //     updateworkerTime.value = description ? description : ""
-                    //     workerIdUpdate.value = _id ? _id : ""
-                    // })
-                }) : "";
-            }
-        })
+          }
+          // console.log(menu-flters);
+          // cardUser.addEventListener('click', async (e) => {
+          //     const parentCard = e.target.closest('.user');
+          //     const id = parentCard.getAttribute('id');
+          //     let response = await fetch(BASE_URL + "foods/" + id);
+          //     let {
+          //         name,
+          //         calories,
+          //         type,
+          //         price,
+          //         isAvailable,
+          //         description,
+          //         _id
+          //     } = await response.json();
+          //     updateworkername.value = name ? name : ""
+          //     updatePassword2.value = type ? type : ""
+          //     updateworkeremail.value = calories ? calories : ""
+          //     updateworkerPhone.value = price ? price : ""
+          //     updateworkerinfo.value = isAvailable ? isAvailable : ""
+          //     updateworkerTime.value = description ? description : ""
+          //     workerIdUpdate.value = _id ? _id : ""
+          // })
+        }) : "";
+      }
     })
+  })
 
 
 
 
-    resource ? resource.forEach(item => {
-        let cardUser = document.createElement("div");
-        cardUser.setAttribute('id', item._id);
-        cardUser.setAttribute("class", "row")
-        cardUser.innerHTML = `
+  resource ? resource.forEach(item => {
+    let cardUser = document.createElement("div");
+    cardUser.setAttribute('id', item._id);
+    cardUser.setAttribute("class", "row")
+    cardUser.innerHTML = `
              <div class="col-lg-5 align-items-stretch video-box" style='background-image: url("assets/img/about.jpg");'>
             <a href="${item.videoLink}"
             class="venobox play-btn mb-4" data-vbtype="video"
@@ -276,68 +277,68 @@ let BASE_URL = 'http://localhost:5000/api/';
 
           </div>
         `
-        AbouteOneTop.append(cardUser)
-    }) : "";
-    choose ? choose.forEach((item, i) => {
-        let cardUser = document.createElement("div");
-        cardUser.setAttribute('id', item._id);
-        cardUser.setAttribute("class", `${i>1 ?"col-lg-4" : "col-lg-4 mt-lg-0" }`)
-        cardUser.innerHTML = `
+    AbouteOneTop.append(cardUser)
+  }) : "";
+  choose ? choose.forEach((item, i) => {
+    let cardUser = document.createElement("div");
+    cardUser.setAttribute('id', item._id);
+    cardUser.setAttribute("class", `${i>1 ?"col-lg-4" : "col-lg-4 mt-lg-0" }`)
+    cardUser.innerHTML = `
             <div class="box">
               <span>0${i+1}</span>
               <h4>${item.title}</h4>
               <p>${item.message}</p>
             </div>
         `
-        chooseCard.append(cardUser)
-    }) : "";
+    chooseCard.append(cardUser)
+  }) : "";
 })();
 
 
 let bookatable = document.querySelector('.bookatablefood')
 bookatable.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    let bookatable = await fetch(BASE_URL + "zakazlar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            username: usernamebook.value,
-            email: useremailbook.value,
-            phone: userphonebook.value,
-            date: userdatebook.value,
-            time: usertimebook.value,
-            num_people: userpeoplebook.value,
-            message: usermessagebook.value,
-            res_id: ResId
-        })
-    });
-    let {
-        success,
-        message
-    } = await bookatable.json();
-    success ? alert(message) : alert("Error")
+  e.preventDefault();
+  let bookatable = await fetch(BASE_URL + "zakazlar", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: usernamebook.value,
+      email: useremailbook.value,
+      phone: userphonebook.value,
+      date: userdatebook.value,
+      time: usertimebook.value,
+      num_people: userpeoplebook.value,
+      message: usermessagebook.value,
+      res_id: ResId
+    })
+  });
+  let {
+    success,
+    message
+  } = await bookatable.json();
+  success ? alert(message) : alert("Error")
 })
 let contactUs = document.querySelector('.contactUs')
 contactUs.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    let contactdata = await fetch(BASE_URL + "contact", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            username: contactname.value,
-            email: contactemail.value,
-            subject: contactsubject.value,
-            message: contactmessage.value,
-            res_id: ResId
-        })
+  e.preventDefault();
+  let contactdata = await fetch(BASE_URL + "contact", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: contactname.value,
+      email: contactemail.value,
+      subject: contactsubject.value,
+      message: contactmessage.value,
+      res_id: ResId
     })
-    let {
-        success,
-        message
-    } = await contactdata.json();
-    success ? alert(message) : alert("Error")
+  })
+  let {
+    success,
+    message
+  } = await contactdata.json();
+  success ? alert(message) : alert("Error")
 })

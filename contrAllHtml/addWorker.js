@@ -18,13 +18,14 @@ addadmin.addEventListener("submit", async (e) => {
         formData.append('salary', workersalary.value)
         formData.append('rol', workerRol.value)
         formData.append('res_id', localStorage.getItem("adminres_id"))
-        await fetch('http://localhost:5000/api/worker', {
+   let data =     await fetch('http://localhost:5000/api/worker', {
             method: 'POST',
             headers: {
                 'enctype': 'multipart/form-data'
             },
             body: formData
         });
+            data ? location.reload() : null
 
     } catch (error) {
         console.error(error);
@@ -121,13 +122,15 @@ async function AllWorker() {
             formData.append('salary', updateworkersalary.value ? updateworkersalary.value : "")
             formData.append('rol', updateworkerRol.value ? updateworkerRol.value : "")
             formData.append('res_id', localStorage.getItem("adminres_id"))
-            await fetch('http://localhost:5000/api/worker/' + workerIdUpdate.value, {
+     let data=       await fetch('http://localhost:5000/api/worker/' + workerIdUpdate.value, {
                 method: 'PUT',
                 headers: {
                     'enctype': 'multipart/form-data'
                 },
                 body: formData
             });
+            data ? location.reload() : null
+
         } catch (error) {
             console.error(error);
         }
@@ -140,7 +143,7 @@ async function AllWorker() {
       <div class="card2">
    <div class="banner">
       <div class="avatar">
-      <img src=${"http://localhost:5000/imgs/"+worker.userPhoto}>
+      <img src=${'http://localhost:5000/imgs/'+worker.userPhoto}>
       </div>
    </div>
 	<h3>${worker.username}</h3>

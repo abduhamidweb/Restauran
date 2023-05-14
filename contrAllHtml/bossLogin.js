@@ -15,7 +15,7 @@ formcontr.addEventListener("submit", async (e) => {
         const {
             token
         } = await response.json();
-        console.log(token);
+      
         if (token) {
             localStorage.setItem("tokenbos", token);
             location = "bossRestCrud.html";

@@ -1,5 +1,6 @@
 let tokenbos = localStorage.getItem("tokenadmin");
 let resId = localStorage.getItem("adminres_id");
+console.log('resId :', resId);
 (() => {
     if (!tokenbos) return location = "adminLogin.html";
     if (!resId) return location = "adminLogin.html";
@@ -15,6 +16,7 @@ async function section1() {
     staticOurFood.setAttribute("id", "staticOurFood")
     let response = await fetch(BASE_URL + resId);
     let data = await response.json();
+    console.log('data :', data);
     let hero = data.hero;
     let updatePanelHero = document.querySelector('.tabUpdatePanelUpdate');
 
@@ -24,7 +26,7 @@ async function section1() {
         cardUser.setAttribute('id', item._id);
         cardUser.setAttribute("class", "user border border-2 m-4 p-4 d-flex");
         cardUser.innerHTML = `
-                <div class="userImg">
+                <div class="userImg">1
                     <img src= ${ item.imgLink ? "http://localhost:5000/imgs/"+item.imgLink : ""} alt="workers imgs">
                 </div>
                 <div class="userInfo ms-5 mt-5">
@@ -60,7 +62,7 @@ async function section1() {
                     },
                     body: formData
                 });
-                console.log(await data.json());
+                data ? location.reload() : null
             } catch (error) {
                 console.error(error);
             }
@@ -104,7 +106,7 @@ async function section1() {
                     },
                     body: formData
                 });
-                console.log(await data.json());
+                data ? location.reload() : null
             } catch (error) {
                 console.error(error);
             }
@@ -118,6 +120,8 @@ async function section1() {
             if (!response.ok) {
                 throw new Error('Server error');
             }
+            const data = await response.json();
+            data ? location.reload() : null
             // Element o'chirildi
         } catch (error) {
             console.log('error :', error);
@@ -130,7 +134,7 @@ async function section1() {
             let id = e.target.getAttribute("id");
             if (id) {
                 deleteItem("hero", id)
-                window.location.reload()
+                // window.location.reload()
             } else alert("Something is strange")
         })
     });
@@ -138,24 +142,44 @@ async function section1() {
     // hero end ===============================================
     let allArray = data.resource;
     allArray.forEach(item => {
-        EumIpsamUpdate.value = item.title,
-            videoEumIpsam.value = item.videoLink
-        videoEumIpsamId.value = item._id
+        EumIpsamUpdatePut.value = item.title,
+            videoEumIpsamPut.value = item.videoLink
+        videoEumIpsamIdPut.value = item._id
     });
-    EumIpsam.addEventListener("submit", async (e) => {
+    EumIpsamPost.addEventListener("submit", async (e) => {
         e.preventDefault();
-        let bookatable = await fetch(BASE_URL2 + "resources/" + videoEumIpsamId.value, {
-            method: "PUT",
+        let bookatable = await fetch(BASE_URL2 + "resources/", {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 title: EumIpsamUpdate.value,
                 videoLink: videoEumIpsam.value,
+                res_id: resId
             })
         });
         const data = await bookatable.json();
-        data ? alert("oke") : ""
+        console.log('data :', data);
+        // data ? location.reload() : null
+
+    });
+    EumIpsamPut.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let bookatable = await fetch(BASE_URL2 + "resources/" + videoEumIpsamIdPut.value, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title: EumIpsamUpdatePut.value,
+                videoLink: videoEumIpsamPut.value,
+                res_id: resId
+            })
+        });
+        const data = await bookatable.json();
+        data ? location.reload() : null
+
     });
     let chooseArray = data.choose;
     chooseArray.forEach(item => {
@@ -181,12 +205,15 @@ async function section1() {
             } = await response.json()
             updatechooseFormUpdate.value = title ? title : ""
             videoupdatechooseForm.value = message ? message : ""
-            videoupdatechooseFormId.value = _id ? _id : ""
+            videoupdatechssssooseFormId.value = _id ? _id : ""
+            localStorage.setItem('videoupdatechooseFormId', _id)
         })
     });
     updatechooseForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        let bookatable = await fetch(BASE_URL2 + "choose/" + videoupdatechooseFormId.value, {
+        let id = localStorage.getItem('videoupdatechooseFormId')
+        console.log('id :', id);
+        let bookatable = await fetch(BASE_URL2 + "choose/" + id, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -194,11 +221,13 @@ async function section1() {
             body: JSON.stringify({
                 title: updatechooseFormUpdate.value,
                 message: videoupdatechooseForm.value,
+                res_id: localStorage.getItem('rest-id')
             })
         });
         const data = await bookatable.json();
         console.log('data :', data);
-        data ? alert("oke") : ""
+        // data ? location.reload() : null
+
     });
     chooseArray ? chooseArray.forEach(item => {
         let cardUser = document.createElement("div");
@@ -395,13 +424,14 @@ formaddhero.addEventListener("submit", async (e) => {
         formData.append('description', herodescription.value)
         formData.append('file', heroImg.files[0])
         formData.append('res_id', localStorage.getItem("adminres_id"));
-        await fetch(BASE_URL2 + 'hero', {
+        let data = await fetch(BASE_URL2 + 'hero', {
             method: 'POST',
             headers: {
                 'enctype': 'multipart/form-data'
             },
             body: formData
         });
+        data ? location.reload() : null
 
     } catch (error) {
         console.error(error);
