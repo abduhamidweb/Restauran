@@ -83,6 +83,7 @@ let BASE_URL = 'http://localhost:5000/api/';
     cardUser.setAttribute('id', item._id);
     cardUser.setAttribute("class", "carousel-item");
     cardUser.setAttribute("style", `background-image: url(${ item.imgLink ? "http://localhost:5000/imgs/"+item.imgLink : ""}`)
+    console.log('cardUser :', cardUser);
     if (index === 0) {
       cardUser.classList.add('active');
     }
