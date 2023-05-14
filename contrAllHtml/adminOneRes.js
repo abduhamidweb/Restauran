@@ -160,8 +160,7 @@ async function section1() {
             })
         });
         const data = await bookatable.json();
-        console.log('data :', data);
-        // data ? location.reload() : null
+        data ? location.reload() : null
 
     });
     EumIpsamPut.addEventListener("submit", async (e) => {
@@ -225,8 +224,7 @@ async function section1() {
             })
         });
         const data = await bookatable.json();
-        console.log('data :', data);
-        // data ? location.reload() : null
+        data ? location.reload() : null
 
     });
     chooseArray ? chooseArray.forEach(item => {
@@ -344,7 +342,6 @@ async function section1() {
             let id = e.target.getAttribute("id");
             if (id) {
                 deleteItem("photo", id)
-                window.location.reload()
             } else alert("Something is strange")
         })
     });

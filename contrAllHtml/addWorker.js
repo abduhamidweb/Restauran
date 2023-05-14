@@ -18,15 +18,14 @@ addadmin.addEventListener("submit", async (e) => {
         formData.append('salary', workersalary.value)
         formData.append('rol', workerRol.value)
         formData.append('res_id', localStorage.getItem("adminres_id"))
-   let data =     await fetch('http://localhost:5000/api/worker', {
+        let data = await fetch('http://localhost:5000/api/worker', {
             method: 'POST',
             headers: {
                 'enctype': 'multipart/form-data'
             },
             body: formData
         });
-            data ? location.reload() : null
-
+        data ? location.reload() : null
     } catch (error) {
         console.error(error);
     }
@@ -122,7 +121,7 @@ async function AllWorker() {
             formData.append('salary', updateworkersalary.value ? updateworkersalary.value : "")
             formData.append('rol', updateworkerRol.value ? updateworkerRol.value : "")
             formData.append('res_id', localStorage.getItem("adminres_id"))
-     let data=       await fetch('http://localhost:5000/api/worker/' + workerIdUpdate.value, {
+            let data = await fetch('http://localhost:5000/api/worker/' + workerIdUpdate.value, {
                 method: 'PUT',
                 headers: {
                     'enctype': 'multipart/form-data'
@@ -197,6 +196,8 @@ async function AllWorker() {
             if (!response.ok) {
                 throw new Error('Server error');
             }
+            const data = await response.json();
+            data ? location.reload() : null
             // Element o'chirildi
         } catch (error) {
             console.log('error :', error);
@@ -208,9 +209,7 @@ async function AllWorker() {
         item.addEventListener('click', (e) => {
             let id = e.target.getAttribute("id");
             if (id) {
-
                 deleteItem(id)
-                window.location.reload()
             } else alert("Something is strange")
         })
     })
