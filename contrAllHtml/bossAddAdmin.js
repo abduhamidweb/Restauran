@@ -19,7 +19,6 @@ addadmin.addEventListener("submit", async (e) => {
             })
         });
         let result = await data.json()
-        console.log('result :', result);
         result ? location.reload() : null
 
     } catch (error) {
