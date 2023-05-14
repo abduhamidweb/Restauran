@@ -14,9 +14,9 @@ let BASE_URL = 'http://localhost:5000/api/';
     resource,
     choose,
     photos,
-    workers
+    workers,
+    events
   } = await response.json();
-  console.log(choose);
   bcgvhdjdwvg2.innerHTML = contact
   const today = new Date();
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -38,7 +38,6 @@ let BASE_URL = 'http://localhost:5000/api/';
   }
   // img==============================
   workers ? workers.forEach(item => {
-      console.log('item :', item);
       if (item.rol == "admin") {
         return null
       }
@@ -77,13 +76,59 @@ let BASE_URL = 'http://localhost:5000/api/';
         `
     restImgsWrapper.append(cardUser);
   }) : ""
+  events ? events.forEach((item, index) => {
+
+    let cardUser = document.createElement("div");
+    cardUser.setAttribute('id', item._id);
+    cardUser.setAttribute("class", "carousel-item2");
+    if (index === 0) {
+      cardUser.classList.add('active');
+    }
+    cardUser.innerHTML = `
+       <div class="carousel-container">
+              <div class="carousel-content">
+                   <div class="row event-item">
+                <div class="col-lg-6">
+                  <img src=${'http://localhost:5000/imgs/'+item.imgLink} height="400" class="img-fluid eventImg" alt="">
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0 content">
+                  <h3>${item.title}</h3>
+                  <div class="price">
+                    <p><span>${item.price}</span></p>
+                  </div>
+                  <p class="fst-italic">
+                 ${item.desc_short}
+                  </p>
+                  <ul>
+                    <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+                    <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.
+                    </li>
+                    <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+                  </ul>
+                  <p>
+                                  ${item.desc_long}
+
+                  </p>
+                </div>
+              </div>
+              </div>
+            </div>
+          
+        `
+    eventsWrapper.append(cardUser);
+  }) : ""
+  const prevButto = document.querySelectorAll(".carousel-control-prev")[1];
+  const nextButto = document.querySelectorAll(".carousel-control-next")[1];
+
+
+  // slide-larni yangilash
   // <!-- ======= Menu Section ======= -->
   hero ? hero.forEach((item, index) => {
     let cardUser = document.createElement("div");
     cardUser.setAttribute('id', item._id);
     cardUser.setAttribute("class", "carousel-item");
     cardUser.setAttribute("style", `background-image: url(${ item.imgLink ? "http://localhost:5000/imgs/"+item.imgLink : ""}`)
-    console.log('cardUser :', cardUser);
+
     if (index === 0) {
       cardUser.classList.add('active');
     }
@@ -102,9 +147,12 @@ let BASE_URL = 'http://localhost:5000/api/';
         `
     heroWrapperAllItems.append(cardUser);
   }) : "";
-  const prevButton = document.querySelector(".carousel-control-prev");
-  const nextButton = document.querySelector(".carousel-control-next");
+  const prevButton = document.querySelectorAll(".carousel-control-prev")[0];
+  const nextButton = document.querySelectorAll(".carousel-control-next")[0];
   let activeIndex = 0;
+
+
+
   prevButton.addEventListener("click", () => {
     activeIndex--;
     if (activeIndex < 0) activeIndex = hero.length - 1;
@@ -116,8 +164,37 @@ let BASE_URL = 'http://localhost:5000/api/';
     if (activeIndex >= hero.length) activeIndex = 0;
     renderSlides();
   });
+  // ============================================
+  let activeIndex2 = 0;
+  const slideInterval = setInterval(() => {
+    activeIndex2++;
+    if (activeIndex2 >= events.length) activeIndex2 = 0;
+    renderSlides2();
+  }, 3000);
 
-  // slide-larni yangilash
+  prevButto.addEventListener("click", () => {
+    clearInterval(slideInterval);
+    activeIndex2--;
+    if (activeIndex2 < 0) activeIndex2 = events.length - 1;
+    renderSlides2();
+  });
+
+  nextButto.addEventListener("click", () => {
+    clearInterval(slideInterval);
+    activeIndex2++;
+    if (activeIndex2 >= events.length) activeIndex2 = 0;
+    renderSlides2();
+  });
+
+  function renderSlides2() {
+    const carouselItems = document.querySelectorAll(".carousel-item2");
+    carouselItems.forEach((item, index) => {
+      if (index === activeIndex2) item.classList.add("active");
+      else item.classList.remove("active");
+    });
+  }
+
+
   function renderSlides() {
     const carouselItems = document.querySelectorAll(".carousel-item");
     carouselItems.forEach((item, index) => {

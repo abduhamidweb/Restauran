@@ -125,7 +125,7 @@ async function section1() {
         cardUser.setAttribute('id', item._id);
         cardUser.setAttribute("class", "user border border-2 m-4 p-4 d-flex");
         cardUser.innerHTML = `
-                <div class="userImg">1
+                <div class="userImg">
                     <img src= ${ item.imgLink ? "http://localhost:5000/imgs/"+item.imgLink : ""} alt="workers imgs">
                 </div>
                 <div class="userInfo ms-5 mt-5">
@@ -310,7 +310,6 @@ async function section1() {
     updatechooseForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         let id = localStorage.getItem('videoupdatechooseFormId')
-        console.log('id :', id);
         let bookatable = await fetch(BASE_URL2 + "choose/" + id, {
             method: "PUT",
             headers: {
@@ -336,33 +335,6 @@ async function section1() {
                 </div>
                 `
         deletChooseWrapper.append(cardUser);
-        // ================================================
-
-
-
-
-
-
-        // formupdatehero.addEventListener("submit", async (e) => {
-        //     e.preventDefault();
-        //     try {
-        //         const formData = new FormData();
-        //         formData.append('title', updateherotitle.value ? updateherotitle.value : "")
-        //         formData.append('description', updateherodescription.value ? updateherodescription.value : "")
-        //         formData.append('file', updateheroImg.files[0] ? updateheroImg.files[0] : "")
-        //         formData.append('res_id', localStorage.getItem("adminres_id"))
-        //         let data = await fetch(BASE_URL2 + 'hero/' + updateheroImgId.value, {
-        //             method: 'PUT',
-        //             headers: {
-        //                 'enctype': 'multipart/form-data'
-        //             },
-        //             body: formData
-        //         });
-        //         console.log(await data.json());
-        //     } catch (error) {
-        //         console.error(error);
-        //     }
-        // });
     }) : ""
 
     let allWrapperchoose = document.querySelectorAll('.btnchooseDelete');
@@ -393,7 +365,7 @@ async function section1() {
             updateimg.value = id ? id : ""
         })
     }) : ""
-    // DElete ================================
+    // Delete ================================
     photos ? photos.forEach(item => {
         let cardUser = document.createElement("div");
         cardUser.setAttribute('id', item._id);
@@ -408,32 +380,6 @@ async function section1() {
                 `
         imgUploadDeleted.append(cardUser);
         // ================================================
-
-
-
-
-
-
-        // formupdatehero.addEventListener("submit", async (e) => {
-        //     e.preventDefault();
-        //     try {
-        //         const formData = new FormData();
-        //         formData.append('title', updateherotitle.value ? updateherotitle.value : "")
-        //         formData.append('description', updateherodescription.value ? updateherodescription.value : "")
-        //         formData.append('file', updateheroImg.files[0] ? updateheroImg.files[0] : "")
-        //         formData.append('res_id', localStorage.getItem("adminres_id"))
-        //         let data = await fetch(BASE_URL2 + 'hero/' + updateheroImgId.value, {
-        //             method: 'PUT',
-        //             headers: {
-        //                 'enctype': 'multipart/form-data'
-        //             },
-        //             body: formData
-        //         });
-        //         console.log(await data.json());
-        //     } catch (error) {
-        //         console.error(error);
-        //     }
-        // });
     }) : ""
     let allWrapperImgId = document.querySelectorAll('.btnphotosDelete');
     allWrapperImgId.forEach(item => {
@@ -444,71 +390,6 @@ async function section1() {
             } else alert("Something is strange")
         })
     });
-    // console.log('chooseArray :', chooseArray);
-    // allArray.map(item => {
-    //     // submit
-    //     let buttonUpdate = document.createElement("button");
-    //     buttonUpdate.setAttribute("class", "update");
-    //     buttonUpdate.setAttribute("id", item._id);
-    //     buttonUpdate.setAttribute("type", "submit");
-    //     buttonUpdate.innerHTML = "Update"
-    //     // lable and input
-    //     let titleLable = document.createElement("label");
-    //     let textTitleArea = document.createElement("textarea");
-    //     // lable and input wrapper
-    //     let title = document.createElement("div");
-    //     // lable textContexnt
-    //     titleLable.innerHTML = "title"
-    //     // set atribute for lable and input
-    //     titleLable.setAttribute("for", "title");
-    //     titleLable.setAttribute("class", "title");
-    //     textTitleArea.setAttribute("type", "text");
-    //     textTitleArea.setAttribute("id", "title");
-    //     // backend title value
-    //     textTitleArea.value = item.title;
-    //     // append lable and input  to wrapper
-    //     title.append(titleLable)
-    //     title.append(textTitleArea);
-    //     // wrapper append to adminSection1
-    //     staticOurFood.append(title);
-
-    //     // description 
-    //     item.description.map((txt, index) => {
-    //         let textDescArea = document.createElement("textarea");
-    //         let textDescTitle = document.createElement("h4");
-    //         textDescTitle.innerHTML = "Descriptions " + index;
-    //         let br = document.createElement("br");
-    //         textDescArea.value = txt,
-    //             staticOurFood.append(textDescTitle, textDescArea, br)
-    //     })
-    //     // video CRUD
-    //     let videoLink = document.createElement("textarea");
-    //     videoLink.value = item.videoLink
-    //     staticOurFood.append(videoLink)
-    //     // update btn added last becouse for update
-    //     staticOurFood.append(buttonUpdate)
-    // })
-    // wrapper.append(staticOurFood);
-    // staticOurFood.addEventListener("submit", async (e) => {
-    //     e.preventDefault();
-    //     let texts = document.querySelectorAll("textarea");
-    //     let idUpdate = document.querySelector('.update').getAttribute("id");
-    //     const response = await fetch(BASE_URL2 + `resources/${idUpdate}`, {
-    //         method: 'put',
-    //         headers: {
-    //             token: localStorage.getItem("token"),
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //             title: texts[0].value ? texts[0].value : "",
-    //             description: [texts[1].value, texts[2].value] ? [texts[1].value, texts[2].value] : "",
-    //             space: null || ["taom 1", "taom 2"],
-    //             videoLink: texts[3].value ? texts[3].value : "https://www.youtube.com/watch?v=GlrxcuEDyF8"
-    //         })
-    //     });
-    //     const data = await response.json();
-    //     data ? alert("success") : "error";
-    // })
 }
 section1();
 formaddhero.addEventListener("submit", async (e) => {
