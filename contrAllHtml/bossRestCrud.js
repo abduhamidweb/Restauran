@@ -39,4 +39,3 @@ async function resuorc2() {
 
 }
 resuorc2()
-// 
