@@ -317,28 +317,7 @@ let BASE_URL = 'http://localhost:5000/api/';
                       `
             AllFoodsWrap.append(cardUser);
           }
-          // console.log(menu-flters);
-          // cardUser.addEventListener('click', async (e) => {
-          //     const parentCard = e.target.closest('.user');
-          //     const id = parentCard.getAttribute('id');
-          //     let response = await fetch(BASE_URL + "foods/" + id);
-          //     let {
-          //         name,
-          //         calories,
-          //         type,
-          //         price,
-          //         isAvailable,
-          //         description,
-          //         _id
-          //     } = await response.json();
-          //     updateworkername.value = name ? name : ""
-          //     updatePassword2.value = type ? type : ""
-          //     updateworkeremail.value = calories ? calories : ""
-          //     updateworkerPhone.value = price ? price : ""
-          //     updateworkerinfo.value = isAvailable ? isAvailable : ""
-          //     updateworkerTime.value = description ? description : ""
-          //     workerIdUpdate.value = _id ? _id : ""
-          // })
+      
         }) : "";
       } else {
         AllFoodsWrap.innerHTML = ""

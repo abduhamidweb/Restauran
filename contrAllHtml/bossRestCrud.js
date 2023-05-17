@@ -13,7 +13,7 @@ async function resuorc() {
                 <th scope="row">${i+1}</th>
                 <td>${item.rest_name}</td>
                 <td>${item._id}</td>
-                <td><delete class="btn btn-danger" id=${item._id}>delete</delete></td>
+                <td><delete class="btn btn-danger allRestDelete" id=${item._id}>delete</delete></td>
                 <td><delete class="btn btn-info text-light" id=${item._id}>update</delete></td>
         `
         menu.append(rest_wrapper);
@@ -24,14 +24,14 @@ resuorc()
 async function resuorc2() {
     let response = await fetch("http://localhost:5000/api/workeradmin");
     let data = await response.json();
-    data ? data.map((item, i) => {
+    data ? data.forEach((item, i) => {
         let rest_wrapper = document.createElement("tr");
         rest_wrapper.innerHTML =
             `
                 <th scope="row">${i + 1}</th>
                 <td>${item.email}</td>
                 <td>${item.password}</td>
-                <td><delete class="btn btn-danger" id=${item._id}>delete</delete></td>
+                <td><delete class="btn btn-danger allDeleteBtnAdmin" id=${item._id}>delete</delete></td>
                 <td><delete class="btn btn-info text-light" id=${item._id}>update</delete></td>
         `
         alladmins.append(rest_wrapper);
@@ -56,5 +56,50 @@ async function resuorc2() {
             }
         })
     })
+    let allRestDelete = document.querySelectorAll('.allRestDelete');
+    let allDeleteBtnAdmin = document.querySelectorAll('.allDeleteBtnAdmin');
+    allRestDelete.forEach((item) => {
+        item.addEventListener('click', (e) => {
+            deleteItem(e.target.getAttribute('id'));
+        });
+    })
+    allDeleteBtnAdmin.forEach((item) => {
+        item.addEventListener('click', (e) => {
+            deleteItem2(e.target.getAttribute('id'));
+        });
+    })
 }
-resuorc2()
+
+resuorc2();
+const deleteItem = async (id) => {
+    try {
+        const response = await fetch(`${BASE_URL}/${id}`, {
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            throw new Error('Server error');
+        }
+        const data = await response.json();
+        data ? location.reload() : null
+        // Element o'chirildi
+    } catch (error) {
+        console.log('error :', error);
+        // Xatolikni ishlash
+    }
+}
+const deleteItem2 = async (id) => {
+    try {
+        const response = await fetch(`${'http://localhost:5000/api/worker'}/${id}`, {
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            throw new Error('Server error');
+        }
+        const data = await response.json();
+        data ? location.reload() : null
+        // Element o'chirildi
+    } catch (error) {
+        console.log('error :', error);
+        // Xatolikni ishlash
+    }
+}
