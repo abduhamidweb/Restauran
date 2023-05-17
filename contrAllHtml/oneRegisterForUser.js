@@ -15,7 +15,8 @@ let BASE_URL = 'http://localhost:5000/api/';
     choose,
     photos,
     workers,
-    events
+    events,
+    space
   } = await response.json();
   bcgvhdjdwvg2.innerHTML = contact
   const today = new Date();
@@ -36,6 +37,81 @@ let BASE_URL = 'http://localhost:5000/api/';
   } else {
     sabdhjbhds.innerHTML = 'Closed'
   }
+  // space food and other stuff is      
+  // var array = [{
+  //     tab_name: "Object 1"
+  //   },
+  //   {
+  //     tab_name: "Object 2"
+  //   },
+  //   {
+  //     tab_name: "Object 3"
+  //   }
+  // ];
+
+  var spaceTabWrapper = document.getElementById("spaceTabWrapper"); // Get the spaceTabWrapper element
+
+  // Loop through the array
+  for (var i = 0; i < space.length; i++) {
+    var listItem = document.createElement("li"); // Create LI element
+    listItem.className = "nav-item";
+
+    var link = document.createElement("a"); // Create anchor (a) element
+    link.className = "nav-link";
+    link.setAttribute("data-bs-toggle", "tab");
+    link.textContent = space[i].name; // Set the tab_name value from the array
+    if (i === 0) {
+      link.classList.add("active", "show"); // Add "active" and "show" classes to the first tab
+    }
+    listItem.appendChild(link); // Append the anchor element to the LI element
+    spaceTabWrapper.appendChild(listItem); // Append the LI element to the spaceTabWrapper
+  };
+  let allSpaceTab = document.querySelectorAll('#spaceTabWrapper .nav-link');
+  allSpaceTab.forEach(function (s) {
+    if (s.classList.contains("active")) {
+      let text = s.innerHTML;
+      space.forEach(function (item) {
+        if (item.name == text) {
+          let div = document.createElement("div");
+          div.setAttribute('class', 'row');
+          div.innerHTML = `
+           <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>${item.tap_type}</h3>
+                    <p class="fst-italic">${item.short_desc}</p>
+                    <p>${item.long_desc}</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src=${'http://localhost:5000/imgs/' + item.imgLink} alt="" class="img-fluid">
+                  </div>
+          `
+          tabContent2.append(div);
+        }
+      })
+    }
+    s.addEventListener('click', () => {
+      tabContent2.innerHTML = ``
+       if (s.classList.contains("active")) {
+         let text = s.innerHTML;
+         space.forEach(function (item) {
+           if (item.name == text) {
+             let div = document.createElement("div");
+             div.setAttribute('class', 'row');
+             div.innerHTML = `
+           <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>${item.tap_type}</h3>
+                    <p class="fst-italic">${item.short_desc}</p>
+                    <p>${item.long_desc}</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src=${'http://localhost:5000/imgs/' + item.imgLink} alt="" class="img-fluid">
+                  </div>
+          `
+             tabContent2.append(div);
+           }
+         })
+       }
+    })
+  });
   // img==============================
   workers ? workers.forEach(item => {
       if (item.rol == "admin") {
