@@ -13,6 +13,7 @@
         crossorigin="anonymous"></script>
     <!-- style -->
     <link rel="stylesheet" href="./contrStyleCss/style.css">
+    <link rel="stylesheet" href="./contrStyleCss/addadmin.css">
     <title>boss CRUD</title>
 </head>
 
@@ -36,12 +37,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./bossAddRest.html">Add Restaurant</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./bossRestUpdateRest.html">Update Restaurant</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./bossRestDeleteRest.html">Delete Restaurant</a>
-                    </li>
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -50,16 +45,80 @@
             </div>
         </div>
     </nav>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 mx-auto">
-                <h2 class="text-center my-4">bigBoss CRUD</h2>
-                <div class="menu" id="menu"></div>
-                <div class="admins pt-4">
-                    <h2 class="mt-5 text-center" id="alladmins">Admins</h2>
-                
+    <div class="container  mt-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Restaurant</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Update</th>
+                </tr>
+            </thead>
+            <tbody id="menu">
+
+            </tbody>
+        </table>
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Restaurant</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Update</th>
+                </tr>
+            </thead>
+            <tbody id="alladmins">
+
+            </tbody>
+        </table>
+    </div>
+    <div class="body2">
+        <div class="container2">
+            <div class="title">Add Restaurant</div>
+            <form id="addrest">
+                <div class="user_details w-100">
+                    <div class="input_pox w-100">
+                        <span class="datails">Restaurant Name*</span>
+                        <input type="text" placeholder="enter restaurant name" required id="rest_name">
+                    </div>
+                    <div class="button w-100 d-block">
+                        <input type="submit" value="submit">
+                    </div>
+            </form>
+        </div>
+        <div class="container2 ">
+
+            <div class="title">Add Admin</div>
+            <form id="addadmin">
+                <div class="user_details">
+                    <div class="input_pox">
+                        <span class="datails">Email *</span>
+                        <input type="email" placeholder="enter admin Email" required value="@gmail.com"
+                            id="bossadminadd">
+                    </div>
+                    <div class="input_pox">
+                        <span class="datails">Password *</span>
+                        <input type="password" placeholder="enter admin password" required value=""
+                            id="bossadminaddpassword">
+                    </div>
+                    <div class="input_pox">
+                        <span class="datails">your restaurant</span>
+                        <select id="AllRestaurantOption" required class="form-control">
+                     <option disabled selected>All Restaurant</option>
+                        </select>
+                    </div>
+                    <div class="input_pox">
+                        <span class="datails">Which restaurant owner is this? *</span>
+                        <input type="text" disabled placeholder="Rest Id" required value="" id="bossaddWhichResta">
+                    </div>
                 </div>
-            </div>
+                <div class="button">
+                    <input type="submit" value="Register">
+                </div>
+            </form>
         </div>
     </div>
     <!-- script -->
@@ -71,6 +130,8 @@
         crossorigin="anonymous"></script>
     <!-- my script -->
     <script src="./contrAllHtml/bossRestCrud.js"></script>
+    <script src="./contrAllHtml/bossAddAdmin.js"></script>
+    <script src="./contrAllHtml/bossAddRest.js"></script>
 </body>
 
 </html>

@@ -13,10 +13,6 @@ addrest.addEventListener("submit", async (e) => {
             },
             body: JSON.stringify({
                 rest_name: rest_name.value,
-                rest_year: "1934",
-                description: "lsnklkdjsn lknsdlkcnsd kjncdsklnc sk kn;dsknsda",
-                contact: "09813330938",
-                rest_img: "/nskdcjnsldm/diwoke.jpg"
             })
         });
             data ? location.reload() : null

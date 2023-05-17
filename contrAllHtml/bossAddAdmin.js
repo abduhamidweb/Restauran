@@ -13,7 +13,7 @@ addadmin.addEventListener("submit", async (e) => {
             },
             body: JSON.stringify({
                 email: bossadminadd.value,
-                password: "123",
+                password: bossadminaddpassword.value,
                 rol: "admin",
                 res_id: bossaddWhichResta.value,
             })
