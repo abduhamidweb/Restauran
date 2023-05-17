@@ -1,6 +1,5 @@
 let tokenbos = localStorage.getItem("tokenadmin");
 let resId = localStorage.getItem("adminres_id");
-console.log('resId :', resId);
 (() => {
     if (!tokenbos) return location = "adminLogin.html";
     if (!resId) return location = "adminLogin.html";
@@ -18,6 +17,110 @@ async function section1() {
     let data = await response.json();
     let hero = data.hero;
     let updatePanelHero = document.querySelector('.tabUpdatePanelUpdate');
+
+    // Space information---------------------------------------------------------------------------------
+    spacefoodadd.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        try {
+            const formData = new FormData();
+            formData.append('name', spacefoodaddtitle.value ? spacefoodaddtitle.value : "")
+            formData.append('tap_type', spacefoodaddprice.value ? spacefoodaddprice.value : "")
+            formData.append('short_desc', spacefoodaddshorts.value ? spacefoodaddshorts.value : "")
+            formData.append('long_desc', spacefoodaddlongs.value ? spacefoodaddlongs.value : "")
+            formData.append('file', spacefoodaddimgupload.files[0] ? spacefoodaddimgupload.files[0] : "")
+            formData.append('res_id', localStorage.getItem("adminres_id"))
+            let data = await fetch(BASE_URL2 + 'specials/', {
+                method: 'POST',
+                headers: {
+                    'enctype': 'multipart/form-data'
+                },
+                body: formData
+            });
+            await data.json() ? location.reload() : null
+        } catch (error) {
+            console.error(error);
+        }
+    });
+    // update
+    let allSpaceFood = data.space;
+    allSpaceFood ? allSpaceFood.forEach(item => {
+        let cardUser = document.createElement("div");
+        cardUser.setAttribute('id', item._id);
+        cardUser.setAttribute("class", "user border border-2 m-4 p-4 d-flex");
+        cardUser.innerHTML = `
+                <div class="userImg">
+                    <img src= ${ item.imgLink ? "http://localhost:5000/imgs/"+item.imgLink : ""} alt="workers imgs">
+                </div>
+                <div class="userInfo ms-5 mt-5">
+                    <h4><strong>name:</strong> ${item.name ?item.name : "bu muxim odam" }</h4>
+                </div>
+                `
+        spacefoodUpdatedata.append(cardUser);
+        cardUser.addEventListener('click', async (e) => {
+            const parentCard = e.target.closest('.user');
+            const id = parentCard.getAttribute('id');
+            let response = await fetch(BASE_URL2 + "specials/" + id);
+            let {
+                name,
+                tap_type,
+                short_desc,
+                long_desc,
+                res_id,
+                _id
+            } = await response.json();
+            spacefoodupdatetitle.value = name ? name : "something is strange"
+            spacefoodupdateprice.value = tap_type ? tap_type : "something is strange"
+            spacefoodupdateshorts.value = short_desc ? short_desc : "something is strange"
+            spacefoodupdatelongs.value = long_desc ? long_desc : "something is strange"
+            spacefoodupdateId.value = _id ? _id : "something is strange"
+        });
+        spacefoodupdate.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            try {
+                const formData = new FormData();
+                formData.append('name', spacefoodupdatetitle.value ? spacefoodupdatetitle.value : "")
+                formData.append('tap_type', spacefoodupdateprice.value ? spacefoodupdateprice.value : "")
+                formData.append('short_desc', spacefoodupdateshorts.value ? spacefoodupdateshorts.value : "")
+                formData.append('long_desc', spacefoodupdatelongs.value ? spacefoodupdatelongs.value : "")
+                formData.append('file', spacefoodupdateimgupload.files[0] ? spacefoodupdateimgupload.files[0] : "")
+                formData.append('res_id', localStorage.getItem("adminres_id"))
+                let data = await fetch(BASE_URL2 + 'specials/' + spacefoodupdateId.value, {
+                    method: 'PUT',
+                    headers: {
+                        'enctype': 'multipart/form-data'
+                    },
+                    body: formData
+                });
+                // data ? location.reload() : null
+                console.log('data :', await data.json());
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    }) : ""
+    // delete special
+    allSpaceFood ? allSpaceFood.forEach(item => {
+        let cardUser = document.createElement("div");
+        cardUser.setAttribute('id', item._id);
+        cardUser.setAttribute("class", "user border border-2 m-4 p-4 d-flex");
+        cardUser.innerHTML = `
+                <div class="userInfo ms-5 mt-5">
+                    <h4> <strong> name: </strong> ${item.name ?item.name : "bu muxim odam" } <button class="btn btn-danger btnallSpaceFoodDelete" id=${item._id}>delete</button > </h4>
+                </div>
+                `
+        deletFoodsspecialsWrapper.append(cardUser);
+    }) : ""
+    let btnallSpaceFoodDelete = document.querySelectorAll('.btnallSpaceFoodDelete');
+    btnallSpaceFoodDelete.forEach(item => {
+        item.addEventListener('click', (e) => {
+            let id = e.target.getAttribute("id");
+            if (id) {
+                deleteItem("specials", id)
+            } else alert("Something is strange")
+        })
+    });
+
+
     // Eventsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
     let allEvents = data.events;
     // added
@@ -517,5 +620,3 @@ imguploadUpdate.addEventListener("submit", async (e) => {
         console.error(error);
     }
 });
-
-

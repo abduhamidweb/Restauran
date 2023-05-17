@@ -56,6 +56,92 @@
 
     <h2 class="text-center my-4">Admin of Restaurant</h2>
     <div class="container border border-2 p-5 mt-3">
+        <h2 class="text-center">Space foods</h2>
+        <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1spacefood" role="tab"
+                    aria-controls="ex1-tabs-1spacefood" aria-selected="true">add spacefood</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#ex1-tabs-2spacefood" role="tab"
+                    aria-controls="ex1-tabs-2spacefood" aria-selected="false">Update spacefood</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#ex1-tabs-3spacefood" role="tab"
+                    aria-controls="ex1-tabs-3spacefood" aria-selected="false">delete spacefood</a>
+            </li>
+        </ul>
+        <!-- Tabs navs -->
+        <!-- Tabs content -->
+        <div class="tab-content" id="ex1-content">
+            <div class="tab-pane fade show active" id="ex1-tabs-1spacefood" role="tabpanel" aria-labelledby="ex1-tab-1">
+                <!-- Tabs content -->
+                <form id="spacefoodadd">
+                    <h4 class="mt-3 ">Tab name </h4>
+                    <input type="text" class="form-control mt-3 p-3" placeholder="title" id="spacefoodaddtitle"
+                        required>
+
+
+                    <h4 class="mt-3 ">Tab content title</h4>
+                    <input type="text" class="form-control mt-3 p-3" placeholder="title" id="spacefoodaddprice"
+                        required>
+
+
+                    <h4 class="mt-3 ">short description </h4>
+                    <input type="text" class="form-control mt-3 p-3" placeholder="title" id="spacefoodaddshorts"
+                        required>
+
+
+                    <h4 class="mt-3 ">long description </h4>
+                    <input type="text" class="form-control mt-3 p-3" placeholder="title" id="spacefoodaddlongs"
+                        required>
+                    <h4 class="mt-3 ">img upload</h4>
+                    <input type="file" class="form-control mt-3 p-3" placeholder="title" id="spacefoodaddimgupload"
+                        required>
+                    <button type="submit" class="form-control mt-4 p-3 fs-3 bg-info text-light">submit</button>
+                </form>
+            </div>
+            <div class="tab-pane fade " id="ex1-tabs-2spacefood" role="tabpanel" aria-labelledby="ex1-tab-2">
+                <div id="spacefoodUpdatedata">
+                </div>
+                <form id="spacefoodupdate">
+                    <h4 class="mt-3 ">title </h4>
+                    <input type="text" class="form-control mt-3 p-3" placeholder="title" id="spacefoodupdatetitle"
+                        required>
+                    <h4 class="mt-3 ">price</h4>
+                    <input type="text" class="form-control mt-3 p-3" placeholder="title" id="spacefoodupdateprice"
+                        required>
+
+
+                    <h4 class="mt-3 ">description short</h4>
+                    <input type="text" class="form-control mt-3 p-3" placeholder="title" id="spacefoodupdateshorts"
+                        required>
+
+
+                    <h4 class="mt-3 ">description long</h4>
+                    <input type="text" class="form-control mt-3 p-3" placeholder="title" id="spacefoodupdatelongs"
+                        required>
+
+
+                    <h4 class="mt-3 ">img upload</h4>
+                    <input type="file" class="form-control mt-3 p-3" placeholder="title" id="spacefoodupdateimgupload"
+                        required>
+
+                    <h4 class="mt-3 ">Id Event</h4>
+                    <input type="text" class="form-control mt-3 p-3" placeholder="event Id" id="spacefoodupdateId"
+                        required>
+
+                    <button type="submit" class="form-control mt-4 p-3 fs-3 bg-spacefood text-light">submit</button>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="ex1-tabs-3spacefood" role="tabpanel" aria-labelledby="ex1-tab-3">
+                <div id="deletFoodsspecialsWrapper">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container border border-2 p-5 mt-3">
         <h2 class="text-center">Restaurant info</h2>
         <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
             <li class="nav-item" role="presentation">
@@ -132,8 +218,8 @@
                 </form>
             </div>
             <div class="tab-pane fade" id="ex1-tabs-3info" role="tabpanel" aria-labelledby="ex1-tab-3">
-            <div id="deletEventsWrapper">
-            </div>
+                <div id="deletEventsWrapper">
+                </div>
             </div>
         </div>
 
