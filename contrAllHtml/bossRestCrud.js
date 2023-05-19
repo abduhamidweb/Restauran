@@ -14,7 +14,7 @@ async function resuorc() {
                 <td>${item.rest_name}</td>
                 <td>${item._id}</td>
                 <td><delete class="btn btn-danger allRestDelete" id=${item._id}>delete</delete></td>
-                <td><delete class="btn btn-info text-light" id=${item._id}>update</delete></td>
+                <td><delete class="btn btn-info text-light allRestUpdate" id=${item._id}>update</delete></td>
         `
         menu.append(rest_wrapper);
     }) : " Restarantlar hali ishga tushmadi. Soon"
@@ -32,14 +32,13 @@ async function resuorc2() {
                 <td>${item.email}</td>
                 <td>${item.password}</td>
                 <td><delete class="btn btn-danger allDeleteBtnAdmin" id=${item._id}>delete</delete></td>
-                <td><delete class="btn btn-info text-light" id=${item._id}>update</delete></td>
+                <td><delete class="btn btn-info text-light allUpdateBtnAdmin" id=${item._id}>update</delete></td>
         `
         alladmins.append(rest_wrapper);
 
     }) : " Restarantlar hali ishga tushmadi. Soon";
     let restaurants = await fetch(BASE_URL);
     let rest = await restaurants.json();
-
     rest ? rest.map((item, i) => {
         let rest_wrapper = document.createElement("option");
         rest_wrapper.innerHTML = item.rest_name
@@ -58,6 +57,18 @@ async function resuorc2() {
     })
     let allRestDelete = document.querySelectorAll('.allRestDelete');
     let allDeleteBtnAdmin = document.querySelectorAll('.allDeleteBtnAdmin');
+    let allRestUpdate = document.querySelectorAll('.allRestUpdate');
+    let allUpdateBtnAdmin = document.querySelectorAll('.allUpdateBtnAdmin');
+    allRestUpdate.forEach((item) => {
+        item.addEventListener('click', (e) => {
+            update(e.target.getAttribute('id'), "rest")
+        });
+    })
+    allUpdateBtnAdmin.forEach((item) => {
+        item.addEventListener('click', (e) => {
+            update(e.target.getAttribute('id'), "admin")
+        });
+    })
     allRestDelete.forEach((item) => {
         item.addEventListener('click', (e) => {
             deleteItem(e.target.getAttribute('id'));
@@ -101,5 +112,50 @@ const deleteItem2 = async (id) => {
     } catch (error) {
         console.log('error :', error);
         // Xatolikni ishlash
+    }
+}
+const body = document.querySelector("body")
+async function update(id, rol) {
+
+    modalContainer.classList.add("d-block");
+    if (id && rol == "rest") {
+        let response = await fetch(BASE_URL + "/" + id);
+        let data = await response.json();
+        if (data.rest_name) {
+            IdName.value = data.rest_name
+        }
+        modlaUpdateRestAdmin.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            let response = await fetch(BASE_URL + "/" + id, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    rest_name: IdName.value.trim() ? IdName.value.trim() : undefined
+                })
+            });
+            await response.json() ? location.reload() : alert("something went wrong;")
+        });
+    }
+    if (id && rol == "admin") {
+        let response = await fetch("http://localhost:5000/api/worker/" + id);
+        let data = await response.json();
+        if (data.email) {
+            IdName.value = data.email;
+        }
+        modlaUpdateRestAdmin.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            let response = await fetch("http://localhost:5000/api/workeradmin/" + id, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: IdName.value.trim() ? IdName.value.trim() : undefined
+                })
+            });
+            await response.json() ? location.reload() : alert("something went wrong;")
+        });
     }
 }

@@ -267,7 +267,6 @@ async function AllWorker() {
             }
             if (e.target.classList.contains("btn-info")) {
                 let updateId = e.target.getAttribute("id")
-                
                 modal.style.display = "block";
                 let response = await fetch(BASE_URL + "contact/" + updateId);
                 let {
@@ -310,8 +309,6 @@ async function AllWorker() {
                     success ? location.reload() : alert("error")
                 });
             }
-            // const parentCard = e.target.closest('.user');
-            // const id = parentCard.getAttribute('id');
             // let response = await fetch(BASE_URL + "foods/" + id);
             // let {
             //     name,
