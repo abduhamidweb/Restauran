@@ -116,7 +116,6 @@ const deleteItem2 = async (id) => {
 }
 const body = document.querySelector("body")
 async function update(id, rol) {
-
     modalContainer.classList.add("d-block");
     if (id && rol == "rest") {
         let response = await fetch(BASE_URL + "/" + id);

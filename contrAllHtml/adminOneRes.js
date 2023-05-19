@@ -15,6 +15,37 @@ async function section1() {
     staticOurFood.setAttribute("id", "staticOurFood")
     let response = await fetch(BASE_URL + resId);
     let data = await response.json();
+    let {
+        contact,
+        rest_img,
+        description,
+        rest_name,
+        rest_year,
+    } = data;
+
+    // Resturant
+    RestaurantUpaddtitle.value = contact ? contact : "";
+    RestaurantUpaddprice.value = rest_img ? rest_img : "";
+    RestaurantUpaddshorts.value = description ? description : "";
+    RestaurantUpaddlongs.value = rest_name ? rest_name : "";
+    RestaurantUpaddimgupload.value = rest_year ? rest_year : "";
+    RestaurantUpadd.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let respons2 = fetch(BASE_URL + resId, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                rest_name: RestaurantUpaddlongs.value.trim() ? RestaurantUpaddlongs.value.trim() : undefined,
+                rest_year: RestaurantUpaddimgupload.value.trim() ? RestaurantUpaddimgupload.value.trim() : undefined,
+                description: RestaurantUpaddshorts.value.trim() ? RestaurantUpaddshorts.value.trim() : undefined,
+                contact: RestaurantUpaddtitle.value.trim() ? RestaurantUpaddtitle.value.trim() : undefined,
+                rest_img: RestaurantUpaddprice.value.trim() ? RestaurantUpaddprice.value.trim() : undefined,
+            })
+        })
+         await respons2.json() ? alert("ok") : alert("something went wrong")
+    })
     let hero = data.hero;
     let updatePanelHero = document.querySelector('.tabUpdatePanelUpdate');
 
