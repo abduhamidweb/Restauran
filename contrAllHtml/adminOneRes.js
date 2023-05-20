@@ -31,20 +31,26 @@ async function section1() {
     RestaurantUpaddimgupload.value = rest_year ? rest_year : "";
     RestaurantUpadd.addEventListener("submit", async (e) => {
         e.preventDefault();
-        let respons2 = fetch(BASE_URL + resId, {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                rest_name: RestaurantUpaddlongs.value.trim() ? RestaurantUpaddlongs.value.trim() : undefined,
-                rest_year: RestaurantUpaddimgupload.value.trim() ? RestaurantUpaddimgupload.value.trim() : undefined,
-                description: RestaurantUpaddshorts.value.trim() ? RestaurantUpaddshorts.value.trim() : undefined,
-                contact: RestaurantUpaddtitle.value.trim() ? RestaurantUpaddtitle.value.trim() : undefined,
-                rest_img: RestaurantUpaddprice.value.trim() ? RestaurantUpaddprice.value.trim() : undefined,
-            })
-        })
-         await respons2.json() ? alert("ok") : alert("something went wrong")
+     try {
+           let respons2 =await fetch(BASE_URL + resId, {
+               method: "PUT",
+               headers: {
+                   'Content-Type': 'application/json'
+               },
+               body: JSON.stringify({
+                   rest_name: RestaurantUpaddlongs.value.trim() ? RestaurantUpaddlongs.value.trim() : undefined,
+                   rest_year: RestaurantUpaddimgupload.value.trim() ? RestaurantUpaddimgupload.value.trim() : undefined,
+                   description: RestaurantUpaddshorts.value.trim() ? RestaurantUpaddshorts.value.trim() : undefined,
+                   contact: RestaurantUpaddtitle.value.trim() ? RestaurantUpaddtitle.value.trim() : undefined,
+                   rest_img: RestaurantUpaddprice.value.trim() ? RestaurantUpaddprice.value.trim() : undefined,
+               })
+           });
+           let dataw =await  respons2.json()
+           await dataw ? alert("ok") : alert("something went wrong")
+     } catch (error) {
+     console.log('error :', error.message);
+        
+     }
     })
     let hero = data.hero;
     let updatePanelHero = document.querySelector('.tabUpdatePanelUpdate');
@@ -122,8 +128,7 @@ async function section1() {
                     },
                     body: formData
                 });
-                // data ? location.reload() : null
-                console.log('data :', await data.json());
+                await data.json() ? location.reload() : null
             } catch (error) {
                 console.error(error);
             }

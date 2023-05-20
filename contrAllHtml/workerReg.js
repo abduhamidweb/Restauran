@@ -1,6 +1,5 @@
  formcontr.addEventListener("submit", async (e) => {
      e.preventDefault();
-     // let email = document.querySelector("#email");
      try {
          const response = await fetch('http://localhost:5000/api/workerlogin', {
              method: 'POST',

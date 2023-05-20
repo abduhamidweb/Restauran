@@ -25,11 +25,12 @@ addadmin.addEventListener("submit", async (e) => {
             },
             body: formData
         });
-        data ? location.reload() : null
+        data.json() ? location.reload() : null
     } catch (error) {
-        console.error(error);
+        console.error(error.message);
     }
 });
+workersresResId.value = localStorage.getItem("adminres_id")
 
 
 // const card = document.querySelector('.card');
