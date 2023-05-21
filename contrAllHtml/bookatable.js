@@ -13,8 +13,8 @@ let workerRes_id = localStorage.getItem("workerRes_id");
 })();
 const body = document.querySelector("body"),
     modeToggle = body.querySelector(".mode-toggle");
-sidebar = body.querySelector("nav");
-sidebarToggle = body.querySelector(".sidebar-toggle");
+// sidebar = body.querySelector("nav");
+// sidebarToggle = body.querySelector(".sidebar-toggle");
 
 let getMode = localStorage.getItem("mode");
 if (getMode && getMode === "dark") {
@@ -34,32 +34,16 @@ modeToggle.addEventListener("click", () => {
         localStorage.setItem("mode", "light");
     }
 });
-
-sidebarToggle.addEventListener("click", () => {
-    sidebar.classList.toggle("close");
-    if (sidebar.classList.contains("close")) {
-        localStorage.setItem("status", "close");
-    } else {
-        localStorage.setItem("status", "open");
-    }
-})
-
-let BASE_URL = HOST+"api/";
+let BASE_URL = HOST + "api/";
 
 // Modal yopish tugmasi
-var closeButton = document.getElementsByClassName("close")[0];
-
-// Modal ochish tugmasiga "click" hodisasini qo'shish
-
-// Modal yopish tugmasiga "click" hodisasini qo'shish
+let closeButton = document.getElementsByClassName("close")[0];
 closeButton.onclick = function () {
     modal.style.display = "none";
 }
-
-// Modalni xaridor tomonidan jo'natilgan ma'lumotlari qabul qilish
-
 async function AllWorker() {
     let id = localStorage.getItem("adminres_id") || localStorage.getItem('workerRes_id')
+    console.log('id :', id);
     let response = await fetch(BASE_URL + "restaurants/" + id);
     let {
         zakaz,
@@ -210,7 +194,7 @@ async function AllWorker() {
         })
     }) : ""
     contactUs ? contactUs.forEach(z => {
-       
+
         let cardUser = document.createElement("div");
         cardUser.setAttribute("class", "activity-data")
         cardUser.innerHTML = `

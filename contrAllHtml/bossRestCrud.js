@@ -24,7 +24,7 @@ async function resuorc() {
 }
 resuorc()
 async function resuorc2() {
-    let response = await fetch(HOST+"api/workeradmin");
+    let response = await fetch(HOST + "api/workeradmin");
     let data = await response.json();
     data ? data.forEach((item, i) => {
         let rest_wrapper = document.createElement("tr");
@@ -140,14 +140,14 @@ async function update(id, rol) {
         });
     }
     if (id && rol == "admin") {
-        let response = await fetch(HOST+"api/worker/" + id);
+        let response = await fetch(HOST + "api/worker/" + id);
         let data = await response.json();
         if (data.email) {
             IdName.value = data.email;
         }
         modlaUpdateRestAdmin.addEventListener("submit", async (e) => {
             e.preventDefault();
-            let response = await fetch(HOST+"api/workeradmin/" + id, {
+            let response = await fetch(HOST + "api/workeradmin/" + id, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'

@@ -17,48 +17,40 @@ async function section1() {
 
     staticOurFood.setAttribute("id", "staticOurFood")
     let response = await fetch(BASE_URL + resId);
-    console.log('resId :', resId);
-    console.log('BASE_URL :', BASE_URL);
     let data = await response.json();
     let {
         contact,
-        rest_img,
         description,
         rest_name,
         rest_year,
     } = data;
-
-    // Resturant
     RestaurantUpaddtitle.value = contact ? contact : "";
-    RestaurantUpaddprice.value = rest_img ? rest_img : "";
     RestaurantUpaddshorts.value = description ? description : "";
     RestaurantUpaddlongs.value = rest_name ? rest_name : "";
     RestaurantUpaddimgupload.value = rest_year ? rest_year : "";
     RestaurantUpadd.addEventListener("submit", async (e) => {
         e.preventDefault();
         try {
-            let respons2 = await fetch(BASE_URL + resId, {
-                method: "PUT",
+            const formData = new FormData();
+            formData.append('contact', RestaurantUpaddtitle.value ? RestaurantUpaddtitle.value : "")
+            formData.append('description', RestaurantUpaddshorts.value ? RestaurantUpaddshorts.value : "")
+            formData.append('rest_name', RestaurantUpaddlongs.value ? RestaurantUpaddlongs.value : "")
+            formData.append('rest_year', RestaurantUpaddimgupload.value ? RestaurantUpaddimgupload.value : "")
+            formData.append('file', RestaurantUpaddprice.files[0] ? RestaurantUpaddprice.files[0] : "")
+            let data = await fetch(BASE_URL2 + 'restaurants/' + resId, {
+                method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'enctype': 'multipart/form-data'
                 },
-                body: JSON.stringify({
-                    rest_name: RestaurantUpaddlongs.value.trim() ? RestaurantUpaddlongs.value.trim() : undefined,
-                    rest_year: RestaurantUpaddimgupload.value.trim() ? RestaurantUpaddimgupload.value.trim() : undefined,
-                    description: RestaurantUpaddshorts.value.trim() ? RestaurantUpaddshorts.value.trim() : undefined,
-                    contact: RestaurantUpaddtitle.value.trim() ? RestaurantUpaddtitle.value.trim() : undefined,
-                    rest_img: RestaurantUpaddprice.value.trim() ? RestaurantUpaddprice.value.trim() : undefined,
-                })
+                body: formData
             });
-            let dataw = await respons2.json()
-            await dataw ? location.reload() : alert("something went wrong")
+            await data.json() ? location.reload() : null
         } catch (error) {
             console.log('error :', error.message);
         }
     })
     let hero = data.hero;
     let updatePanelHero = document.querySelector('.tabUpdatePanelUpdate');
-
     // Space information---------------------------------------------------------------------------------
     spacefoodadd.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -80,6 +72,7 @@ async function section1() {
             await data.json() ? location.reload() : null
         } catch (error) {
             console.error(error);
+            alert("Error: " + error)
         }
     });
     // update
@@ -90,10 +83,10 @@ async function section1() {
         cardUser.setAttribute("class", "user border border-2 m-4 p-4 d-flex");
         cardUser.innerHTML = `
                 <div class="userImg">
-                    <img src= ${ item.imgLink ? HOST+"imgs/"+item.imgLink : ""} alt="workers imgs">
+                    <img src= ${item.imgLink ? HOST + "imgs/" + item.imgLink : ""} alt="workers imgs">
                 </div>
                 <div class="userInfo ms-5 mt-5">
-                    <h4><strong>name:</strong> ${item.name ?item.name : "bu muxim odam" }</h4>
+                    <h4><strong>name:</strong> ${item.name ? item.name : "bu muxim odam"}</h4>
                 </div>
                 `
         spacefoodUpdatedata.append(cardUser);
@@ -137,7 +130,7 @@ async function section1() {
                 console.error(error);
             }
         });
-    }) : ""
+    }) : "";
     // delete special
     allSpaceFood ? allSpaceFood.forEach(item => {
         let cardUser = document.createElement("div");

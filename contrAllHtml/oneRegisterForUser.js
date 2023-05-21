@@ -39,26 +39,13 @@ let BASE_URL = HOST + 'api/';
   } else {
     sabdhjbhds.innerHTML = 'Closed'
   }
-  // space food and other stuff is      
-  // var array = [{
-  //     tab_name: "Object 1"
-  //   },
-  //   {
-  //     tab_name: "Object 2"
-  //   },
-  //   {
-  //     tab_name: "Object 3"
-  //   }
-  // ];
-
-  var spaceTabWrapper = document.getElementById("spaceTabWrapper"); // Get the spaceTabWrapper element
-
+  let spaceTabWrapper = document.getElementById("spaceTabWrapper"); // Get the spaceTabWrapper element
   // Loop through the array
-  for (var i = 0; i < space.length; i++) {
-    var listItem = document.createElement("li"); // Create LI element
+  for (let i = 0; i < space.length; i++) {
+    let listItem = document.createElement("li"); // Create LI element
     listItem.className = "nav-item";
 
-    var link = document.createElement("a"); // Create anchor (a) element
+    let link = document.createElement("a"); // Create anchor (a) element
     link.className = "nav-link";
     link.setAttribute("data-bs-toggle", "tab");
     link.textContent = space[i].name; // Set the tab_name value from the array

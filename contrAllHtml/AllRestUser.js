@@ -1,6 +1,6 @@
 import HOST from "./config.js";
 
-let BASE_URL = HOST+'api/restaurants'
+let BASE_URL = HOST + 'api/restaurants'
 async function resuorc() {
     let response = await fetch(BASE_URL);
     let data = await response.json();
@@ -9,7 +9,7 @@ async function resuorc() {
         rest_wrapper.setAttribute("class", "col-lg-3")
         rest_wrapper.innerHTML = `
             <div class="card" >
-                <img src="https://www.shutterstock.com/image-photo/friends-having-pasta-dinner-home-260nw-1206985765.jpg" class="card-img-top" alt="...">
+                <img src=${ item.rest_img ? HOST+"restaurant/"+item.rest_img : "https://www.shutterstock.com/image-photo/friends-having-pasta-dinner-home-260nw-1206985765.jpg"} class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">${item.rest_name}</h5>
                     <p class="card-text">
@@ -18,7 +18,6 @@ async function resuorc() {
                 </div>
             </div>
         `
-
         allrestwrapper.append(rest_wrapper);
 
     }) : " Restarantlar hali ishga tushmadi. Soon"
