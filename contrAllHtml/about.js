@@ -1,4 +1,3 @@
-console.log(1);
 // ma'lumotlar ro'yxati
 let myArray = [{
         title: "Test",

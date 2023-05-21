@@ -1,5 +1,5 @@
-let HOST = 'http://localhost:5000/';
- 
+import HOST from "./config.js";
+
 formcontr.addEventListener("submit", async (e) => {
      e.preventDefault();
      // let email = document.querySelector("#email");

@@ -1,4 +1,4 @@
-let HOST = 'http://localhost:5000/'
+import HOST from "./config.js";
 
 let tokenadmin = localStorage.getItem("tokenadmin");
 let resId = localStorage.getItem("adminres_id");

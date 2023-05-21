@@ -1,4 +1,4 @@
-let HOST = 'http://localhost:5000/';
+import HOST from "./config.js";
 
 let BASE_URL = HOST+'api/restaurants'
 async function resuorc() {
