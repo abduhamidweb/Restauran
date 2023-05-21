@@ -1,10 +1,11 @@
+let HOST = 'http://localhost:5000/'
 (() => {
   let tokenbos = localStorage.getItem("rest-id");
   if (!tokenbos) return location = "AllRestForUser.html";
 })();
 let ResId = localStorage.getItem("adminres_id") || localStorage.getItem("rest-id")
 
-let BASE_URL = 'http://localhost:5000/api/';
+let BASE_URL = HOST + 'api/';
 (async () => {
   let response = await fetch(BASE_URL + "restaurants/" + localStorage.getItem("rest-id"));
   let {
@@ -81,7 +82,7 @@ let BASE_URL = 'http://localhost:5000/api/';
                     <p>${item.long_desc}</p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src=${'http://localhost:5000/imgs/' + item.imgLink} alt="" class="img-fluid">
+                    <img src=${HOST+'imgs/' + item.imgLink} alt="" class="img-fluid">
                   </div>
           `
           tabContent2.append(div);
@@ -103,7 +104,7 @@ let BASE_URL = 'http://localhost:5000/api/';
                     <p>${item.long_desc}</p>
                   </div>
                   <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src=${'http://localhost:5000/imgs/' + item.imgLink} alt="" class="img-fluid">
+                    <img src=${HOST+'imgs/' + item.imgLink} alt="" class="img-fluid">
                   </div>
           `
              tabContent2.append(div);
@@ -122,7 +123,7 @@ let BASE_URL = 'http://localhost:5000/api/';
       card.innerHTML = `
             <div class="member">
               <div class="pic">
-              <img src=${'http://localhost:5000/imgs/' + item.userPhoto} class="img-fluid" alt=""></div>
+              <img src=${HOST+'imgs/' + item.userPhoto} class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>${item.username}</h4>
                 <span>${item.rol ? item.rol : "Master Chef"}</span>
@@ -145,8 +146,8 @@ let BASE_URL = 'http://localhost:5000/api/';
     cardUser.setAttribute("class", "col-lg-3 col-md-4");
     cardUser.innerHTML = `
             <div class="gallery-item">
-              <a href=${'http://localhost:5000/imgs/'+photo.imgLink} class="gallery-lightbox">
-                <img src=${'http://localhost:5000/imgs/'+photo.imgLink} alt="" class="img-fluid">
+              <a href=${HOST+'imgs/'+photo.imgLink} class="gallery-lightbox">
+                <img src=${HOST+'imgs/'+photo.imgLink} alt="" class="img-fluid">
               </a>
             </div>
         `
@@ -165,7 +166,7 @@ let BASE_URL = 'http://localhost:5000/api/';
               <div class="carousel-content">
                    <div class="row event-item">
                 <div class="col-lg-6">
-                  <img src=${'http://localhost:5000/imgs/'+item.imgLink} height="400" class="img-fluid eventImg" alt="">
+                  <img src=${HOST+'imgs/'+item.imgLink} height="400" class="img-fluid eventImg" alt="">
                 </div>
                 <div class="col-lg-6 pt-4 pt-lg-0 content">
                   <h3>${item.title}</h3>
@@ -203,7 +204,7 @@ let BASE_URL = 'http://localhost:5000/api/';
     let cardUser = document.createElement("div");
     cardUser.setAttribute('id', item._id);
     cardUser.setAttribute("class", "carousel-item");
-    cardUser.setAttribute("style", `background-image: url(${ item.imgLink ? "http://localhost:5000/imgs/"+item.imgLink : ""}`)
+    cardUser.setAttribute("style", `background-image: url(${ item.imgLink ? HOST+"imgs/"+item.imgLink : ""}`)
 
     if (index === 0) {
       cardUser.classList.add('active');

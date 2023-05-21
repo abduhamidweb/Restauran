@@ -1,11 +1,14 @@
+// localStorage.clear()
+let HOST = 'http://localhost:5000/';
+
 let tokenbos = localStorage.getItem("tokenadmin");
 let resId = localStorage.getItem("adminres_id");
 (() => {
     if (!tokenbos) return location = "adminLogin.html";
     if (!resId) return location = "adminLogin.html";
 })();
-let BASE_URL = 'http://localhost:5000/api/restaurants/'
-let BASE_URL2 = 'http://localhost:5000/api/';
+let BASE_URL = HOST + 'api/restaurants/'
+let BASE_URL2 = HOST + 'api/';
 async function section1() {
     let staticOurFood = document.createElement("form");
     let staticOurTitle = document.createElement("h2");
@@ -14,6 +17,8 @@ async function section1() {
 
     staticOurFood.setAttribute("id", "staticOurFood")
     let response = await fetch(BASE_URL + resId);
+    console.log('resId :', resId);
+    console.log('BASE_URL :', BASE_URL);
     let data = await response.json();
     let {
         contact,
@@ -31,26 +36,25 @@ async function section1() {
     RestaurantUpaddimgupload.value = rest_year ? rest_year : "";
     RestaurantUpadd.addEventListener("submit", async (e) => {
         e.preventDefault();
-     try {
-           let respons2 =await fetch(BASE_URL + resId, {
-               method: "PUT",
-               headers: {
-                   'Content-Type': 'application/json'
-               },
-               body: JSON.stringify({
-                   rest_name: RestaurantUpaddlongs.value.trim() ? RestaurantUpaddlongs.value.trim() : undefined,
-                   rest_year: RestaurantUpaddimgupload.value.trim() ? RestaurantUpaddimgupload.value.trim() : undefined,
-                   description: RestaurantUpaddshorts.value.trim() ? RestaurantUpaddshorts.value.trim() : undefined,
-                   contact: RestaurantUpaddtitle.value.trim() ? RestaurantUpaddtitle.value.trim() : undefined,
-                   rest_img: RestaurantUpaddprice.value.trim() ? RestaurantUpaddprice.value.trim() : undefined,
-               })
-           });
-           let dataw =await  respons2.json()
-           await dataw ? alert("ok") : alert("something went wrong")
-     } catch (error) {
-     console.log('error :', error.message);
-        
-     }
+        try {
+            let respons2 = await fetch(BASE_URL + resId, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    rest_name: RestaurantUpaddlongs.value.trim() ? RestaurantUpaddlongs.value.trim() : undefined,
+                    rest_year: RestaurantUpaddimgupload.value.trim() ? RestaurantUpaddimgupload.value.trim() : undefined,
+                    description: RestaurantUpaddshorts.value.trim() ? RestaurantUpaddshorts.value.trim() : undefined,
+                    contact: RestaurantUpaddtitle.value.trim() ? RestaurantUpaddtitle.value.trim() : undefined,
+                    rest_img: RestaurantUpaddprice.value.trim() ? RestaurantUpaddprice.value.trim() : undefined,
+                })
+            });
+            let dataw = await respons2.json()
+            await dataw ? location.reload() : alert("something went wrong")
+        } catch (error) {
+            console.log('error :', error.message);
+        }
     })
     let hero = data.hero;
     let updatePanelHero = document.querySelector('.tabUpdatePanelUpdate');
@@ -86,7 +90,7 @@ async function section1() {
         cardUser.setAttribute("class", "user border border-2 m-4 p-4 d-flex");
         cardUser.innerHTML = `
                 <div class="userImg">
-                    <img src= ${ item.imgLink ? "http://localhost:5000/imgs/"+item.imgLink : ""} alt="workers imgs">
+                    <img src= ${ item.imgLink ? HOST+"imgs/"+item.imgLink : ""} alt="workers imgs">
                 </div>
                 <div class="userInfo ms-5 mt-5">
                     <h4><strong>name:</strong> ${item.name ?item.name : "bu muxim odam" }</h4>
@@ -189,7 +193,7 @@ async function section1() {
         cardUser.setAttribute("class", "user border border-2 m-4 p-4 d-flex");
         cardUser.innerHTML = `
                 <div class="userImg">
-                    <img src= ${ item.imgLink ? "http://localhost:5000/imgs/"+item.imgLink : ""} alt="workers imgs">
+                    <img src= ${ item.imgLink ? HOST+"imgs/"+item.imgLink : ""} alt="workers imgs">
                 </div>
                 <div class="userInfo ms-5 mt-5">
                     <h4><strong>name:</strong> ${item.title ?item.title : "bu muxim odam" }</h4>
@@ -265,7 +269,7 @@ async function section1() {
         cardUser.setAttribute("class", "user border border-2 m-4 p-4 d-flex");
         cardUser.innerHTML = `
                 <div class="userImg">
-                    <img src= ${ item.imgLink ? "http://localhost:5000/imgs/"+item.imgLink : ""} alt="workers imgs">
+                    <img src= ${ item.imgLink ? HOST+"imgs/"+item.imgLink : ""} alt="workers imgs">
                 </div>
                 <div class="userInfo ms-5 mt-5">
                     <h4><strong>name:</strong> ${item.title ?item.title : "bu muxim odam" }</h4>
@@ -494,7 +498,7 @@ async function section1() {
         cardUser.setAttribute("class", "user border border-2 m-4 p-4 d-flex");
         cardUser.innerHTML = `
                 <div class="userInfo ms-5 mt-5">
-                                    <img src=${'http://localhost:5000/imgs/'+item.imgLink} width="300" alt="" class="img-fluid">
+                                    <img src=${HOST+'imgs/'+item.imgLink} width="300" alt="" class="img-fluid">
                 </div>
                 `
         photoUpdate.append(cardUser);
@@ -514,7 +518,7 @@ async function section1() {
                     <h4><strong>name:</strong> ${item._id ?item._id : "bu muxim odam" } <button class="btn btn-danger btnphotosDelete" id=${item._id}>delete</button></h4>
                 </div>
                      <div class="userInfo ms-5 mt-5">
-                                    <img src=${'http://localhost:5000/imgs/'+item.imgLink} width="200" alt="" class="img-fluid">
+                                    <img src=${HOST+'imgs/'+item.imgLink} width="200" alt="" class="img-fluid">
                 </div>
                 `
         imgUploadDeleted.append(cardUser);

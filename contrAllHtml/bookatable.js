@@ -1,3 +1,5 @@
+let HOST = 'http://localhost:5000/'
+
 let tokenadmin = localStorage.getItem("tokenadmin");
 let resId = localStorage.getItem("adminres_id");
 let workerToken = localStorage.getItem("workerToken");
@@ -42,7 +44,7 @@ sidebarToggle.addEventListener("click", () => {
     }
 })
 
-let BASE_URL = "http://localhost:5000/api/";
+let BASE_URL = HOST+"api/";
 
 // Modal yopish tugmasi
 var closeButton = document.getElementsByClassName("close")[0];

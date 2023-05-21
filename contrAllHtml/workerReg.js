@@ -1,7 +1,8 @@
- formcontr.addEventListener("submit", async (e) => {
+let HOST = 'http://localhost:5000/'
+formcontr.addEventListener("submit", async (e) => {
      e.preventDefault();
      try {
-         const response = await fetch('http://localhost:5000/api/workerlogin', {
+         const response = await fetch(HOST+'api/workerlogin', {
              method: 'POST',
              headers: {
                  'Content-Type': 'application/json'

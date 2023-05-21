@@ -1,4 +1,6 @@
-let BASE_URL = 'http://localhost:5000/api/restaurants'
+let HOST = 'http://localhost:5000/';
+
+let BASE_URL = HOST+'api/restaurants'
 async function resuorc() {
     let response = await fetch(BASE_URL);
     let data = await response.json();

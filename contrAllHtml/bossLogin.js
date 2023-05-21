@@ -1,8 +1,10 @@
+let HOST = 'http://localhost:5000/'
+
 formcontr.addEventListener("submit", async (e) => {
     e.preventDefault();
     // let email = document.querySelector("#email");
     try {
-        const response = await fetch('http://localhost:5000/api/boss/login', {
+        const response = await fetch(HOST+'api/boss/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

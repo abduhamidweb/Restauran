@@ -1,3 +1,5 @@
+let HOST = 'http://localhost:5000/'
+
 (() => {
     let tokenbos = localStorage.getItem("tokenbos");
     if (!tokenbos) return location = "bossLogin.html";
@@ -5,7 +7,7 @@
 addrest.addEventListener("submit", async (e) => {
     e.preventDefault();
     try {
-  let data=      await fetch('http://localhost:5000/api/restaurants', {
+        let data = await fetch(HOST + 'api/restaurants', {
             method: 'POST',
             headers: {
                 token: localStorage.getItem("tokenbos"),
@@ -15,7 +17,7 @@ addrest.addEventListener("submit", async (e) => {
                 rest_name: rest_name.value,
             })
         });
-            data ? location.reload() : null
+        data ? location.reload() : null
 
     } catch (error) {
         console.error(error);

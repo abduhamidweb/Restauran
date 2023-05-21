@@ -1,11 +1,13 @@
- formcontr.addEventListener("submit", async (e) => {
+let HOST = 'http://localhost:5000/';
+ 
+formcontr.addEventListener("submit", async (e) => {
      e.preventDefault();
      // let email = document.querySelector("#email");
      try {
-         const response = await fetch('http://localhost:5000/api/workerisadmin', {
+         const response = await fetch(HOST + 'api/workerisadmin', {
              method: 'POST',
              headers: {
-                 'Content-Type': 'application/json' 
+                 'Content-Type': 'application/json'
              },
              body: JSON.stringify({
                  useremail: email.value,
@@ -16,10 +18,11 @@
              token,
              res_id
          } = await response.json();
-  
+         console.log(token,
+             res_id);
          if (token) {
              localStorage.setItem("tokenadmin", token);
-             localStorage.setItem("adminres_id",res_id ? res_id : null);
+             localStorage.setItem("adminres_id", res_id ? res_id : null);
              location = "adminOneRes.html";
          } else {
              alert("please enter your email address");

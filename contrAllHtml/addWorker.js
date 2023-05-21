@@ -1,3 +1,5 @@
+let HOST = 'http://localhost:5000/';
+
 let tokenbos = localStorage.getItem("tokenadmin");
 let resId = localStorage.getItem("adminres_id");
 (() => {
@@ -18,7 +20,7 @@ addadmin.addEventListener("submit", async (e) => {
         formData.append('salary', workersalary.value)
         formData.append('rol', workerRol.value)
         formData.append('res_id', localStorage.getItem("adminres_id"))
-        let data = await fetch('http://localhost:5000/api/worker', {
+        let data = await fetch(HOST+'api/worker', {
             method: 'POST',
             headers: {
                 'enctype': 'multipart/form-data'
@@ -57,7 +59,7 @@ workersresResId.value = localStorage.getItem("adminres_id")
 //     card.removeEventListener('mousemove', drag);
 //     card.removeEventListener('mouseup', dragEnd);
 // };
-let BASE_URL = "http://localhost:5000/api/"
+let BASE_URL = HOST+"api/"
 async function AllWorker() {
     let response = await fetch(BASE_URL + "restaurants/" + localStorage.getItem("adminres_id"));
     let {
@@ -69,7 +71,7 @@ async function AllWorker() {
         cardUser.setAttribute("class", "user");
         cardUser.innerHTML = `
                 <div class="userImg">
-                    <img src= ${ worker.userPhoto ? "http://localhost:5000/imgs/"+worker.userPhoto : ""} alt="workers imgs">
+                    <img src= ${ worker.userPhoto ? HOST+"imgs/"+worker.userPhoto : ""} alt="workers imgs">
                 </div>
                 <div class="userInfo">
                     <h4><strong>name:</strong> ${worker.username ?worker.username : "bu muxim odam" }</h4>
@@ -122,7 +124,7 @@ async function AllWorker() {
             formData.append('salary', updateworkersalary.value ? updateworkersalary.value : "")
             formData.append('rol', updateworkerRol.value ? updateworkerRol.value : "")
             formData.append('res_id', localStorage.getItem("adminres_id"))
-            let data = await fetch('http://localhost:5000/api/worker/' + workerIdUpdate.value, {
+            let data = await fetch(HOST+'api/worker/' + workerIdUpdate.value, {
                 method: 'PUT',
                 headers: {
                     'enctype': 'multipart/form-data'
@@ -143,7 +145,7 @@ async function AllWorker() {
       <div class="card2">
    <div class="banner">
       <div class="avatar">
-      <img src=${'http://localhost:5000/imgs/'+worker.userPhoto}>
+      <img src=${HOST+'imgs/'+worker.userPhoto}>
       </div>
    </div>
 	<h3>${worker.username}</h3>

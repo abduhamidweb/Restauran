@@ -1,9 +1,11 @@
+let HOST = 'http://localhost:5000/'
+
 (() => {
     let tokenbos = localStorage.getItem("tokenbos");
     if (!tokenbos) return location = "bossLogin.html";
 })();
 
-let BASE_URL = 'http://localhost:5000/api/restaurants'
+let BASE_URL = HOST + 'api/restaurants'
 async function resuorc() {
     let response = await fetch(BASE_URL);
     let data = await response.json();
@@ -22,7 +24,7 @@ async function resuorc() {
 }
 resuorc()
 async function resuorc2() {
-    let response = await fetch("http://localhost:5000/api/workeradmin");
+    let response = await fetch(HOST+"api/workeradmin");
     let data = await response.json();
     data ? data.forEach((item, i) => {
         let rest_wrapper = document.createElement("tr");
@@ -100,7 +102,7 @@ const deleteItem = async (id) => {
 }
 const deleteItem2 = async (id) => {
     try {
-        const response = await fetch(`${'http://localhost:5000/api/worker'}/${id}`, {
+        const response = await fetch(`${HOST+'api/worker'}/${id}`, {
             method: 'DELETE'
         });
         if (!response.ok) {
@@ -138,14 +140,14 @@ async function update(id, rol) {
         });
     }
     if (id && rol == "admin") {
-        let response = await fetch("http://localhost:5000/api/worker/" + id);
+        let response = await fetch(HOST+"api/worker/" + id);
         let data = await response.json();
         if (data.email) {
             IdName.value = data.email;
         }
         modlaUpdateRestAdmin.addEventListener("submit", async (e) => {
             e.preventDefault();
-            let response = await fetch("http://localhost:5000/api/workeradmin/" + id, {
+            let response = await fetch(HOST+"api/workeradmin/" + id, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'

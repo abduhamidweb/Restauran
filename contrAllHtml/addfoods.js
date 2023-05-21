@@ -1,3 +1,5 @@
+let HOST = 'http://localhost:5000/';
+
 let tokenbos = localStorage.getItem("tokenadmin");
 let resId = localStorage.getItem("adminres_id");
 (() => {
@@ -7,7 +9,6 @@ let resId = localStorage.getItem("adminres_id");
 addadmin.addEventListener("submit", async (e) => {
     e.preventDefault();
     try {
-
         const formData = new FormData();
         formData.append('name', workername.value)
         formData.append('calories', workeremail.value)
@@ -17,7 +18,7 @@ addadmin.addEventListener("submit", async (e) => {
         formData.append('file', workerImg.files[0])
         formData.append('description', workersalary.value)
         formData.append('res_id', localStorage.getItem("adminres_id"));
-        let data = await fetch('http://localhost:5000/api/foods', {
+        let data = await fetch(HOST + 'api/foods', {
             method: 'POST',
             headers: {
                 'enctype': 'multipart/form-data'
@@ -55,7 +56,7 @@ addadmin.addEventListener("submit", async (e) => {
 //     card.removeEventListener('mousemove', drag);
 //     card.removeEventListener('mouseup', dragEnd);
 // };
-let BASE_URL = "http://localhost:5000/api/"
+let BASE_URL = HOST + "api/"
 async function AllWorker() {
     let response = await fetch(BASE_URL + "restaurants/" + localStorage.getItem("adminres_id"));
     let {
@@ -74,7 +75,7 @@ async function AllWorker() {
         cardUser.setAttribute("class", "user");
         cardUser.innerHTML = `
                 <div class="userImg">
-                    <img src= ${ food.imgLink ? "http://localhost:5000/imgs/"+food.imgLink : ""} alt="workers imgs">
+                    <img src= ${ food.imgLink ? HOST+"imgs/"+food.imgLink : ""} alt="workers imgs">
                 </div>
                 <div class="userInfo">
                     <h4><strong>name:</strong> ${food.name ?food.name : "bu muxim odam" }</h4>
@@ -137,7 +138,7 @@ async function AllWorker() {
           <div class="card2">
        <div class="banner">
           <div class="avatar">
-          <img src=${"http://localhost:5000/imgs/" + food.imgLink}>
+          <img src=${HOST+"imgs/" + food.imgLink}>
           </div>
        </div>
     	<h3>${food.name}</h3>

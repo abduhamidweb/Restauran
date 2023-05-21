@@ -1,12 +1,13 @@
+let HOST = 'http://localhost:5000/'
+
 (() => {
     let tokenbos = localStorage.getItem("tokenbos");
     if (!tokenbos) return location = "bossLogin.html";
 })();
 addadmin.addEventListener("submit", async (e) => {
     e.preventDefault();
-
     try {
-        let data = await fetch('http://localhost:5000/api/worker/admin', {
+        let data = await fetch(HOST + 'api/worker/admin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
