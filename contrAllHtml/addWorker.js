@@ -21,10 +21,11 @@ addadmin.addEventListener("submit", async (e) => {
         formData.append('salary', workersalary.value)
         formData.append('rol', workerRol.value)
         formData.append('res_id', localStorage.getItem("adminres_id"))
-        let data = await fetch(HOST+'api/worker', {
+        let data = await fetch(HOST + 'api/worker', {
             method: 'POST',
             headers: {
-                'enctype': 'multipart/form-data'
+                'enctype': 'multipart/form-data',
+                token: tokenbos
             },
             body: formData
         });
@@ -60,9 +61,14 @@ workersresResId.value = localStorage.getItem("adminres_id")
 //     card.removeEventListener('mousemove', drag);
 //     card.removeEventListener('mouseup', dragEnd);
 // };
-let BASE_URL = HOST+"api/"
+let BASE_URL = HOST + "api/"
 async function AllWorker() {
-    let response = await fetch(BASE_URL + "restaurants/" + localStorage.getItem("adminres_id"));
+    let response = await fetch(BASE_URL + "restaurants/" + localStorage.getItem("adminres_id"), {
+        headers: {
+            'Content-Type': 'application/json',
+            token: tokenbos
+        }
+    });
     let {
         workers
     } = await response.json();
@@ -125,7 +131,7 @@ async function AllWorker() {
             formData.append('salary', updateworkersalary.value ? updateworkersalary.value : "")
             formData.append('rol', updateworkerRol.value ? updateworkerRol.value : "")
             formData.append('res_id', localStorage.getItem("adminres_id"))
-            let data = await fetch(HOST+'api/worker/' + workerIdUpdate.value, {
+            let data = await fetch(HOST + 'api/worker/' + workerIdUpdate.value, {
                 method: 'PUT',
                 headers: {
                     'enctype': 'multipart/form-data'

@@ -59,7 +59,12 @@ addadmin.addEventListener("submit", async (e) => {
 // };
 let BASE_URL = HOST + "api/"
 async function AllWorker() {
-    let response = await fetch(BASE_URL + "restaurants/" + localStorage.getItem("adminres_id"));
+    let response = await fetch(BASE_URL + "restaurants/" + localStorage.getItem("adminres_id"), {
+        headers: {
+            'Content-Type': 'application/json',
+            token: tokenbos
+        }
+    });
     let {
         foods
     } = await response.json();
