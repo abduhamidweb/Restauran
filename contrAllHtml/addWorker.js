@@ -138,10 +138,12 @@ async function AllWorker() {
                 },
                 body: formData
             });
-            data ? location.reload() : null
-
+            let {
+                errors,
+            } = await data.json();
+            errors ? console.log(errors) : location.reload();
         } catch (error) {
-            console.error(error);
+            alert(error.message);
         }
     });
     workers ? workers.forEach(worker => {

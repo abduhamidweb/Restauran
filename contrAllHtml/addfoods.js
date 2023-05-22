@@ -131,7 +131,10 @@ async function AllWorker() {
                 },
                 body: formData
             });
-            data ? location.reload() : null
+                        let {
+                            errors,
+                        } = await data.json();
+                        errors ? console.log(errors) : location.reload();
         } catch (error) {
             console.error(error);
         }
@@ -182,7 +185,7 @@ async function AllWorker() {
             let id = e.target.getAttribute("id");
             if (id) {
                 deleteItem(id)
-                window.location.reload()
+                // window.location.reload()
             } else alert("Something is strange")
         })
     })
