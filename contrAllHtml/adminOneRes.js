@@ -49,7 +49,8 @@ async function section1() {
                 },
                 body: formData
             });
-            await data.json() ? location.reload() : null
+            let { errors } = await data.json();
+            errors ? console.log(errors) : location.reload();
         } catch (error) {
             console.log('error :', error.message);
         }
@@ -74,7 +75,10 @@ async function section1() {
                 },
                 body: formData
             });
-            await data.json() ? location.reload() : null
+                       let {
+                           errors
+                       } = await data.json();
+                       errors ? console.log(errors) : location.reload();
         } catch (error) {
             console.error(error);
             alert("Error: " + error)

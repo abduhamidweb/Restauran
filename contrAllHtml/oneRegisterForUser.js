@@ -83,13 +83,13 @@ let BASE_URL = HOST + 'api/';
     }
     s.addEventListener('click', () => {
       tabContent2.innerHTML = ``
-       if (s.classList.contains("active")) {
-         let text = s.innerHTML;
-         space.forEach(function (item) {
-           if (item.name == text) {
-             let div = document.createElement("div");
-             div.setAttribute('class', 'row');
-             div.innerHTML = `
+      if (s.classList.contains("active")) {
+        let text = s.innerHTML;
+        space.forEach(function (item) {
+          if (item.name == text) {
+            let div = document.createElement("div");
+            div.setAttribute('class', 'row');
+            div.innerHTML = `
            <div class="col-lg-8 details order-2 order-lg-1">
                     <h3>${item.tap_type}</h3>
                     <p class="fst-italic">${item.short_desc}</p>
@@ -99,10 +99,10 @@ let BASE_URL = HOST + 'api/';
                     <img src=${HOST+'imgs/' + item.imgLink} alt="" class="img-fluid">
                   </div>
           `
-             tabContent2.append(div);
-           }
-         })
-       }
+            tabContent2.append(div);
+          }
+        })
+      }
     })
   });
   // img==============================
@@ -310,7 +310,7 @@ let BASE_URL = HOST + 'api/';
                       `
             AllFoodsWrap.append(cardUser);
           }
-      
+
         }) : "";
       } else {
         AllFoodsWrap.innerHTML = ""
