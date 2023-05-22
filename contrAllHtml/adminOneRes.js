@@ -16,7 +16,12 @@ async function section1() {
     staticOurFood.append(staticOurTitle)
 
     staticOurFood.setAttribute("id", "staticOurFood")
-    let response = await fetch(BASE_URL + resId);
+    let response = await fetch(BASE_URL + resId, {
+        headers: {
+            'Content-Type': 'application/json',
+            token: tokenbos
+        },
+    });
     let data = await response.json();
     let {
         contact,

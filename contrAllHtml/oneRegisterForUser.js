@@ -8,7 +8,11 @@ let ResId = localStorage.getItem("adminres_id") || localStorage.getItem("rest-id
 
 let BASE_URL = HOST + 'api/';
 (async () => {
-  let response = await fetch(BASE_URL + "restaurants/" + localStorage.getItem("rest-id"));
+  let response = await fetch(BASE_URL + "restaurants/" + localStorage.getItem("rest-id"), {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   let {
     foods,
     contact,
