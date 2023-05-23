@@ -1,24 +1,28 @@
 import HOST from "./config.js";
 
 
+let tokenbos = localStorage.getItem("tokenbos");
+console.log('tokenbos :', tokenbos);
 (() => {
-    let tokenbos = localStorage.getItem("tokenbos");
     if (!tokenbos) return location = "bossLogin.html";
 })();
 addrest.addEventListener("submit", async (e) => {
     e.preventDefault();
+    let Rest = rest_name.value
+    let contact = rest_contact.value
     try {
         let data = await fetch(HOST + 'api/restaurants', {
             method: 'POST',
             headers: {
-                token: localStorage.getItem("tokenbos"),
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "token": tokenbos,
             },
             body: JSON.stringify({
-                rest_name: rest_name.value,
+                rest_name: Rest,
+                contact
             })
         });
-        data ? location.reload() : null
+        await data.json() ? location.reload() : null
 
     } catch (error) {
         console.error(error);

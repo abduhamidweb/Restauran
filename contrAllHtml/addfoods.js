@@ -131,10 +131,10 @@ async function AllWorker() {
                 },
                 body: formData
             });
-                        let {
-                            errors,
-                        } = await data.json();
-                        errors ? console.log(errors) : location.reload();
+            let {
+                errors,
+            } = await data.json();
+            errors ? console.log(errors) : location.reload();
         } catch (error) {
             console.error(error);
         }
@@ -174,6 +174,7 @@ async function AllWorker() {
                 throw new Error('Server error');
             }
             // Element o'chirildi
+            await response.json() ? location.reload() : ''
         } catch (error) {
             console.log('error :', error);
             // Xatolikni ishlash

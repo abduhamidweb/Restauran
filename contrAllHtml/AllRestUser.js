@@ -1,6 +1,6 @@
 import HOST from "./config.js";
 
-let BASE_URL = HOST + 'api/restaurants'
+let BASE_URL = HOST + 'api/restaurants/user';
 async function resuorc() {
     let response = await fetch(BASE_URL);
     let data = await response.json();
@@ -28,7 +28,5 @@ async function resuorc() {
                 location = "../index.html"
         })
     })
-
 }
-
 resuorc();

@@ -7,14 +7,13 @@ let resId = localStorage.getItem("adminres_id");
     if (!tokenbos) return location = "adminLogin.html";
     if (!resId) return location = "adminLogin.html";
 })();
-let BASE_URL = HOST + 'api/restaurants/'
+let BASE_URL = HOST + 'api/restaurantsadmin/'
 let BASE_URL2 = HOST + 'api/';
 async function section1() {
     let staticOurFood = document.createElement("form");
     let staticOurTitle = document.createElement("h2");
     staticOurTitle.innerHTML = "staticOurFood"
     staticOurFood.append(staticOurTitle)
-
     staticOurFood.setAttribute("id", "staticOurFood")
     let response = await fetch(BASE_URL + resId, {
         headers: {
@@ -23,6 +22,10 @@ async function section1() {
         },
     });
     let data = await response.json();
+    console.log('data :', data);
+    if (data.error) {
+        return location = "adminLogin.html"
+    }
     let {
         contact,
         description,
@@ -37,19 +40,22 @@ async function section1() {
         e.preventDefault();
         try {
             const formData = new FormData();
-            formData.append('contact', RestaurantUpaddtitle.value ? RestaurantUpaddtitle.value : "")
-            formData.append('description', RestaurantUpaddshorts.value ? RestaurantUpaddshorts.value : "")
-            formData.append('rest_name', RestaurantUpaddlongs.value ? RestaurantUpaddlongs.value : "")
-            formData.append('rest_year', RestaurantUpaddimgupload.value ? RestaurantUpaddimgupload.value : "")
-            formData.append('file', RestaurantUpaddprice.files[0] ? RestaurantUpaddprice.files[0] : "")
+            formData.append('contact', RestaurantUpaddtitle.value ? RestaurantUpaddtitle.value : "");
+            formData.append('description', RestaurantUpaddshorts.value ? RestaurantUpaddshorts.value : "");
+            formData.append('rest_name', RestaurantUpaddlongs.value ? RestaurantUpaddlongs.value : "");
+            formData.append('rest_year', RestaurantUpaddimgupload.value ? RestaurantUpaddimgupload.value : "");
+            formData.append('file', RestaurantUpaddprice.files[0] ? RestaurantUpaddprice.files[0] : "");
             let data = await fetch(BASE_URL2 + 'restaurants/' + resId, {
                 method: 'PUT',
                 headers: {
-                    'enctype': 'multipart/form-data'
+                    'enctype': 'multipart/form-data',
+                    'token': tokenbos
                 },
                 body: formData
             });
-            let { errors } = await data.json();
+            let {
+                errors
+            } = await data.json();
             errors ? console.log(errors) : location.reload();
         } catch (error) {
             console.log('error :', error.message);
@@ -75,10 +81,10 @@ async function section1() {
                 },
                 body: formData
             });
-                       let {
-                           errors
-                       } = await data.json();
-                       errors ? console.log(errors) : location.reload();
+            let {
+                errors
+            } = await data.json();
+            errors ? console.log(errors) : location.reload();
         } catch (error) {
             console.error(error);
             alert("Error: " + error)

@@ -1,14 +1,22 @@
 import HOST from "./config.js";
 // localStorage.clear();
+let tokenbos = localStorage.getItem("tokenbos");
 (() => {
-    let tokenbos = localStorage.getItem("tokenbos");
     if (!tokenbos) return location = "bossLogin.html";
 })();
 
 let BASE_URL = HOST + 'api/restaurants'
 async function resuorc() {
-    let response = await fetch(BASE_URL);
+    let response = await fetch(BASE_URL, {
+        headers: {
+            'content-type': 'application/json',
+            'token': tokenbos
+        }
+    });
     let data = await response.json();
+    if (data.error) {
+        return location = 'bossLogin.html'
+    }
     data ? data.map((item, i) => {
         let rest_wrapper = document.createElement("tr");
         rest_wrapper.innerHTML = `
@@ -20,12 +28,14 @@ async function resuorc() {
         `
         menu.append(rest_wrapper);
     }) : " Restarantlar hali ishga tushmadi. Soon"
-
 }
 resuorc()
 async function resuorc2() {
     let response = await fetch(HOST + "api/workeradmin");
     let data = await response.json();
+    if (data.error) {
+        return location = 'bossLogin.html'
+    }
     data ? data.forEach((item, i) => {
         let rest_wrapper = document.createElement("tr");
         rest_wrapper.innerHTML =
@@ -37,11 +47,15 @@ async function resuorc2() {
                 <td><delete class="btn btn-info text-light allUpdateBtnAdmin" id=${item._id}>update</delete></td>
         `
         alladmins.append(rest_wrapper);
-
     }) : " Restarantlar hali ishga tushmadi. Soon";
-    let restaurants = await fetch(BASE_URL);
+    let restaurants = await fetch(BASE_URL, {
+        headers: {
+            "Content-Type": "application/json",
+            'token': tokenbos,
+        }
+    });
     let rest = await restaurants.json();
-    rest ? rest.map((item, i) => {
+    rest.length ? rest.map((item, i) => {
         let rest_wrapper = document.createElement("option");
         rest_wrapper.innerHTML = item.rest_name
         AllRestaurantOption.append(rest_wrapper);
@@ -49,7 +63,13 @@ async function resuorc2() {
     }) : " Restarantlar hali ishga tushmadi. Soon"
     AllRestaurantOption.addEventListener("change", async (e) => {
         e.preventDefault();
-        let response = await fetch(BASE_URL);
+        let response = await fetch(BASE_URL, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                'token': tokenbos,
+            }
+        });
         let data = await response.json();
         data.forEach((item) => {
             if (item.rest_name == AllRestaurantOption.value) {
@@ -87,7 +107,11 @@ resuorc2();
 const deleteItem = async (id) => {
     try {
         const response = await fetch(`${BASE_URL}/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+                token: tokenbos,
+            }
         });
         if (!response.ok) {
             throw new Error('Server error');
@@ -102,8 +126,12 @@ const deleteItem = async (id) => {
 }
 const deleteItem2 = async (id) => {
     try {
-        const response = await fetch(`${HOST+'api/worker'}/${id}`, {
-            method: 'DELETE'
+        const response = await fetch(`${HOST+'api/workerbos'}/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+                token: tokenbos,
+            }
         });
         if (!response.ok) {
             throw new Error('Server error');
