@@ -158,7 +158,8 @@ async function update(id, rol) {
             let response = await fetch(BASE_URL + "/" + id, {
                 method: "PUT",
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'token':tokenbos
                 },
                 body: JSON.stringify({
                     rest_name: IdName.value.trim() ? IdName.value.trim() : undefined
@@ -178,7 +179,9 @@ async function update(id, rol) {
             let response = await fetch(HOST + "api/workeradmin/" + id, {
                 method: "PUT",
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'token': tokenbos
+
                 },
                 body: JSON.stringify({
                     email: IdName.value.trim() ? IdName.value.trim() : undefined
